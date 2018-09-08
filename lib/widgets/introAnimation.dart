@@ -77,7 +77,6 @@ class introAnimationState extends State<introAnimation>
                 style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.normal,
-
                     color: widget.color),
               ),
             ),

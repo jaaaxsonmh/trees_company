@@ -3,7 +3,6 @@ import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/IntroHelper.dart';
 import 'package:trees_co/widgets/introAnimation.dart';
 
-
 class IntroScreen extends StatefulWidget {
   @override
   IntroScreenState createState() {
@@ -14,7 +13,7 @@ class IntroScreen extends StatefulWidget {
 class IntroScreenState extends State<IntroScreen> {
   final PageController controller = new PageController();
   int current = 0;
-  int totalPage = 4;
+  int totalPage = 3;
   bool last = false;
 
   void onPageChange(int page) {
@@ -33,71 +32,79 @@ class IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      color: Colors.blue,
-      padding: EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-              child: Container()
-          ),
-          Expanded(
-            flex: 3,
-            child: PageView(
-              children: <Widget>[
+        color: Colors.blue,
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Expanded(flex: 1, child: Container()),
+            Expanded(
+              flex: 3,
+              child: PageView(
+                children: <Widget>[
+                  //tree co welcome
+                  introAnimation(
+                    title: IntroHelper.titleCard1,
+                    content: IntroHelper.textCard1,
+                    icon: Icons.wc,
+                  ),
 
-                //tree co welcome
-                introAnimation(
-                  title: IntroHelper.titleCard1,
-                  content: IntroHelper.textCard1,
-                  icon: Icons.wc,
-                ),
+                  //shopping cart
+                  introAnimation(
+                    title: IntroHelper.titleCard2,
+                    content: IntroHelper.textCard2,
+                    icon: Icons.add_shopping_cart,
+                  ),
 
-                //shopping cart
-                introAnimation(
-                  title: IntroHelper.titleCard2,
-                  content: IntroHelper.textCard2,
-                  icon: Icons.add_shopping_cart,
-                ),
+                  // verifying orders / delivery
+                  introAnimation(
+                    title: IntroHelper.titleCard3,
+                    content: IntroHelper.textCard3,
+                    icon: Icons.verified_user,
+                  ),
 
-                // verifying orders / delivery
-                introAnimation(
-                  title: IntroHelper.titleCard3,
-                  content: IntroHelper.textCard3,
-                  icon: Icons.verified_user,
-                ),
-
-                // Final card (thank you)
-                introAnimation(
-                  title: IntroHelper.titleCard4,
-                  content: IntroHelper.textCard4,
-                  icon: Icons.cake,
-                ),
-              ],
-              controller: controller,
-              onPageChanged: onPageChange,
+                  // Final card (thank you)
+                  introAnimation(
+                    title: IntroHelper.titleCard4,
+                    content: IntroHelper.textCard4,
+                    icon: Icons.cake,
+                  ),
+                ],
+                controller: controller,
+                onPageChanged: onPageChange,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                FlatButton(
-                  child: Text(last ? "" : IntroHelper.skipCard,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0)),
-                    onPressed: () => last ? null : MyNavigator.goToHome(context),
-                ),
-              ],
-            )
-          )
-        ],
-      )
-    );
+            Expanded(
+                flex: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text(last ? "" : IntroHelper.skipCard,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0)),
+                      onPressed: () =>
+                          last ? null : MyNavigator.goToHome(context),
+                    ),
+                    FlatButton(
+                      child: Text(
+                          last ? IntroHelper.lastCard : IntroHelper.nextCard,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0)),
+                      onPressed: () => last
+                          ? MyNavigator.goToHome(context)
+                          : controller.nextPage(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.easeIn),
+                    ),
+                  ],
+                ))
+          ],
+        ));
   }
 }
