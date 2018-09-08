@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,56 +23,69 @@ class SplashScreenState extends State<SplashScreen>
         parent: _iconAnimationController, curve: Curves.bounceOut);
     _iconAnimation.addListener(() => this.setState(() {}));
     _iconAnimationController.forward();
-    Timer(
-        Duration(seconds: 5),
-            () => MyNavigator.goToIntro(context));
+    Timer(Duration(seconds: 5), () => openNextPage());
+  }
+
+  openNextPage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isIntro = false;
+    try{
+      isIntro  = prefs.getBool("isIntro") ?? false;
+    }catch (e){
+    }
+
+    if (isIntro) {
+      MyNavigator.goToHome(context);
+    } else {
+      MyNavigator.goToIntro(context);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: new Stack(fit: StackFit.expand, children: <Widget>[
-          Container(
-            decoration: BoxDecoration(color: Colors.lightGreen),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          new Image(
-                            image: new AssetImage("assets/sprout.png"),
-                            height: _iconAnimation.value * 100,
-                            width: _iconAnimation.value * 100,
-                          ),
-                          Text(
-                            "Plant A Tree",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: _iconAnimation.value * 26,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Roboto"),
-                          )
-                        ]),
-                  )),
-              Expanded(
-                flex: 1,
+      Container(
+        decoration: BoxDecoration(color: Colors.lightGreen),
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+              flex: 2,
+              child: Container(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Padding(
-                      padding: EdgeInsets.all(30.0),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          )
-        ]));
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Image(
+                        image: new AssetImage("assets/sprout.png"),
+                        height: _iconAnimation.value * 100,
+                        width: _iconAnimation.value * 100,
+                      ),
+                      Text(
+                        "Plant A Tree",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: _iconAnimation.value * 26,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Roboto"),
+                      )
+                    ]),
+              )),
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                Padding(
+                  padding: EdgeInsets.all(30.0),
+                )
+              ],
+            ),
+          ),
+        ],
+      )
+    ]));
   }
 }

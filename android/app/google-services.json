@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "258877671939",
+    "firebase_url": "https://plant-a-tree-7825b.firebaseio.com",
+    "project_id": "plant-a-tree-7825b",
+    "storage_bucket": "plant-a-tree-7825b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258877671939:android:10dd4db9a49d181c",
+        "android_client_info": {
+          "package_name": "com.example.treesco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258877671939-2i8lva5vabs743rk9tu839ku38vhom6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVhIfwhoMF1yQbbDwoV8zkhcP_KCe2iAA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

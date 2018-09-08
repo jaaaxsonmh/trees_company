@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/IntroHelper.dart';
 import 'package:trees_co/widgets/introAnimation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -21,10 +22,16 @@ class IntroScreenState extends State<IntroScreen> {
       current = page;
       if (current == totalPage) {
         last = true;
+        _intoPageShownSave();
       } else {
         last = false;
       }
     });
+  }
+
+  _intoPageShownSave() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isIntro", true);
   }
 
   // build layout
