@@ -46,17 +46,56 @@ class IntroScreenState extends State<IntroScreen> {
             flex: 3,
             child: PageView(
               children: <Widget>[
+
+                //tree co welcome
                 introAnimation(
                   title: IntroHelper.titleCard1,
-                  content: IntroHelper.titleCard1,
-                  icon: Icons.child_friendly,
+                  content: IntroHelper.textCard1,
+                  icon: Icons.wc,
+                ),
+
+                //shopping cart
+                introAnimation(
+                  title: IntroHelper.titleCard2,
+                  content: IntroHelper.textCard2,
+                  icon: Icons.add_shopping_cart,
+                ),
+
+                // verifying orders / delivery
+                introAnimation(
+                  title: IntroHelper.titleCard3,
+                  content: IntroHelper.textCard3,
+                  icon: Icons.verified_user,
+                ),
+
+                // Final card (thank you)
+                introAnimation(
+                  title: IntroHelper.titleCard4,
+                  content: IntroHelper.textCard4,
+                  icon: Icons.cake,
                 ),
               ],
               controller: controller,
               onPageChanged: onPageChange,
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                FlatButton(
+                  child: Text(last ? "" : IntroHelper.skipCard,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0)),
+                    onPressed: () => last ? null : MyNavigator.goToHome(context),
+                ),
+              ],
             )
           )
-
         ],
       )
     );

@@ -29,7 +29,7 @@ class SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
         body: new Stack(fit: StackFit.expand, children: <Widget>[
           Container(
             decoration: BoxDecoration(color: Colors.lightGreen),

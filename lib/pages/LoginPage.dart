@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:trees_co/utils/MyNavigator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  State createState() => new LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
