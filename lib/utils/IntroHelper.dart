@@ -9,5 +9,5 @@ class IntroHelper {
   static const String textCard4 = "Let us know what you think! \n you are one of the first to use this concept \n and your opinion means the world!";
   static const String skipCard = "SKIP";
   static const String nextCard = "NEXT";
-  static const String lastCard = "Thanks!";
+  static const String lastCard = "Lets get in to it!";
 }

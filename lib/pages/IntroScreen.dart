@@ -37,7 +37,10 @@ class IntroScreenState extends State<IntroScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Expanded(flex: 1, child: Container()),
+            Expanded(flex: 1, child: Container(
+
+              ),
+            ),
             Expanded(
               flex: 3,
               child: PageView(

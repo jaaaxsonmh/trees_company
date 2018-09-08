@@ -1,38 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
+import 'package:trees_co/widgets/placeholder.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
-  HomeScreenState createState() => new HomeScreenState();
+  State<StatefulWidget> createState() {
+    return HomeScreenState();
+  }
 }
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  int currentIndex = 0;
+  final List<Widget> _children = [
+    PlaceholderWidget(Colors.green),
+    PlaceholderWidget(Colors.red),
+    PlaceholderWidget(Colors.amber),
+    PlaceholderWidget(Colors.deepOrange)
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(color: Colors.blue),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Image(
-                    image: new AssetImage("assets/heart.png"),
-                    height: 128.0,
-                    width: 128.0
-                ),
-                Text(
-                  "ur all gay",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,),
-                )
-              ],
-            ),
-          ],
-        ));
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('Plant a Tree'),
+      ),
+      body: _children[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: currentIndex,
+      items: [
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.home),
+          title: new Text('Home'),
+
+        ),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.new_releases),
+          title: new Text('News'),
+        ),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.add_a_photo),
+          title: new Text('Location'),
+        ),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.add_shopping_cart),
+          title: new Text('Catelog'),
+          )
+        ],
+      ),
+    );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
   }
 }
