@@ -23,7 +23,7 @@ class SplashScreenState extends State<SplashScreen>
         parent: _iconAnimationController, curve: Curves.elasticOut);
     _iconAnimation.addListener(() => this.setState(() {}));
     _iconAnimationController.forward();
-    Timer(Duration(seconds: 5), () => openNextPage());
+    Timer(Duration(milliseconds: 5000), () => openNextPage());
   }
 
   openNextPage() async {

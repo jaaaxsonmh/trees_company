@@ -26,7 +26,7 @@ class TreeInfo extends StatelessWidget {
                   content: "\$" + document[Fire.TREE_PRICE].toString())
             ]),
           ),
-          Expanded(flex: 1, child: Container()),
+          Expanded(flex: 3, child: Container()),
         ],
       ),
     );
