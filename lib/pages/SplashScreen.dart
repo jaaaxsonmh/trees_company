@@ -20,7 +20,7 @@ class SplashScreenState extends State<SplashScreen>
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(milliseconds: 5000));
     _iconAnimation = new CurvedAnimation(
-        parent: _iconAnimationController, curve: Curves.bounceOut);
+        parent: _iconAnimationController, curve: Curves.elasticOut);
     _iconAnimation.addListener(() => this.setState(() {}));
     _iconAnimationController.forward();
     Timer(Duration(seconds: 5), () => openNextPage());
@@ -61,14 +61,6 @@ class SplashScreenState extends State<SplashScreen>
                         image: new AssetImage("assets/sprout.png"),
                         height: _iconAnimation.value * 100,
                         width: _iconAnimation.value * 100,
-                      ),
-                      Text(
-                        "Plant A Tree",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: _iconAnimation.value * 26,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Roboto"),
                       )
                     ]),
               )),
@@ -77,7 +69,14 @@ class SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                CircularProgressIndicator(),
+                Text(
+                  "Plant A Tree",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize:  26.0,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Roboto"),
+                ),
                 Padding(
                   padding: EdgeInsets.all(30.0),
                 )
