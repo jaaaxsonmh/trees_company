@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-class introAnimation extends StatefulWidget {
+class IntroAnimation extends StatefulWidget {
   final title;
   final content;
   final icon;
   final color;
+  final src;
 
-  introAnimation(
-  {
-    this.title,
-    this.content,
-    this.icon,
-    this.color = Colors.green
-}
-      );
+  IntroAnimation(
+      {this.title,
+      this.content,
+      this.icon,
+      this.color = Colors.green,
+      this.src});
 
   @override
   introAnimationState createState() {
@@ -21,8 +20,8 @@ class introAnimation extends StatefulWidget {
   }
 }
 
-class introAnimationState extends State<introAnimation>
-  with SingleTickerProviderStateMixin {
+class introAnimationState extends State<IntroAnimation>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation<double> _animation;
 
@@ -31,9 +30,10 @@ class introAnimationState extends State<introAnimation>
     // TODO: create animiation controlller and curve in annimation
     // TODO: add listener
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 700));
-    _animation = Tween(begin: -225.0, end: 0.0).animate(
-        CurvedAnimation(parent: _animationController, curve: Curves.elasticInOut));
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
+    _animation = Tween(begin: -225.0, end: 0.0).animate(CurvedAnimation(
+        parent: _animationController, curve: Curves.elasticInOut));
     _animation.addListener(() => setState(() {}));
     _animationController.forward();
   }
@@ -58,18 +58,20 @@ class introAnimationState extends State<introAnimation>
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             //title text
-            new Transform(transform:
-            new Matrix4.translationValues(_animation.value, 0.0, 0.0),
-            child: new Text(
-              widget.title,
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: widget.color),
+            new Transform(
+              transform:
+                  new Matrix4.translationValues(_animation.value, 0.0, 0.0),
+              child: new Text(
+                widget.title,
+                style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: widget.color),
               ),
             ),
-            new Transform(transform:
-            new Matrix4.translationValues(_animation.value, 0.0, 0.0),
+            new Transform(
+              transform:
+                  new Matrix4.translationValues(_animation.value, 0.0, 0.0),
               child: new Text(
                 widget.content,
                 softWrap: true,
@@ -84,7 +86,8 @@ class introAnimationState extends State<introAnimation>
               widget.icon,
               size: 80.0,
               color: widget.color,
-            )
+            ),
+            new Image.network(widget.src ?? "")
           ],
         ),
       ),

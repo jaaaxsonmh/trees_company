@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
-class News extends StatelessWidget {
+class ToolsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('news').snapshots(),
+      stream: Firestore.instance.collection(Fire.tools).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const Text('Loading...');
         return new ListView.builder(
@@ -32,11 +33,9 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
       child: new Row(
         children: <Widget>[
           new Expanded(
-            child: new Text(document['title']),
+            child: new Text(document[Fire.TOOLS_TITLE]),
           ),
-          new Text(
-            document['date'].toString(),
-          ),
+          new Image.network(document[Fire.TOOLS_IMAGE]),
         ],
       ),
     ),
@@ -45,5 +44,5 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
 }
 
 _openNewsFullPage(BuildContext context, DocumentSnapshot document) {
-  MyNavigator.goToNewsFullInfo(context, document);
+  MyNavigator.goToToolFullInfo(context, document);
 }

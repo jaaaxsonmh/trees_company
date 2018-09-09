@@ -50,28 +50,28 @@ class IntroScreenState extends State<IntroScreen> {
               child: PageView(
                 children: <Widget>[
                   //tree co welcome
-                  introAnimation(
+                  IntroAnimation(
                     title: IntroHelper.titleCard1,
                     content: IntroHelper.textCard1,
                     icon: Icons.wc,
                   ),
 
                   //shopping cart
-                  introAnimation(
+                  IntroAnimation(
                     title: IntroHelper.titleCard2,
                     content: IntroHelper.textCard2,
                     icon: Icons.add_shopping_cart,
                   ),
 
                   // verifying orders / delivery
-                  introAnimation(
+                  IntroAnimation(
                     title: IntroHelper.titleCard3,
                     content: IntroHelper.textCard3,
                     icon: Icons.verified_user,
                   ),
 
                   // Final card (thank you)
-                  introAnimation(
+                  IntroAnimation(
                     title: IntroHelper.titleCard4,
                     content: IntroHelper.textCard4,
                     icon: Icons.cake,

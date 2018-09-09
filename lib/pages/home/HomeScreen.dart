@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:trees_co/pages/home/Colourd.dart';
-import 'package:trees_co/pages/home/News.dart';
+import 'package:trees_co/pages/home/news/NewsList.dart';
+import 'package:trees_co/pages/home/tools/ToolsList.dart';
+import 'package:trees_co/pages/home/tree/TreesList.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,9 +13,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    News(),
-    Colourd(Colors.deepOrange),
-    Colourd(Colors.green)
+    NewsList(),
+    TreesList(),
+    ToolsList()
   ];
 
   @override

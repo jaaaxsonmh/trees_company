@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trees_co/pages/home/NewsFullInfo.dart';
+import 'package:trees_co/pages/home/news/NewsFullInfo.dart';
+import 'package:trees_co/pages/home/tools/ToolsFullInfo.dart';
+import 'package:trees_co/pages/home/tree/TreeInfo.dart';
 import 'package:trees_co/utils/Routers.dart';
 
 class MyNavigator {
@@ -20,6 +22,20 @@ class MyNavigator {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => NewsFullInfo(document)),
+    );
+  }
+
+  static void goToTreeFullInfo(BuildContext context, DocumentSnapshot document) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TreeInfo(document)),
+    );
+  }
+
+  static void goToToolFullInfo(BuildContext context, DocumentSnapshot document) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ToolInfo(document)),
     );
   }
 }
