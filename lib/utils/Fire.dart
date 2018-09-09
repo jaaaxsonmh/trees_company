@@ -12,6 +12,7 @@ class Fire {
   /// TREES FIELDS
   static const String TREE_TITLE = "title";
   static const String TREE_IMAGE = "image";
+  static const String TREE_PRICE = "price";
 
   /// TOOLS FIELDS
   static const String TOOLS_TITLE = "title";

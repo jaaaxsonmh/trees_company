@@ -21,15 +21,13 @@ class TreeInfo extends StatelessWidget {
             child: PageView(children: <Widget>[
               //tree co welcome
               IntroAnimation(
-                title: document[Fire.TREE_TITLE],
-                src: document[Fire.TREE_IMAGE],
-                content:document[Fire.TREE_TITLE]
-              )
+                  title: document[Fire.TREE_TITLE],
+                  src: document[Fire.TREE_IMAGE],
+                  content: "\$" + document[Fire.TREE_PRICE].toString())
             ]),
           ),
           Expanded(flex: 1, child: Container()),
         ],
-
       ),
     );
   }
