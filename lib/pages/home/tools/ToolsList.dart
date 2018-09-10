@@ -9,10 +9,19 @@ class ToolsList extends StatelessWidget {
     return new StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection(Fire.tools).snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return const Text('Loading...');
+        if (!snapshot.hasData)
+          return new Center(
+            child: new SizedBox(
+              height: 50.0,
+              width: 50.0,
+              child: new CircularProgressIndicator(
+                strokeWidth: 7.0,
+              ),
+            ),
+          );
         return new ListView.builder(
             itemCount: snapshot.data.documents.length,
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.all(16.0),
             itemExtent: 55.0,
             itemBuilder: (context, index) =>
                 _buildListItem(context, snapshot.data.documents[index]));

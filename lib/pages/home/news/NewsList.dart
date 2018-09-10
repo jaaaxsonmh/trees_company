@@ -21,7 +21,7 @@ class NewsList extends StatelessWidget {
         );
         return new ListView.builder(
             itemCount: snapshot.data.documents.length,
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.all(10.0),
             itemExtent: 55.0,
             itemBuilder: (context, index) =>
                 _buildListItem(context, snapshot.data.documents[index]));
@@ -32,11 +32,12 @@ class NewsList extends StatelessWidget {
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
   return new ListTile(
+    dense: true,
     key: new ValueKey(document.documentID),
     title: new Container(
       decoration: new BoxDecoration(
-        border: new Border.all(color: const Color(0x80000000)),
-        borderRadius: new BorderRadius.circular(5.0),
+        border: new BorderDirectional(bottom: BorderSide(color: Colors.green, width: 1.0,
+            style: BorderStyle.solid)),
       ),
       padding: const EdgeInsets.all(10.0),
       child: new Row(
