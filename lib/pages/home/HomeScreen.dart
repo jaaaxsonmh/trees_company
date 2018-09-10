@@ -91,6 +91,7 @@ class _HomeState extends State<HomeScreen> {
             onPressed: () {
               _scaffoldKey.currentState.openDrawer();
             }),
+        backgroundColor: Colors.green,
         title: new Text('Plant A Tree',
         style: new TextStyle(
           color: Colors.white,
@@ -101,6 +102,7 @@ class _HomeState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
         currentIndex: _currentIndex,
+        fixedColor: Colors.green,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.insert_drive_file),
