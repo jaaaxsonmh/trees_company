@@ -3,6 +3,7 @@ import 'package:trees_co/pages/home/news/NewsList.dart';
 import 'package:trees_co/pages/home/tools/ToolsList.dart';
 import 'package:trees_co/pages/home/tree/TreesList.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:share/share.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -37,24 +38,32 @@ class _HomeState extends State<HomeScreen> {
             accountEmail: new Text('jpm8993@autuni.ac.nz'),
             otherAccountsPictures: <Widget>[
               new FlatButton(
-                  onPressed: () { showAboutDialog(
-                      context: context,
-                      applicationName: 'Plant a Tree',
-                      applicationIcon: new Image.asset("assets/sprout.png", width: 50.0),
-                      applicationVersion: 'version 1.0',
-                      applicationLegalese: 'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.'
-                  );
+                  onPressed: () {
+                    showAboutDialog(
+                        context: context,
+                        applicationName: 'Plant a Tree',
+                        applicationIcon:
+                            new Image.asset("assets/sprout.png", width: 50.0),
+                        applicationVersion: 'version 1.0',
+                        applicationLegalese:
+                            'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.');
                   },
-                  child: new Icon(Icons.cake, color: Colors.white)
+                  child: new Icon(Icons.cake, color: Colors.white)),
+              //TODO: add share functionality
+              new FlatButton(
+                child: new Icon(Icons.share, color: Colors.white),
+                onPressed: () { Share.share('Come try out our app download here:');
+                },
               ),
-              //TODO: add share popup
-              Icon(Icons.share,),
-              //TODO: add review popup
-              new FlatButton
-                (
-                child: new Icon(Icons.rate_review, color: Colors.white,
+              new FlatButton(
+                child: new Icon(
+                  Icons.rate_review,
+                  color: Colors.white,
                 ),
-                onPressed: () { LaunchReview.launch(androidAppId: 'com.skuu.plantatree', iOSAppId: 'com.skuu.runfinity');
+                onPressed: () {
+                  LaunchReview.launch(
+                      androidAppId: 'com.skuu.plantatree',
+                      iOSAppId: 'com.skuu.runfinity');
                 },
               )
             ],
@@ -64,8 +73,9 @@ class _HomeState extends State<HomeScreen> {
           ),
           //TODO: add profile page
           ListTile(
-            leading: Icon(Icons.person,
-            color: Colors.green,
+            leading: Icon(
+              Icons.person,
+              color: Colors.green,
             ),
             title: Text('Profile'),
             onTap: () {
@@ -74,7 +84,8 @@ class _HomeState extends State<HomeScreen> {
           ),
           //TODO: add settings page
           ListTile(
-            leading: Icon(Icons.shopping_cart,
+            leading: Icon(
+              Icons.shopping_cart,
               color: Colors.green,
             ),
             title: Text('View Cart'),
@@ -91,11 +102,11 @@ class _HomeState extends State<HomeScreen> {
           ),
           //TODO: add cart page
           ListTile(
-            leading: Icon(Icons.settings,
+            leading: Icon(
+              Icons.settings,
               color: Colors.green,
             ),
             title: Text('Settings'),
-
             onTap: () {
               Navigator.pop(context);
             },
@@ -110,10 +121,10 @@ class _HomeState extends State<HomeScreen> {
             }),
         backgroundColor: Colors.green,
         title: new Text('Plant A Tree',
-        style: new TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        )),
+            style: new TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
