@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trees_co/pages/home/news/NewsList.dart';
 import 'package:trees_co/pages/home/tools/ToolsList.dart';
 import 'package:trees_co/pages/home/tree/TreesList.dart';
+import 'package:launch_review/launch_review.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,12 +36,27 @@ class _HomeState extends State<HomeScreen> {
             //TODO: pull email from DB
             accountEmail: new Text('jpm8993@autuni.ac.nz'),
             otherAccountsPictures: <Widget>[
-              //TODO: add a "thank you" popup
-              Icon(Icons.cake),
+              new FlatButton(
+                  onPressed: () { showAboutDialog(
+                      context: context,
+                      applicationName: 'Plant a Tree',
+                      applicationIcon: new Image.asset("assets/sprout.png", width: 50.0),
+                      applicationVersion: 'version 1.0',
+                      applicationLegalese: 'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.'
+                  );
+                  },
+                  child: new Icon(Icons.cake, color: Colors.white)
+              ),
               //TODO: add share popup
-              Icon(Icons.share),
+              Icon(Icons.share,),
               //TODO: add review popup
-              Icon(Icons.rate_review),
+              new FlatButton
+                (
+                child: new Icon(Icons.rate_review, color: Colors.white,
+                ),
+                onPressed: () { LaunchReview.launch(androidAppId: 'com.skuu.plantatree', iOSAppId: 'com.skuu.runfinity');
+                },
+              )
             ],
             decoration: BoxDecoration(
               color: Colors.green,
@@ -58,16 +74,6 @@ class _HomeState extends State<HomeScreen> {
           ),
           //TODO: add settings page
           ListTile(
-            leading: Icon(Icons.settings,
-              color: Colors.green,
-            ),
-            title: Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          //TODO: add cart page
-          ListTile(
             leading: Icon(Icons.shopping_cart,
               color: Colors.green,
             ),
@@ -79,6 +85,17 @@ class _HomeState extends State<HomeScreen> {
                 color: Colors.red,
               ),
             ),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          //TODO: add cart page
+          ListTile(
+            leading: Icon(Icons.settings,
+              color: Colors.green,
+            ),
+            title: Text('Settings'),
+
             onTap: () {
               Navigator.pop(context);
             },
