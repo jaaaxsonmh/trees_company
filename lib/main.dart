@@ -5,11 +5,13 @@ import 'package:trees_co/pages/IntroScreen.dart';
 import 'package:trees_co/pages/LoginPage.dart';
 import 'package:trees_co/pages/home/news/NewsFullInfo.dart';
 import 'package:trees_co/utils/Routers.dart';
+import 'package:trees_co/pages/diagnoseTree/diagnoseTree.dart';
 
 var routes = <String, WidgetBuilder>{
   Routers.home: (BuildContext context) => HomeScreen(),
   Routers.intro: (BuildContext context) => IntroScreen(),
   Routers.login: (BuildContext context) => LoginPage(),
+  Routers.diagnoseTree: (BuildContext context) => DiagnoseTree()
 };
 
 void main() => runApp(new MaterialApp(

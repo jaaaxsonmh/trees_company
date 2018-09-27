@@ -4,6 +4,7 @@ import 'package:trees_co/pages/home/tools/ToolsList.dart';
 import 'package:trees_co/pages/home/tree/TreesList.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:share/share.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -91,7 +92,7 @@ class _HomeState extends State<HomeScreen> {
             ),
             title: Text('Diagnose Tree Health'),
             onTap: () {
-              Navigator.pop(context);
+              MyNavigator.goToDiagnoseTree(context);
             },
           ),
           //TODO: add cart page

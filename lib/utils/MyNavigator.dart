@@ -38,4 +38,8 @@ class MyNavigator {
       MaterialPageRoute(builder: (context) => ToolInfo(document)),
     );
   }
+
+  static void goToDiagnoseTree(BuildContext context) {
+    Navigator.pushNamed(context, Routers.diagnoseTree);
+  }
 }
