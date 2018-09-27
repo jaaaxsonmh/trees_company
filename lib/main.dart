@@ -3,7 +3,6 @@ import 'package:trees_co/pages/SplashScreen.dart';
 import 'package:trees_co/pages/home/HomeScreen.dart';
 import 'package:trees_co/pages/IntroScreen.dart';
 import 'package:trees_co/pages/LoginPage.dart';
-import 'package:trees_co/pages/home/news/NewsFullInfo.dart';
 import 'package:trees_co/utils/Routers.dart';
 import 'package:trees_co/pages/diagnoseTree/diagnoseTree.dart';
 
