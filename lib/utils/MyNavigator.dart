@@ -42,4 +42,8 @@ class MyNavigator {
   static void goToDiagnoseTree(BuildContext context) {
     Navigator.pushNamed(context, Routers.diagnoseTree);
   }
+
+  static void goToSettings(BuildContext context) {
+    Navigator.pushNamed(context, Routers.settings);
+  }
 }

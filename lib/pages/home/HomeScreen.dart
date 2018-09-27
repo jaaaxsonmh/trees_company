@@ -133,7 +133,7 @@ class _HomeState extends State<HomeScreen> {
             ),
             title: Text('Settings'),
             onTap: () {
-              Navigator.pop(context);
+              MyNavigator.goToSettings(context);
             },
           ),
         ],
