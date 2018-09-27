@@ -5,4 +5,5 @@ class Routers {
   static const String newsFullInfo = "/newsFullInfo";
   static const String diagnoseTree = "/diagnoseTree";
   static const String settings = "/settings";
+  static const String delivery = "/delivery";
 }

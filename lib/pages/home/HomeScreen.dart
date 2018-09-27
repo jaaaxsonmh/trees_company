@@ -121,7 +121,7 @@ class _HomeState extends State<HomeScreen> {
               ),
             title: new Text("Delivery Address"),
             onTap: () {
-              Navigator.pop(context);
+              MyNavigator.goToDelivery(context);
             },
           ),
           new Divider(color: Colors.green),
