@@ -90,7 +90,11 @@ class _diagnoseTree extends State<DiagnoseTree> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text('Diagnose Tree Health'),
-              Icon(Icons.healing)
+              new Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child:
+                  new Icon(Icons.healing)
+              )
             ],
           )),
       body: ListView(

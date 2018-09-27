@@ -12,9 +12,11 @@ dependencies:
   share: ^0.5.3
   shared_preferences: 0.4.2
   cloud_firestore: 0.8.0
+  flutter_cupertino_settings: ^0.0.8
 
 dependency_overrides:
   image_picker: ^0.4.10
+  flutter_cupertino_settings: ^0.0.8
 
 dev_dependencies:
   flutter_test:

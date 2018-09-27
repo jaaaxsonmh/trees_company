@@ -113,6 +113,7 @@ class _HomeState extends State<HomeScreen> {
             },
           ),
           //TODO: add cart page
+          new Divider(color: Colors.green),
           ListTile(
             leading: Icon(
               Icons.shopping_cart,
@@ -130,6 +131,17 @@ class _HomeState extends State<HomeScreen> {
               Navigator.pop(context);
             },
           ),
+          new ListTile(
+            leading: Icon(
+                Icons.home,
+                color: Colors.green,
+              ),
+            title: new Text("Delivery Address"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          new Divider(color: Colors.green),
           //TODO: add settings page
           ListTile(
             leading: Icon(
@@ -138,7 +150,7 @@ class _HomeState extends State<HomeScreen> {
             ),
             title: Text('Settings'),
             onTap: () {
-              Navigator.pop(context);
+              MyNavigator.goToSettings(context);
             },
           ),
         ],
