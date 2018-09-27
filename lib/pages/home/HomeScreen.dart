@@ -63,7 +63,7 @@ class _HomeState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   LaunchReview.launch(
-                      androidAppId: 'com.skuu.plantatree',
+                      androidAppId: 'com.skuu.treesco',
                       iOSAppId: 'com.skuu.runfinity');
                 },
               )
