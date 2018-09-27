@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trees_co/pages/home/news/NewsList.dart';
 import 'package:trees_co/pages/home/tools/ToolsList.dart';
 import 'package:trees_co/pages/home/tree/TreesList.dart';
@@ -16,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [NewsList(), TreesList(), ToolsList()];
+
+  static const platform = const MethodChannel('samples.flutter.io/ar');
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -93,6 +96,20 @@ class _HomeState extends State<HomeScreen> {
             title: Text('Diagnose Tree Health'),
             onTap: () {
               MyNavigator.goToDiagnoseTree(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.camera,
+              color: Colors.green,
+            ),
+            title: Text('Plant a Tree in AR'),
+            onTap: () {
+              try {
+                platform.invokeMethod('getAr');
+              } on PlatformException catch (e) {
+                // TODO: This is where iOS error message goes
+              }
             },
           ),
           //TODO: add cart page

@@ -1,8 +1,3 @@
-# trees_co
+# Plant a Tree - TreeCo
 
-A new Flutter project.
-
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+![](https://github.com/jaaaxsonmh/trees_company/raw/master/tree.png)
