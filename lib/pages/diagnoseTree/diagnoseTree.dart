@@ -48,7 +48,7 @@ class _diagnoseTree extends State<DiagnoseTree> {
             child: image == null
                 ? new Placeholder(color: Colors.green,
               fallbackHeight: 300.0, fallbackWidth: 300.0)
-                : new Image.file(image, ),
+                : new Image.file(image, width: 300.0, height: 300.0),
           ),
           RaisedButton(
             onPressed: _pickImageGallery,
