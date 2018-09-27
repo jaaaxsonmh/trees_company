@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
-import ''
-
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class DiagnoseTree extends StatefulWidget {
   @override
@@ -11,42 +11,66 @@ class DiagnoseTree extends StatefulWidget {
 }
 
 class _diagnoseTree extends State<DiagnoseTree> {
-
   final _formKey = GlobalKey<FormState>();
+  File image;
+
+
+  // for camera option
+  _pickImageCamera() async {
+    File img = await ImagePicker.pickImage(source: ImageSource.camera);
+    image = img;
+    setState(() {});
+  }
+
+  // for gallery option
+  _pickImageGallery() async {
+    File img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    image = img;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.green,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text('Diagnose Tree Health'),
-            Icon(Icons.healing)
-          ],
-        )
-      ),
+          backgroundColor: Colors.green,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Diagnose Tree Health'),
+              Icon(Icons.healing)
+            ],
+          )),
       body: ListView(
         children: <Widget>[
-
-           FlatButton(onPressed: () => MyNavigator.goToHome(context),
-             color: Colors.green,
-             padding: EdgeInsets.all(20.0),
-             child: Icon(Icons.add_a_photo,
-             color: Colors.white),
-           ),
-
-       /*  inputEmail,
-         inputDetails,
-         submitbutton,*/
+          Center(
+            child: image == null
+                ? new Placeholder(color: Colors.green,
+              fallbackHeight: 300.0, fallbackWidth: 300.0)
+                : new Image.file(image, ),
+          ),
+          RaisedButton(
+            onPressed: _pickImageGallery,
+            color: Colors.green,
+            /*(){
+              new SimpleDialog(
+              title: new Text('Camera'),
+                children: <Widget>[
+                  new FlatButton(onPressed: _pickImageCamera,
+                      child: null),
+                  new FlatButton(onPressed: _pickImageGallery,
+                      child: null)
+                ],
+            );
+            },*/
+            child: Icon(Icons.add_a_photo, color: Colors.white),
+          ),
         ],
       ),
     );
   }
 }
-
 
 /*padding: new EdgeInsets.all(20.0),
 child: new Form(
