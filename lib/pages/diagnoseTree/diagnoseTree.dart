@@ -11,9 +11,7 @@ class DiagnoseTree extends StatefulWidget {
 }
 
 class _diagnoseTree extends State<DiagnoseTree> {
-  final _formKey = GlobalKey<FormState>();
   File image;
-
 
   // for camera option
   _pickImageCamera() async {
@@ -46,9 +44,18 @@ class _diagnoseTree extends State<DiagnoseTree> {
         children: <Widget>[
           Center(
             child: image == null
-                ? new Placeholder(color: Colors.green,
-              fallbackHeight: 300.0, fallbackWidth: 300.0)
-                : new Image.file(image, width: 300.0, height: 300.0),
+                ? new Padding(
+                    padding:
+                        EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
+                    child: new Placeholder(
+                        color: Colors.green,
+                        fallbackHeight: 290.0,
+                        fallbackWidth: 290.0),
+                  )
+                : new Padding(
+                    padding:
+                        EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
+                    child: new Image.file(image, width: 290.0, height: 290.0)),
           ),
           RaisedButton(
             onPressed: _pickImageGallery,
@@ -66,58 +73,29 @@ class _diagnoseTree extends State<DiagnoseTree> {
             },*/
             child: Icon(Icons.add_a_photo, color: Colors.white),
           ),
+          new TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              // Use email input type for emails.
+              decoration: new InputDecoration(
+                  hintText: 'you@example.com', labelText: 'E-mail Address')),
+          new TextFormField(
+              decoration: new InputDecoration(
+                  hintText: 'Tell us what you think is wrong?',
+                  labelText: 'Enter short details about the tree')),
+          new Container(
+            child: new RaisedButton(
+              child: new Text(
+                'Send for Review',
+                style: new TextStyle(color: Colors.white),
+              ),
+              // TODO: send data from each field and image to firebase
+              //TODO: Show comfirmation of being sent.
+              onPressed: () => null,
+              color: Colors.green,
+            ),
+          ),
         ],
       ),
     );
   }
 }
-
-/*padding: new EdgeInsets.all(20.0),
-child: new Form(
-key: this._formKey,
-child: new ListView(
-children: <Widget>[
-new TextFormField(
-keyboardType: TextInputType.emailAddress, // Use email input type for emails.
-decoration: new InputDecoration(
-hintText: 'you@example.com',
-labelText: 'E-mail Address'
-)
-),
-new TextFormField(
-decoration: new InputDecoration(
-hintText: 'Tell us what you think is wrong?',
-labelText: 'Enter short details about the tree'
-)
-),
-new Container(
-child: new RaisedButton(
-child: new Text(
-'Send for Review',
-style: new TextStyle(
-color: Colors.white
-),
-),
-// TODO: send data from each field and image to firebase
-onPressed: () => null,
-color: Colors.green,
-),
-margin: new EdgeInsets.only(
-top: 20.0
-),
-),
-new Container(
-child:
-new RaisedButton(
-child: new Text(
-'Send for Review',
-style: new TextStyle(
-color: Colors.white
-),
-),
-// TODO: send data from each field and image to firebase
-onPressed: () => null,
-color: Colors.green,
-),
-)
-],*/
