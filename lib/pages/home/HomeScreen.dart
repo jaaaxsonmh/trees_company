@@ -71,6 +71,8 @@ class _HomeState extends State<HomeScreen> {
               color: Colors.green,
             ),
           ),
+
+          /* This shows all the tab items on the drawer menu */
           //TODO: add profile page
           ListTile(
             leading: Icon(
@@ -82,7 +84,17 @@ class _HomeState extends State<HomeScreen> {
               Navigator.pop(context);
             },
           ),
-          //TODO: add settings page
+          ListTile(
+            leading: Icon(
+              Icons.healing,
+              color: Colors.green,
+            ),
+            title: Text('Diagnose Tree Health'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          //TODO: add cart page
           ListTile(
             leading: Icon(
               Icons.shopping_cart,
@@ -100,7 +112,7 @@ class _HomeState extends State<HomeScreen> {
               Navigator.pop(context);
             },
           ),
-          //TODO: add cart page
+          //TODO: add settings page
           ListTile(
             leading: Icon(
               Icons.settings,
