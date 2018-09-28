@@ -66,7 +66,7 @@ class _HomeState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   LaunchReview.launch(
-                      androidAppId: 'com.skuu.plantatree',
+                      androidAppId: 'com.skuu.treesco',
                       iOSAppId: 'com.skuu.runfinity');
                 },
               )
@@ -138,7 +138,7 @@ class _HomeState extends State<HomeScreen> {
               ),
             title: new Text("Delivery Address"),
             onTap: () {
-              Navigator.pop(context);
+              MyNavigator.goToDelivery(context);
             },
           ),
           new Divider(color: Colors.green),

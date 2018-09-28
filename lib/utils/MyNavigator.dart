@@ -46,4 +46,8 @@ class MyNavigator {
   static void goToSettings(BuildContext context) {
     Navigator.pushNamed(context, Routers.settings);
   }
+
+  static void goToDelivery(BuildContext context) {
+    Navigator.pushNamed(context, Routers.delivery);
+  }
 }

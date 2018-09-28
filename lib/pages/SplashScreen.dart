@@ -46,7 +46,7 @@ class SplashScreenState extends State<SplashScreen>
     return Scaffold(
         body: new Stack(fit: StackFit.expand, children: <Widget>[
       Container(
-        decoration: BoxDecoration(color: Colors.lightGreen),
+        decoration: BoxDecoration(color: Colors.green),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
