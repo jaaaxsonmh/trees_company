@@ -88,7 +88,6 @@ class CardLayout extends StatelessWidget {
                         style: new TextStyle(color: Colors.green)),
                     onPressed: () {
                       //TODO: full details cards
-
                   },
                   ),
                 ],

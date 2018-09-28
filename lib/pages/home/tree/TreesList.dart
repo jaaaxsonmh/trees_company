@@ -21,8 +21,7 @@ class TreesList extends StatelessWidget {
           );
         return new ListView.builder(
             itemCount: snapshot.data.documents.length,
-            padding: const EdgeInsets.all(16.0),
-            itemExtent: 55.0,
+            padding: const EdgeInsets.all(5.0),
             itemBuilder: (context, index) =>
                 _buildListItem(context, snapshot.data.documents[index]));
       },
@@ -31,23 +30,36 @@ class TreesList extends StatelessWidget {
 }
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-  return new ListTile(
-    key: new ValueKey(document.documentID),
-    title: new Container(
-      decoration: new BoxDecoration(
-        border: new Border.all(color: const Color(0x80000000)),
-      ),
+  return new Container(
+    child: new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new ListTile(
+            key: new ValueKey(document.documentID),
+            leading: new Image.network(document[Fire.TREE_IMAGE], width: 50.0, height: 50.0),
+            title: new Text(
+              document[Fire.TREE_TITLE],
+            ),
+
+            /*new Container(
       padding: const EdgeInsets.all(10.0),
+      height: 100.0,
+      width: 100.0,
       child: new Row(
         children: <Widget>[
           new Expanded(
             child: new Text(document[Fire.TREE_TITLE]),
           ),
-          new Image.network(document[Fire.TREE_IMAGE]),
+          new Image.network(document[Fire.TREE_IMAGE], scale: ,),
+        ],
+      ),
+    ), */
+            onTap: () => _openNewsFullPage(context, document),
+          ),
         ],
       ),
     ),
-    onTap: () => _openNewsFullPage(context, document),
   );
 }
 

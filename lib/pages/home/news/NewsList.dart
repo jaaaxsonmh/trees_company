@@ -21,8 +21,7 @@ class NewsList extends StatelessWidget {
         );
         return new ListView.builder(
             itemCount: snapshot.data.documents.length,
-            padding: const EdgeInsets.all(10.0),
-            itemExtent: 55.0,
+            padding: const EdgeInsets.all(5.0),
             itemBuilder: (context, index) =>
                 _buildListItem(context, snapshot.data.documents[index]));
       },
@@ -31,27 +30,23 @@ class NewsList extends StatelessWidget {
 }
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-  return new ListTile(
-    dense: true,
-    key: new ValueKey(document.documentID),
-    title: new Container(
-      decoration: new BoxDecoration(
-        border: new BorderDirectional(bottom: BorderSide(color: Colors.green, width: 1.0,
-            style: BorderStyle.solid)),
-      ),
-      padding: const EdgeInsets.all(10.0),
-      child: new Row(
+  return new Container(
+    child: new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Expanded(
-            child: new Text(document[Fire.NEWS_TITLE]),
-          ),
-          new Text(
-            document[Fire.NEWS_DATE].toString(),
+          new ListTile(
+            key: new ValueKey(document.documentID),
+            leading: new Icon(Icons.new_releases, color: Colors.red),
+            title: new Text(
+              document[Fire.NEWS_TITLE],
+            ),
+            subtitle: new Text(document[Fire.NEWS_DATE]),
+            onTap: () => _openNewsFullPage(context, document),
           ),
         ],
       ),
     ),
-    onTap: () => _openNewsFullPage(context, document),
   );
 }
 

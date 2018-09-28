@@ -21,8 +21,7 @@ class ToolsList extends StatelessWidget {
           );
         return new ListView.builder(
             itemCount: snapshot.data.documents.length,
-            padding: const EdgeInsets.all(16.0),
-            itemExtent: 55.0,
+            padding: const EdgeInsets.all(5.0),
             itemBuilder: (context, index) =>
                 _buildListItem(context, snapshot.data.documents[index]));
       },
@@ -31,24 +30,22 @@ class ToolsList extends StatelessWidget {
 }
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-  return new ListTile(
-    key: new ValueKey(document.documentID),
-    title: new Container(
-      decoration: new BoxDecoration(
-        border: new Border.all(color: const Color(0x80000000)),
-        borderRadius: new BorderRadius.circular(5.0),
-      ),
-      padding: const EdgeInsets.all(10.0),
-      child: new Row(
+  return new Container(
+    child: new Card(
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          new Expanded(
-            child: new Text(document[Fire.TOOLS_TITLE]),
+          new ListTile(
+            key: new ValueKey(document.documentID),
+            leading: new Image.network(document[Fire.TOOLS_IMAGE], width: 50.0, height: 50.0),
+            title: new Text(
+              document[Fire.TOOLS_TITLE],
+            ),
+            onTap: () => _openNewsFullPage(context, document),
           ),
-          new Image.network(document[Fire.TOOLS_IMAGE]),
         ],
       ),
     ),
-    onTap: () => _openNewsFullPage(context, document),
   );
 }
 
