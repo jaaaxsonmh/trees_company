@@ -6,6 +6,7 @@ import 'package:trees_co/pages/home/tree/TreesList.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:share/share.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
+import 'package:trees_co/utils/Routers.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _HomeState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [NewsList(), TreesList(), ToolsList()];
 
-  static const platform = const MethodChannel('samples.flutter.io/ar');
+  static const platform = const MethodChannel(Routers.AR_KEY);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
