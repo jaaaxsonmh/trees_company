@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trees_co/pages/home/news/NewsList.dart';
@@ -56,7 +58,8 @@ class _HomeState extends State<HomeScreen> {
                   child: new Icon(Icons.cake, color: Colors.white)),
               new FlatButton(
                 child: new Icon(Icons.share, color: Colors.white),
-                onPressed: () { Share.share('Come try out our app download here:');
+                onPressed: () {
+                  Share.share('Come try out our app download here:');
                 },
               ),
               new FlatButton(
@@ -115,11 +118,7 @@ class _HomeState extends State<HomeScreen> {
             ),
             title: Text('Plant a Tree in AR'),
             onTap: () {
-              try {
-                platform.invokeMethod('getAr');
-              } on PlatformException catch (e) {
-                // TODO: This is where iOS error message goes
-              }
+              openAR();
             },
           ),
           //TODO: add cart page
@@ -143,9 +142,9 @@ class _HomeState extends State<HomeScreen> {
           ),
           new ListTile(
             leading: Icon(
-                Icons.home,
-                color: Colors.green,
-              ),
+              Icons.home,
+              color: Colors.green,
+            ),
             title: new Text("Delivery Address"),
             onTap: () {
               MyNavigator.goToDelivery(context);
@@ -184,6 +183,41 @@ class _HomeState extends State<HomeScreen> {
               icon: Icon(Icons.pan_tool), title: Text('Tools'))
         ],
       ),
+    );
+  }
+
+  void openAR() {
+    Future<Null> _openAR() async {
+      try {
+        int result = await platform.invokeMethod('getAr');
+      } on PlatformException catch (e) {
+        _showDialog();
+      }
+    }
+
+    _openAR();
+  }
+
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("AR is not avalibe"),
+          content: new Text("AR is not avalibe on your device"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

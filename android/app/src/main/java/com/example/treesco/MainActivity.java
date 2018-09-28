@@ -26,6 +26,9 @@ public class MainActivity extends FlutterActivity {
                         if (launchIntent != null) {
                             launchIntent.addCategory("tree_co");
                             startActivity(launchIntent);
+                            result.success(null);
+                        }else {
+                            result.error("AR is not supported", "AR is not supported", null);
                         }
 
                     }

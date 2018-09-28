@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,12 +13,13 @@ class TreeDetailHeader extends StatelessWidget {
 
   final DocumentSnapshot detail;
 
+  BuildContext context;
   _buildCategoryChips(TextTheme textTheme) {
     return <Widget>[
       Container(
         width: 85.0,
         child: new RaisedButton(
-            onPressed: launchARApplication,
+            onPressed: openAR,
             textColor: Colors.white,
             //minWidth: 50.0,
             color: Colors.green,
@@ -37,6 +40,7 @@ class TreeDetailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     var textTheme = Theme.of(context).textTheme;
 
     var movieInformation = new Column(
@@ -107,14 +111,40 @@ class TreeDetailHeader extends StatelessWidget {
 
   }
 
-  launchARApplication() {
+  void openAR() {
     const platform = const MethodChannel(Routers.AR_KEY);
 
-    try {
-      platform.invokeMethod('getAr');
-    } on PlatformException catch (e) {
-      // TODO: This is where iOS error message goes
+    Future<Null> _openAR() async {
+      try {
+        int result = await platform.invokeMethod('getAr');
+      } on PlatformException catch (e) {
+        _showDialog();
+      }
     }
 
+    _openAR();
+  }
+
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("AR is not avalibe"),
+          content: new Text("AR is not avalibe on your device"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
