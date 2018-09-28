@@ -37,10 +37,13 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
         children: <Widget>[
           new ListTile(
             key: new ValueKey(document.documentID),
-            leading: new Image.network(document[Fire.TREE_IMAGE], width: 50.0, height: 50.0),
-            title: new Text(
-              document[Fire.TREE_TITLE],
-            ),
+            leading: new Image.network(document[Fire.TREE_IMAGE],
+                width: 50.0, height: 50.0),
+            title: new Text(document[Fire.TREE_TITLE],
+                style: new TextStyle(fontSize: 20.0)),
+            subtitle: new Text(document[Fire.TREE_CATEGORY]),
+            trailing: new Text("\$" + document[Fire.TREE_PRICE].toString() + ".00",
+                style: new TextStyle(fontSize: 24.0, color: Colors.green)),
 
             /*new Container(
       padding: const EdgeInsets.all(10.0),
