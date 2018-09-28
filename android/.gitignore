@@ -4,6 +4,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+\.idea\libraries\Dart_Packages.xml
 .DS_Store
 /build
 /captures
