@@ -44,20 +44,6 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
             subtitle: new Text(document[Fire.TREE_CATEGORY]),
             trailing: new Text("\$" + document[Fire.TREE_PRICE].toString() + ".00",
                 style: new TextStyle(fontSize: 24.0, color: Colors.green)),
-
-            /*new Container(
-      padding: const EdgeInsets.all(10.0),
-      height: 100.0,
-      width: 100.0,
-      child: new Row(
-        children: <Widget>[
-          new Expanded(
-            child: new Text(document[Fire.TREE_TITLE]),
-          ),
-          new Image.network(document[Fire.TREE_IMAGE], scale: ,),
-        ],
-      ),
-    ), */
             onTap: () => _openNewsFullPage(context, document),
           ),
         ],

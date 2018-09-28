@@ -29,20 +29,30 @@ class _TreeCareState extends State<TreeCare> {
         children: <Widget>[
           new CardLayout(
               plantIcon: Icons.whatshot,
-              plantType: "Palm Tree",
-              shortBrief: "Grow slow\nWater every 2-3 weeks"),
+              plantType: "Shrubs",
+              shortBrief: "Spring is a good time to prune, before the shrub leafs out",
+              show: true),
           new CardLayout(
               plantIcon: Icons.fastfood,
-              plantType: "Fruit Tree",
-              shortBrief: "Fruit trees get nasty bugs!"),
+              plantType: "Trees",
+              shortBrief: "Keep power tools such as lawnmowers and string trimmers from striking the tree and damaging its bark",
+              show: true),
           new CardLayout(
               plantIcon: Icons.nature_people,
-              plantType: "Pine Tree",
-              shortBrief: "Ever heard of a logging company?"),
+              plantType: "Conifer",
+              shortBrief: "It is best to fertilize in the early spring before the plants break dormancy.",
+              show: true),
           new CardLayout(
               plantIcon: Icons.nature,
-              plantType: "Native New Zealand",
-              shortBrief: "Best to upload an image, and get expert help!"),
+              plantType: "Groundcover Plant",
+              shortBrief: "Routine watering, mulching, fertilizing, and grooming",
+              show: true),
+          new CardLayout(
+              plantIcon: Icons.playlist_add_check,
+              plantType: "Your plant not listed?",
+              shortBrief:
+                  "We will be sure to add it soon! \nUpload a photo for expert help.",
+              show: false)
           //add a new card here and it will join the layout at bottom with same formats.
         ], // column
       ), // Container
@@ -51,11 +61,12 @@ class _TreeCareState extends State<TreeCare> {
 }
 
 class CardLayout extends StatelessWidget {
-  CardLayout({this.plantIcon, this.plantType, this.shortBrief});
+  CardLayout({this.plantIcon, this.plantType, this.shortBrief, this.show});
 
   final IconData plantIcon;
   final String shortBrief;
   final String plantType;
+  final bool show;
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +88,12 @@ class CardLayout extends StatelessWidget {
               child: new ButtonBar(
                 children: <Widget>[
                   new FlatButton(
-                    child: new Text('Diagnose Plant Health',
-                        style: new TextStyle(color: Colors.green)),
-                    onPressed: () {
-                      MyNavigator.goToDiagnoseTree(context);
-                    }
-                  ),
-                  new FlatButton(
-                    child: new Text('Full Details',
-                        style: new TextStyle(color: Colors.green)),
-                    onPressed: () {
-                      //TODO: full details cards
-                  },
-                  ),
+                      child: new Text('Diagnose Plant Health',
+                          style: new TextStyle(color: Colors.green)),
+                      onPressed: () {
+                        MyNavigator.goToDiagnoseTree(context);
+                      }),
+                  _buildChild()
                 ],
               ),
             ),
@@ -97,5 +101,17 @@ class CardLayout extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _buildChild() {
+    if(show) {
+      return new FlatButton(
+        child: new Text('Full Details',
+            style: new TextStyle(color: Colors.green)),
+        onPressed: () {
+          //TODO: full details cards
+        },
+      );
+    }
   }
 }
