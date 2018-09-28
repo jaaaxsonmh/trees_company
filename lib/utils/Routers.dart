@@ -1,6 +1,5 @@
 class Routers {
   static const String AR_KEY = "samples.flutter.io/ar";
-
   static const String home = "/home";
   static const String intro = "/intro";
   static const String login = "/login";
@@ -9,6 +8,4 @@ class Routers {
   static const String settings = "/settings";
   static const String delivery = "/delivery";
   static const String treeCare = "/treeCare";
-
-
 }
