@@ -25,11 +25,12 @@ class _TreeCareState extends State<TreeCare> {
             ],
           )), // appBar
       body: new ListView(
+        //TODO: get data from firebase
         children: <Widget>[
           new CardLayout(
               plantIcon: Icons.whatshot,
               plantType: "Palm Tree",
-              shortBrief: "Palm tree's like warm climates"),
+              shortBrief: "Grow slow\nWater every 2-3 weeks"),
           new CardLayout(
               plantIcon: Icons.fastfood,
               plantType: "Fruit Tree",
@@ -87,6 +88,7 @@ class CardLayout extends StatelessWidget {
                         style: new TextStyle(color: Colors.green)),
                     onPressed: () {
                       //TODO: full details cards
+
                   },
                   ),
                 ],

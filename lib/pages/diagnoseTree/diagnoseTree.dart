@@ -99,20 +99,20 @@ class _diagnoseTree extends State<DiagnoseTree> {
           )),
       body: ListView(
         children: <Widget>[
-          Center(
-            child: image == null
-                ? new Padding(
-                    padding:
-                        EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
-                    child: new Placeholder(
-                        color: Colors.green,
-                        fallbackHeight: 290.0,
-                        fallbackWidth: 290.0),
-                  )
-                : new Padding(
-                    padding:
-                        EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
-                    child: new Image.file(image, width: 290.0, height: 290.0)),
+          new Padding(
+            padding: EdgeInsets.only(left: 5.0, right: 5.0),
+            child: new TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                // Use email input type for emails.
+                decoration: new InputDecoration(
+                    hintText: 'you@example.com', labelText: 'E-mail Address'))
+          ),
+          new Padding(
+            padding: EdgeInsets.only(left: 5.0, right: 5.0),
+            child:new TextFormField(
+                decoration: new InputDecoration(
+                    hintText: 'Tell us what you think is wrong?',
+                    labelText: 'Enter short details about the tree'))
           ),
           new RaisedButton(
             onPressed: _pickImageGallery,
@@ -130,20 +130,20 @@ class _diagnoseTree extends State<DiagnoseTree> {
             },*/
             child: Icon(Icons.add_a_photo, color: Colors.white),
           ),
-          new Padding(
-            padding: EdgeInsets.only(left: 5.0, right: 5.0),
-            child: new TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                // Use email input type for emails.
-                decoration: new InputDecoration(
-                    hintText: 'you@example.com', labelText: 'E-mail Address'))
-          ),
-          new Padding(
-            padding: EdgeInsets.only(left: 5.0, right: 5.0),
-            child:new TextFormField(
-                decoration: new InputDecoration(
-                    hintText: 'Tell us what you think is wrong?',
-                    labelText: 'Enter short details about the tree'))
+          Center(
+            child: image == null
+                ? new Padding(
+              padding:
+              EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
+              child: new Placeholder(
+                  color: Colors.green,
+                  fallbackHeight: 290.0,
+                  fallbackWidth: 290.0),
+            )
+                : new Padding(
+                padding:
+                EdgeInsets.only(left: 10.0, right: 10.0),
+                child: new Image.file(image, width: 290.0, height: 290.0)),
           ),
             new Container(
               child: new RaisedButton(
@@ -159,6 +159,7 @@ class _diagnoseTree extends State<DiagnoseTree> {
                 color: Colors.green,
               ),
             ),
+
         ],
       ),
     // this doesnt work since only 1 item, and it requires >= 2.
