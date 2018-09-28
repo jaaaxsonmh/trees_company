@@ -26,6 +26,21 @@ class TreeDetailsPage extends StatelessWidget {
     ];
 
     return new Scaffold(
+      appBar: new AppBar(
+          backgroundColor: Colors.green,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Product Details'),
+              new Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child:
+                  new Icon(Icons.add_shopping_cart)
+              )
+            ],
+          )
+      ),
       body: new SingleChildScrollView(
         child: new Column(
           children: <Widget>[
