@@ -24,6 +24,7 @@ public class MainActivity extends FlutterActivity {
                     public void onMethodCall(MethodCall call, Result result) {
                         Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.ar.treeco");
                         if (launchIntent != null) {
+                            launchIntent.addCategory("tree_co");
                             startActivity(launchIntent);
                         }
 
