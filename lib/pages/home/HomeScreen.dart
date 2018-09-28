@@ -205,8 +205,8 @@ class _HomeState extends State<HomeScreen> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("AR is not avalibe"),
-          content: new Text("AR is not avalibe on your device"),
+          title: new Text("AR is not available"),
+          content: new Text("AR is not available on your device"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
