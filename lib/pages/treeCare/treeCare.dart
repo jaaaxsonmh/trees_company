@@ -30,22 +30,22 @@ class _TreeCareState extends State<TreeCare> {
           new CardLayout(
               plantIcon: Icons.whatshot,
               plantType: "Shrubs",
-              shortBrief: "Grow slow\nWater every 2-3 weeks",
+              shortBrief: "Spring is a good time to prune, before the shrub leafs out",
               show: true),
           new CardLayout(
               plantIcon: Icons.fastfood,
               plantType: "Trees",
-              shortBrief: "Fruit trees get nasty bugs!",
+              shortBrief: "Keep power tools such as lawnmowers and string trimmers from striking the tree and damaging its bark",
               show: true),
           new CardLayout(
               plantIcon: Icons.nature_people,
               plantType: "Conifer",
-              shortBrief: "Ever heard of a logging company?",
+              shortBrief: "It is best to fertilize in the early spring before the plants break dormancy.",
               show: true),
           new CardLayout(
               plantIcon: Icons.nature,
               plantType: "Groundcover Plant",
-              shortBrief: "Best to upload an image, and get expert help!",
+              shortBrief: "Routine watering, mulching, fertilizing, and grooming",
               show: true),
           new CardLayout(
               plantIcon: Icons.playlist_add_check,
