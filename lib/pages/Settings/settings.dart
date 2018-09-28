@@ -12,10 +12,6 @@ class Settings  extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
-  CSWidgetStyle brightnessStyle = const CSWidgetStyle(
-      icon: const Icon(Icons.brightness_medium, color: Colors.black54)
-  );
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

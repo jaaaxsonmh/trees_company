@@ -53,7 +53,6 @@ class _HomeState extends State<HomeScreen> {
                             'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.');
                   },
                   child: new Icon(Icons.cake, color: Colors.white)),
-              //TODO: add share functionality
               new FlatButton(
                 child: new Icon(Icons.share, color: Colors.white),
                 onPressed: () { Share.share('Come try out our app download here:');
@@ -86,6 +85,16 @@ class _HomeState extends State<HomeScreen> {
             title: Text('Profile'),
             onTap: () {
               Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.help,
+              color: Colors.green,
+            ),
+            title: Text('Plant Care Information'),
+            onTap: () {
+              MyNavigator.goToTreeCare(context);
             },
           ),
           ListTile(
@@ -139,18 +148,6 @@ class _HomeState extends State<HomeScreen> {
             title: new Text("Delivery Address"),
             onTap: () {
               MyNavigator.goToDelivery(context);
-            },
-          ),
-          new Divider(color: Colors.green),
-          //TODO: add settings page
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              color: Colors.green,
-            ),
-            title: Text('Settings'),
-            onTap: () {
-              MyNavigator.goToSettings(context);
             },
           ),
         ],

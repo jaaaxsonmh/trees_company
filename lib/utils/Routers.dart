@@ -6,4 +6,5 @@ class Routers {
   static const String diagnoseTree = "/diagnoseTree";
   static const String settings = "/settings";
   static const String delivery = "/delivery";
+  static const String treeCare = "/treeCare";
 }
