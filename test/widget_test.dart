@@ -10,20 +10,39 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:trees_co/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(new MaterialApp());
+  testWidgets('my first widget test', (WidgetTester tester) async {
+    // You can use keys to locate the widget you need to test
+    var sliderKey = UniqueKey();
+    var value = 0.0;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Tells the tester to build a UI based on the widget tree passed to it
+    await tester.pumpWidget(
+      StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return MaterialApp(
+            home: Material(
+              child: Center(
+                child: Slider(
+                  key: sliderKey,
+                  value: value,
+                  onChanged: (double newValue) {
+                    setState(() {
+                      value = newValue;
+                    });
+                  },
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+    expect(value, equals(0.0));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Taps on the widget found by key
+    await tester.tap(find.byKey(sliderKey));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verifies that the widget updated the value correctly
+    expect(value, equals(0.5));
   });
 }
