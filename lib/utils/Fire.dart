@@ -8,7 +8,7 @@ class Fire {
   /// NEWS FIELDS
   static const String NEWS_TITLE = "title";
   static const String NEWS_BODY = "body";
-  static const String NEWS_DATE = "date";
+  static const String NEWS_TIME = "time";
 
   /// TREES FIELDS
   static const String TREE_TITLE = "title";

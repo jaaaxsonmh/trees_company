@@ -72,10 +72,10 @@
             </list>
           </value>
         </entry>
-        <entry key="cupertino_icons">
+        <entry key="date_format">
           <value>
             <list>
-              <option value="$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-0.1.2/lib" />
+              <option value="$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/date_format-1.0.5/lib" />
             </list>
           </value>
         </entry>
@@ -90,13 +90,6 @@
           <value>
             <list>
               <option value="$USER_HOME$/Documents/Development/flutter/packages/flutter/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="flutter_cupertino_settings">
-          <value>
-            <list>
-              <option value="$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_cupertino_settings-0.0.8/lib" />
             </list>
           </value>
         </entry>
@@ -449,9 +442,8 @@
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/convert-2.0.2/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-2.0.6/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.14.5/lib" />
-      <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-0.1.2/lib" />
+      <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/date_format-1.0.5/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.2.5/lib" />
-      <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_cupertino_settings-0.0.8/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/front_end-0.1.4/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/glob-1.1.7/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/html-0.13.3+3/lib" />
