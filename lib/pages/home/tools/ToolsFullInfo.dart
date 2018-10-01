@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 
 class ToolInfo extends StatelessWidget {
   final DocumentSnapshot document;
+
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   ToolInfo(this.document);
 
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _scaffoldKey,
       bottomNavigationBar: new RaisedButton(
           onPressed: pressedBuyButton,
           textColor: Colors.white,
@@ -32,20 +37,16 @@ class ToolInfo extends StatelessWidget {
                   child: new Icon(Icons.shopping_basket))
             ],
           )),
-      body: new Column(
-        children: <Widget>[
-          new Text(document[Fire.TOOLS_TITLE]),
-          new Text("\$ " + document[Fire.TOOLS_PRICE].toString()),
-          new Image.network(document[Fire.TOOLS_IMAGE],
-              width: 50.0, height: 50.0)
-        ]
-      ),
+      body: new Column(children: <Widget>[
+        new Text(document[Fire.TOOLS_TITLE]),
+        new Text("\$ " + document[Fire.TOOLS_PRICE].toString()),
+        new Image.network(document[Fire.TOOLS_IMAGE], width: 50.0, height: 50.0)
+      ]),
     );
   }
 
-  void pressedBuyButton() {
+  pressedBuyButton() {
     // Show some UI -> get user QTY, etc
-
 
     addToShoppingCardDb();
   }
@@ -54,7 +55,7 @@ class ToolInfo extends StatelessWidget {
     Firestore.instance
         .collection(Fire.shoppingCart)
         .where(Fire.SHOPPING_CART_ITEM_TITLE,
-        isEqualTo: document[Fire.TOOLS_TITLE])
+            isEqualTo: document[Fire.TOOLS_TITLE])
         .getDocuments()
         .then((querySnapshot) {
       if (querySnapshot.documents.isEmpty) {
@@ -70,17 +71,26 @@ class ToolInfo extends StatelessWidget {
         Firestore.instance.collection(Fire.shoppingCart).add(values);
       } else {
         querySnapshot.documents.forEach((value) {
-
-
           Map<String, dynamic> values = {
-            Fire.SHOPPING_CART_ITEM_QUANTITY: value[Fire.SHOPPING_CART_ITEM_QUANTITY] + 1,
+            Fire.SHOPPING_CART_ITEM_QUANTITY:
+                value[Fire.SHOPPING_CART_ITEM_QUANTITY] + 1,
           };
 
-          Firestore.instance.collection(Fire.shoppingCart).document(value.documentID).updateData(values);
-
+          Firestore.instance
+              .collection(Fire.shoppingCart)
+              .document(value.documentID)
+              .updateData(values);
         });
       }
+
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text(document[Fire.TOOLS_TITLE] + " added to shopping cart"),
+        action: SnackBarAction(
+            label: "View",
+            onPressed: () {
+              MyNavigator.goToCart(_scaffoldKey.currentContext);
+            }),
+      ));
     });
   }
-
 }

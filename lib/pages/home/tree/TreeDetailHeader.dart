@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:trees_co/pages/home/tree/ArcBannerImage.dart';
 import 'package:trees_co/pages/home/tree/Poster.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/Routers.dart';
 
 class TreeDetailHeader extends StatelessWidget {
@@ -114,12 +115,6 @@ class TreeDetailHeader extends StatelessWidget {
   }
 
   addToShoppingCardDb() async {
-//    Firestore.instance
-//        .collection(Fire.shoppingCart)
-//        .where(Fire.SHOPPING_CART_ITEM_TITLE,
-//            isEqualTo: detail[Fire.TREE_PRICE])
-//        .snapshots()
-//        .listen((data) => data.documents.forEach((doc) => print(doc["title"])));
 
     Firestore.instance
         .collection(Fire.shoppingCart)
@@ -138,6 +133,7 @@ class TreeDetailHeader extends StatelessWidget {
         };
 
         Firestore.instance.collection(Fire.shoppingCart).add(values);
+
       } else {
         querySnapshot.documents.forEach((value) {
 
@@ -148,23 +144,15 @@ class TreeDetailHeader extends StatelessWidget {
 
           Firestore.instance.collection(Fire.shoppingCart).document(value.documentID).updateData(values);
 
-          //Firestore.instance.collection(Fire.shoppingCart).add(values);
-
-
         });
       }
+
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(detail[Fire.TREE_TITLE] + " added to shopping cart"), action: SnackBarAction(label: "View", onPressed: () {
+        MyNavigator.goToCart(context);
+      }),));
     });
 
-//    Map<String, dynamic> values = {
-//      Fire.SHOPPING_CART_ITEM_PRICE: int.tryParse(detail[Fire.TREE_PRICE]),
-//      Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
-//      Fire.SHOPPING_CART_ITEM_QUANTITY: 0,
-//      Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
-//      Fire.SHOPPING_CART_TIME: new DateTime.now(),
-//      Fire.SHOPPING_CART_ITEM_TYPE: "Tree",
-//    };
-//
-//    Firestore.instance.collection(Fire.shoppingCart).add(values);
+
   }
 
   void openAR() {

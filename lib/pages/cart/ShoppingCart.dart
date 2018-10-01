@@ -92,33 +92,47 @@ class _CartState extends State<ShoppingCart> {
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            new ListTile(
-              key: new ValueKey(document.documentID),
-              trailing: new Image.network(document[Fire.SHOPPING_CART_ITEM_IMAGE],
-                  width: 50.0, height: 50.0),
-              leading: new Checkbox(
-                  value: values[document.documentID],
-                  onChanged: (bool value) {
-                    setState(() {
-                      values[document.documentID] = value;
+            Dismissible(
+              key: Key(document.documentID),
+              onDismissed: (dir) {
 
-                      if (value) {
-                        numberOfItemsInShoppingCart++;
-                        totalPriceOfShoppingCart +=
-                            document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY];
-                      } else {
-                        numberOfItemsInShoppingCart--;
-                        totalPriceOfShoppingCart -=
-                            document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY];
-                      }
-                    });
-                  }),
-              title: new Text(
-                document[Fire.SHOPPING_CART_ITEM_TITLE],
+                Firestore.instance.collection(Fire.shoppingCart).document(document.documentID).delete();
+
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text(document[Fire.SHOPPING_CART_ITEM_TITLE] + " removed")));
+              },
+              background: Container(color: Colors.red),
+              child: new ListTile(
+                key: new ValueKey(document.documentID),
+                trailing: new Image.network(
+                    document[Fire.SHOPPING_CART_ITEM_IMAGE],
+                    width: 50.0,
+                    height: 50.0),
+                leading: new Checkbox(
+                    value: values[document.documentID],
+                    onChanged: (bool value) {
+                      setState(() {
+                        values[document.documentID] = value;
+
+                        if (value) {
+                          numberOfItemsInShoppingCart++;
+                          totalPriceOfShoppingCart +=
+                              document[Fire.SHOPPING_CART_ITEM_PRICE] *
+                                  document[Fire.SHOPPING_CART_ITEM_QUANTITY];
+                        } else {
+                          numberOfItemsInShoppingCart--;
+                          totalPriceOfShoppingCart -=
+                              document[Fire.SHOPPING_CART_ITEM_PRICE] *
+                                  document[Fire.SHOPPING_CART_ITEM_QUANTITY];
+                        }
+                      });
+                    }),
+                title: new Text(
+                  document[Fire.SHOPPING_CART_ITEM_TITLE],
+                ),
+                subtitle: new Text(
+                    "\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]}"),
+                //onTap: () => _openNewsFullPage(context, document),
               ),
-              subtitle:
-                  new Text("\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]}"),
-              //onTap: () => _openNewsFullPage(context, document),
             ),
           ],
         ),
@@ -127,14 +141,16 @@ class _CartState extends State<ShoppingCart> {
   }
 
   void pressedBuy() {
-
     // Get the items and assign new db values
 
     void iterateMapEntry(key, value) {
-
-      if (value){
+      if (value) {
         // Get the current data
-        Firestore.instance.collection(Fire.shoppingCart).document(key).get().then((onValue){
+        Firestore.instance
+            .collection(Fire.shoppingCart)
+            .document(key)
+            .get()
+            .then((onValue) {
           Map<String, dynamic> newOrderData = {
             Fire.ORDER_ITEM_PRICE: onValue[Fire.SHOPPING_CART_ITEM_PRICE],
             Fire.ORDER_ITEM_IMAGE: onValue[Fire.SHOPPING_CART_ITEM_IMAGE],
@@ -142,18 +158,18 @@ class _CartState extends State<ShoppingCart> {
             Fire.ORDER_ITEM_TITLE: onValue[Fire.SHOPPING_CART_ITEM_TITLE],
             Fire.ORDER_TIME: new DateTime.now(),
             Fire.ORDER_ITEM_TYPE: Fire.SHOPPING_CART_ITEM_TYPE,
-
             Fire.ORDER_DETAILS: Fire.ORDER_DETAILS_PROCESSING
           };
 
-          Firestore.instance.collection(Fire.shoppingCart).document(key).delete();
+          Firestore.instance
+              .collection(Fire.shoppingCart)
+              .document(key)
+              .delete();
           Firestore.instance.collection(Fire.orders).add(newOrderData);
         });
-
       }
-
     }
-    values.forEach(iterateMapEntry);
 
+    values.forEach(iterateMapEntry);
   }
 }
