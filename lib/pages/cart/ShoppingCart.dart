@@ -17,6 +17,7 @@ class _CartState  extends State<ShoppingCart> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      bottomNavigationBar: new Text("Price"),
       appBar: new AppBar(
           backgroundColor: Colors.green,
           title: Row(
