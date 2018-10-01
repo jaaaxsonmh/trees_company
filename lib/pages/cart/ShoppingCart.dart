@@ -21,20 +21,26 @@ class _CartState  extends State<ShoppingCart> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              child: new Text("total: \$: todo"),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: new Text("total: \$: todo"),
+              ),
             ),
             Container(
-              child: new RaisedButton(
-                  onPressed: pressedBuyButtonn,
-                  textColor: Colors.white,
-                  //minWidth: 50.0,
-                  color: Colors.green,
-                  child: Row(
-                    children: <Widget>[
-                      //Icon(Icons.camera),
-                      new Text("Buy"),
-                    ],
-                  )) ,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: new RaisedButton(
+                    onPressed: pressedBuyButtonn,
+                    textColor: Colors.white,
+                    //minWidth: 50.0,
+                    color: Colors.green,
+                    child: Row(
+                      children: <Widget>[
+                        //Icon(Icons.camera),
+                        new Text("Buy"),
+                      ],
+                    )),
+              ) ,
             ),
           ]
 
