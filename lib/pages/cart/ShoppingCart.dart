@@ -14,6 +14,8 @@ class _CartState  extends State<ShoppingCart> {
   Map<String, bool> values = {
   };
 
+  int numberOfItemsInShoppingCart = 0;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -37,7 +39,7 @@ class _CartState  extends State<ShoppingCart> {
                     child: Row(
                       children: <Widget>[
                         //Icon(Icons.camera),
-                        new Text("Buy"),
+                        new Text("Buy (" + numberOfItemsInShoppingCart.toString() + ")"),
                       ],
                     )),
               ) ,
@@ -98,6 +100,13 @@ class _CartState  extends State<ShoppingCart> {
               leading: new Checkbox(value: values[document.documentID], onChanged: (bool value) {
                 setState(() {
                   values[document.documentID] = value;
+
+                  if (value){
+                    numberOfItemsInShoppingCart++;
+                  }else{
+                    numberOfItemsInShoppingCart--;
+                  }
+
                 });
               }),
               title: new Text(
@@ -116,5 +125,6 @@ class _CartState  extends State<ShoppingCart> {
   void pressedBuyButtonn() {
 
   }
+
 
 }
