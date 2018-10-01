@@ -1,6 +1,8 @@
 # Plant a Tree - TreeCo
 
-![](https://github.com/jaaaxsonmh/trees_company/raw/master/tree.png)
+<p align="center">
+  ![](https://github.com/jaaaxsonmh/trees_company/raw/master/tree.png)
+</p>
 
 One Paragraph of project description goes here
 
