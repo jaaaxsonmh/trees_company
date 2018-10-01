@@ -58,7 +58,7 @@ class TreeDetailHeader extends StatelessWidget {
         new Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: new Text(
-            "\$" + detail[Fire.TREE_PRICE],
+            "\$" + detail[Fire.TREE_PRICE].toString(),
             style: textTheme.title.copyWith(
                 fontWeight: FontWeight.w400,
                 color: Theme.of(context).accentColor),
