@@ -39,4 +39,8 @@ class Fire {
 
   // Shopping Cart
   static const String SHOPPING_CART_TIME = "time";
+  static const String SHOPPING_CART_ITEM_TITLE = "title";
+  static const String SHOPPING_CART_ITEM_IMAGE = "image";
+  static const String SHOPPING_CART_ITEM_PRICE = "price";
+  static const String SHOPPING_CART_ITEM_QUANTITY = "quantity";
 }
