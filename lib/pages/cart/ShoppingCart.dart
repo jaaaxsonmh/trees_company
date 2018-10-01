@@ -15,6 +15,7 @@ class _CartState  extends State<ShoppingCart> {
   };
 
   int numberOfItemsInShoppingCart = 0;
+  int totalPriceOfShoppingCart = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class _CartState  extends State<ShoppingCart> {
             Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: new Text("total: \$: todo"),
+                child: new Text("Total: \$ $totalPriceOfShoppingCart"),
               ),
             ),
             Container(
@@ -39,7 +40,7 @@ class _CartState  extends State<ShoppingCart> {
                     child: Row(
                       children: <Widget>[
                         //Icon(Icons.camera),
-                        new Text("Buy (" + numberOfItemsInShoppingCart.toString() + ")"),
+                        new Text('Buy ($numberOfItemsInShoppingCart)'),
                       ],
                     )),
               ) ,
@@ -89,7 +90,6 @@ class _CartState  extends State<ShoppingCart> {
       values[document.documentID] = false;
     }
 
-
     return new Container(
       child: new Card(
         child: new Column(
@@ -103,16 +103,17 @@ class _CartState  extends State<ShoppingCart> {
 
                   if (value){
                     numberOfItemsInShoppingCart++;
+                    totalPriceOfShoppingCart += document[Fire.SHOPPING_CART_ITEM_PRICE];
                   }else{
                     numberOfItemsInShoppingCart--;
+                    totalPriceOfShoppingCart -= document[Fire.SHOPPING_CART_ITEM_PRICE];
                   }
-
                 });
               }),
               title: new Text(
-                "Item",
+                document[Fire.SHOPPING_CART_ITEM_TITLE],
               ),
-              subtitle: new Text("Item"),
+              subtitle: new Text("\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]}"),
               //onTap: () => _openNewsFullPage(context, document),
             ),
           ],

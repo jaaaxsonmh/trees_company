@@ -107,7 +107,18 @@ class TreeDetailHeader extends StatelessWidget {
   }
 
   addToShoppingCard() {
+    // When the button pressed add to the dataset
 
+    Map<String, dynamic> values = {
+      Fire.SHOPPING_CART_ITEM_PRICE: int.tryParse(detail[Fire.TREE_PRICE]),
+      Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
+      Fire.SHOPPING_CART_ITEM_QUANTITY: 0,
+      Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
+      Fire.SHOPPING_CART_TIME: new DateTime.now(),
+    };
+
+
+    Firestore.instance.collection(Fire.shoppingCart).add(values);
 
   }
 
