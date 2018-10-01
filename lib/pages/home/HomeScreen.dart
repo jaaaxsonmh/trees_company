@@ -154,6 +154,13 @@ class _HomeState extends State<HomeScreen> {
         ],
       )),
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () { MyNavigator.goToOrders(context);
+            }
+          )
+        ],
         leading: new IconButton(
             icon: new Icon(Icons.menu),
             onPressed: () {
@@ -165,6 +172,7 @@ class _HomeState extends State<HomeScreen> {
               color: Colors.white,
               fontWeight: FontWeight.bold,
             )),
+
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

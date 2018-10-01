@@ -23,5 +23,5 @@ var routes = <String, WidgetBuilder>{
 
 void main() => runApp(new MaterialApp(
     theme: ThemeData(primaryColor: Colors.blue),
-    home: SplashScreen(),
+    home: LoginPage(),
     routes: routes));
