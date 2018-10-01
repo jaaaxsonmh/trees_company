@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:date_format/date_format.dart';
 
 class MyOrders extends StatefulWidget {
   @override
@@ -33,7 +34,7 @@ class _MyOrders extends State<MyOrders> {
       body: new StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection(Fire.orders)
-            .orderBy(Fire.SHOPPING_CART_TIME)
+            .orderBy(Fire.SHOPPING_CART_TIME, descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
@@ -60,6 +61,9 @@ class _MyOrders extends State<MyOrders> {
     if (!values.containsKey(document.documentID)) {
       values[document.documentID] = false;
     }
+
+    var orderRawTime = document[Fire.ORDER_TIME];
+    var orderTimeFormatted = formatDate(orderRawTime, [yyyy, '-', m, '-',d , ' ', hh , '-', mm, '-', ss]);
 
     // Get the order status from db
     var orderStatus = document[Fire.ORDER_DETAILS];
@@ -99,6 +103,8 @@ class _MyOrders extends State<MyOrders> {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  new Text("Order time: " + orderTimeFormatted),
+                  new Divider(color: Colors.green),
                   new Text(orderInfo),
                   new Divider(color: Colors.green),
                   new Text(

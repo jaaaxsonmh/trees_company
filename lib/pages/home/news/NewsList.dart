@@ -8,7 +8,7 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection(Fire.news).orderBy(Fire.NEWS_TIME).snapshots(),
+      stream: Firestore.instance.collection(Fire.news).orderBy(Fire.NEWS_TIME, descending: true).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return new Center(
