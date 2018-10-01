@@ -114,7 +114,7 @@ class _CartState extends State<ShoppingCart> {
                 document[Fire.SHOPPING_CART_ITEM_TITLE],
               ),
               subtitle:
-                  new Text("\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]}"),
+                  new Text("\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]}"),
               //onTap: () => _openNewsFullPage(context, document),
             ),
           ],
