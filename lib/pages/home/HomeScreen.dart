@@ -183,6 +183,10 @@ class _HomeState extends State<HomeScreen> {
             icon: Icon(Icons.shopping_cart),
             onPressed: () { MyNavigator.goToCart(context);
             }
+          ),IconButton(
+              icon: Icon(Icons.assignment),
+              onPressed: () { MyNavigator.goToMyOrders(context);
+              }
           )
         ],
         leading: new IconButton(
