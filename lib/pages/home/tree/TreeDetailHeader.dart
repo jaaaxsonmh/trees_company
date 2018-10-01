@@ -134,7 +134,7 @@ class TreeDetailHeader extends StatelessWidget {
           Fire.SHOPPING_CART_ITEM_QUANTITY: 1,
           Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
           Fire.SHOPPING_CART_TIME: new DateTime.now(),
-          Fire.SHOPPING_CART_ITEM_TYPE: "Tree",
+          Fire.SHOPPING_CART_ITEM_TYPE: "Tree"
         };
 
         Firestore.instance.collection(Fire.shoppingCart).add(values);

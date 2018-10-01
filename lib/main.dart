@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trees_co/pages/SplashScreen.dart';
+import 'package:trees_co/pages/cart/MyOrders.dart';
 import 'package:trees_co/pages/cart/ShoppingCart.dart';
 import 'package:trees_co/pages/home/HomeScreen.dart';
 import 'package:trees_co/pages/IntroScreen.dart';
@@ -14,7 +15,8 @@ var routes = <String, WidgetBuilder>{
   Routers.home: (BuildContext context) => HomeScreen(),
   Routers.intro: (BuildContext context) => IntroScreen(),
   Routers.login: (BuildContext context) => LoginPage(),
-  Routers.orders: (BuildContext context) => ShoppingCart(),
+  Routers.shopCart: (BuildContext context) => ShoppingCart(),
+  Routers.orders: (BuildContext context) => MyOrders(),
   Routers.diagnoseTree: (BuildContext context) => DiagnoseTree(),
   Routers.settings: (BuildContext context) => Settings(),
   Routers.delivery: (BuildContext context) => DeliveryDetails(),
@@ -25,4 +27,5 @@ var routes = <String, WidgetBuilder>{
 void main() => runApp(new MaterialApp(
     theme: ThemeData(primaryColor: Colors.blue),
     home: LoginPage(),
+    //home: SplashScreen(),
     routes: routes));

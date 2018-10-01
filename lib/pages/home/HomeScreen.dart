@@ -22,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   int _currentIndex = 0;
   int _currentNumberOfItemsInCart = 0;
+  int _currentNumberOfItemsInOrders = 0;
   final List<Widget> _children = [NewsList(), TreesList(), ToolsList()];
 
   static const platform = const MethodChannel(Routers.AR_KEY);
@@ -143,8 +144,24 @@ class _HomeState extends State<HomeScreen> {
               ),
             ),
             onTap: () {
-              MyNavigator.goToOrders(context);
+              MyNavigator.goToCart(context);
               //Navigator.pop(context);
+            },
+          ),ListTile(
+            leading: Icon(
+              Icons.shopping_cart,
+              color: Colors.green,
+            ),
+            title: Text('My orders'),
+            trailing: new Text(
+              _currentNumberOfItemsInOrders.toString(),
+              style: new TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+            ),
+            onTap: () {
+              MyNavigator.goToMyOrders(context);
             },
           ),
           new ListTile(
@@ -163,7 +180,7 @@ class _HomeState extends State<HomeScreen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.shopping_cart),
-            onPressed: () { MyNavigator.goToOrders(context);
+            onPressed: () { MyNavigator.goToCart(context);
             }
           )
         ],
@@ -252,6 +269,19 @@ class _HomeState extends State<HomeScreen> {
           setState(() {
             _currentNumberOfItemsInCart = size;
           });
+
+
+    });
+
+    Firestore.instance
+        .collection(Fire.orders)
+        .getDocuments()
+        .then((querySnapshot) {
+      var size = querySnapshot.documents.length;
+
+      setState(() {
+        _currentNumberOfItemsInOrders = size;
+      });
 
 
     });

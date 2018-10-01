@@ -56,7 +56,11 @@ class MyNavigator {
     Navigator.pushNamed(context, Routers.treeCare);
   }
 
-  static void goToOrders(BuildContext context) {
+  static void goToCart(BuildContext context) {
+    Navigator.pushNamed(context, Routers.shopCart);
+  }
+
+  static void goToMyOrders(BuildContext context) {
     Navigator.pushNamed(context, Routers.orders);
   }
 

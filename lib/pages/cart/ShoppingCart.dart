@@ -30,7 +30,7 @@ class _CartState extends State<ShoppingCart> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: new RaisedButton(
-                onPressed: pressedBuyButtonn,
+                onPressed: pressedBuy,
                 textColor: Colors.white,
                 //minWidth: 50.0,
                 color: Colors.green,
@@ -59,6 +59,7 @@ class _CartState extends State<ShoppingCart> {
         stream: Firestore.instance
             .collection(Fire.shoppingCart)
             .orderBy(Fire.SHOPPING_CART_TIME)
+            //.where(Fire.SHOPPING_CART_STATUS, isEqualTo: Fire.SHOPPING_CART_STATUS_CART)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
@@ -125,5 +126,34 @@ class _CartState extends State<ShoppingCart> {
     );
   }
 
-  void pressedBuyButtonn() {}
+  void pressedBuy() {
+
+    // Get the items and assign new db values
+
+    void iterateMapEntry(key, value) {
+
+      if (value){
+        // Get the current data
+        Firestore.instance.collection(Fire.shoppingCart).document(key).get().then((onValue){
+          Map<String, dynamic> newOrderData = {
+            Fire.ORDER_ITEM_PRICE: onValue[Fire.SHOPPING_CART_ITEM_PRICE],
+            Fire.ORDER_ITEM_IMAGE: onValue[Fire.SHOPPING_CART_ITEM_IMAGE],
+            Fire.ORDER_ITEM_QUANTITY: onValue[Fire.SHOPPING_CART_ITEM_QUANTITY],
+            Fire.ORDER_ITEM_TITLE: onValue[Fire.SHOPPING_CART_ITEM_TITLE],
+            Fire.ORDER_TIME: new DateTime.now(),
+            Fire.ORDER_ITEM_TYPE: Fire.SHOPPING_CART_ITEM_TYPE,
+
+            Fire.ORDER_DETAILS: Fire.ORDER_DETAILS_PROCESSING
+          };
+
+          Firestore.instance.collection(Fire.shoppingCart).document(key).delete();
+          Firestore.instance.collection(Fire.orders).add(newOrderData);
+        });
+
+      }
+
+    }
+    values.forEach(iterateMapEntry);
+
+  }
 }

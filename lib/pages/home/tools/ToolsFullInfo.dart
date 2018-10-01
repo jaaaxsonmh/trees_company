@@ -64,7 +64,7 @@ class ToolInfo extends StatelessWidget {
           Fire.SHOPPING_CART_ITEM_QUANTITY: 1,
           Fire.SHOPPING_CART_ITEM_TITLE: document[Fire.TOOLS_TITLE],
           Fire.SHOPPING_CART_TIME: new DateTime.now(),
-          Fire.SHOPPING_CART_ITEM_TYPE: "Tool",
+          Fire.SHOPPING_CART_ITEM_TYPE: "Tool"
         };
 
         Firestore.instance.collection(Fire.shoppingCart).add(values);

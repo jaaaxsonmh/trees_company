@@ -8,6 +8,7 @@ class Routers {
   static const String settings = "/settings";
   static const String delivery = "/delivery";
   static const String treeCare = "/treeCare";
+  static const String shopCart = "/shopCart";
   static const String orders = "/orders";
   static const String splash = "/splash";
 }
