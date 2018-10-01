@@ -115,6 +115,7 @@ class TreeDetailHeader extends StatelessWidget {
       Fire.SHOPPING_CART_ITEM_QUANTITY: 0,
       Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
       Fire.SHOPPING_CART_TIME: new DateTime.now(),
+      Fire.SHOPPING_CART_ITEM_TYPE: "Tree",
     };
 
 
