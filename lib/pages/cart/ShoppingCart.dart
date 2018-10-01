@@ -93,6 +93,8 @@ class _CartState extends State<ShoppingCart> {
           children: <Widget>[
             new ListTile(
               key: new ValueKey(document.documentID),
+              trailing: new Image.network(document[Fire.SHOPPING_CART_ITEM_IMAGE],
+                  width: 50.0, height: 50.0),
               leading: new Checkbox(
                   value: values[document.documentID],
                   onChanged: (bool value) {
