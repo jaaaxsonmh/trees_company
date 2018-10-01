@@ -59,7 +59,7 @@ class _CartState  extends State<ShoppingCart> {
           children: <Widget>[
             new ListTile(
               key: new ValueKey(document.documentID),
-              leading: new Icon(Icons.new_releases, color: Colors.red),
+              leading: new Checkbox(value: false, onChanged: null),
               title: new Text(
                 "Item",
               ),
