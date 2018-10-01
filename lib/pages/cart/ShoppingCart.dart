@@ -18,6 +18,7 @@ class _CartState  extends State<ShoppingCart> {
   Widget build(BuildContext context) {
     return new Scaffold(
       bottomNavigationBar: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               child: new Text("total: \$: todo"),
