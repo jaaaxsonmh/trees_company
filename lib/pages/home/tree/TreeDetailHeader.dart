@@ -14,6 +14,7 @@ class TreeDetailHeader extends StatelessWidget {
   final DocumentSnapshot detail;
 
   BuildContext context;
+
   _buildCategoryChips(TextTheme textTheme) {
     return <Widget>[
       Container(
@@ -107,20 +108,63 @@ class TreeDetailHeader extends StatelessWidget {
   }
 
   addToShoppingCard() {
-    // When the button pressed add to the dataset
+    // Show UI (get Quantity & Tree info)
+    // Then call it
+    addToShoppingCardDb();
+  }
 
-    Map<String, dynamic> values = {
-      Fire.SHOPPING_CART_ITEM_PRICE: int.tryParse(detail[Fire.TREE_PRICE]),
-      Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
-      Fire.SHOPPING_CART_ITEM_QUANTITY: 0,
-      Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
-      Fire.SHOPPING_CART_TIME: new DateTime.now(),
-      Fire.SHOPPING_CART_ITEM_TYPE: "Tree",
-    };
+  addToShoppingCardDb() async {
+//    Firestore.instance
+//        .collection(Fire.shoppingCart)
+//        .where(Fire.SHOPPING_CART_ITEM_TITLE,
+//            isEqualTo: detail[Fire.TREE_PRICE])
+//        .snapshots()
+//        .listen((data) => data.documents.forEach((doc) => print(doc["title"])));
+
+    Firestore.instance
+        .collection(Fire.shoppingCart)
+        .where(Fire.SHOPPING_CART_ITEM_TITLE,
+            isEqualTo: detail[Fire.TREE_TITLE])
+        .getDocuments()
+        .then((querySnapshot) {
+      if (querySnapshot.documents.isEmpty) {
+        Map<String, dynamic> values = {
+          Fire.SHOPPING_CART_ITEM_PRICE: int.tryParse(detail[Fire.TREE_PRICE]),
+          Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
+          Fire.SHOPPING_CART_ITEM_QUANTITY: 1,
+          Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
+          Fire.SHOPPING_CART_TIME: new DateTime.now(),
+          Fire.SHOPPING_CART_ITEM_TYPE: "Tree",
+        };
+
+        Firestore.instance.collection(Fire.shoppingCart).add(values);
+      } else {
+        querySnapshot.documents.forEach((value) {
 
 
-    Firestore.instance.collection(Fire.shoppingCart).add(values);
+          Map<String, dynamic> values = {
+            Fire.SHOPPING_CART_ITEM_QUANTITY: value[Fire.SHOPPING_CART_ITEM_QUANTITY] + 1,
+          };
 
+          Firestore.instance.collection(Fire.shoppingCart).document(value.documentID).updateData(values);
+
+          //Firestore.instance.collection(Fire.shoppingCart).add(values);
+
+
+        });
+      }
+    });
+
+//    Map<String, dynamic> values = {
+//      Fire.SHOPPING_CART_ITEM_PRICE: int.tryParse(detail[Fire.TREE_PRICE]),
+//      Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
+//      Fire.SHOPPING_CART_ITEM_QUANTITY: 0,
+//      Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
+//      Fire.SHOPPING_CART_TIME: new DateTime.now(),
+//      Fire.SHOPPING_CART_ITEM_TYPE: "Tree",
+//    };
+//
+//    Firestore.instance.collection(Fire.shoppingCart).add(values);
   }
 
   void openAR() {
