@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trees_co/pages/home/news/NewsList.dart';
@@ -7,6 +8,7 @@ import 'package:trees_co/pages/home/tools/ToolsList.dart';
 import 'package:trees_co/pages/home/tree/TreesList.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:share/share.dart';
+import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/Routers.dart';
 
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeState extends State<HomeScreen> {
   int _currentIndex = 0;
+  int _currentNumberOfItemsInCart = 0;
   final List<Widget> _children = [NewsList(), TreesList(), ToolsList()];
 
   static const platform = const MethodChannel(Routers.AR_KEY);
@@ -27,6 +30,9 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    _getNumberOfItemsInCart();
+
     return new Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -130,7 +136,7 @@ class _HomeState extends State<HomeScreen> {
             ),
             title: Text('View Cart'),
             trailing: new Text(
-              '4',
+              _currentNumberOfItemsInCart.toString(),
               style: new TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.red,
@@ -233,6 +239,21 @@ class _HomeState extends State<HomeScreen> {
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
+    });
+  }
+
+  _getNumberOfItemsInCart() async {
+    Firestore.instance
+        .collection(Fire.shoppingCart)
+        .getDocuments()
+        .then((querySnapshot) {
+          var size = querySnapshot.documents.length;
+
+          setState(() {
+            _currentNumberOfItemsInCart = size;
+          });
+
+
     });
   }
 }
