@@ -23,11 +23,14 @@ class _CartState extends State<ShoppingCart> {
     return new Scaffold(
       key: _scaffoldKey,
       bottomNavigationBar:
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Container(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text("Total: \$ $totalPriceOfShoppingCart"),
+            padding: const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
+            child: new Text(
+              "Total: \$ $totalPriceOfShoppingCart",
+              style: TextStyle(fontSize: 18.0),
+            ),
           ),
         ),
         Container(
@@ -63,7 +66,7 @@ class _CartState extends State<ShoppingCart> {
         stream: Firestore.instance
             .collection(Fire.shoppingCart)
             .orderBy(Fire.SHOPPING_CART_TIME)
-            //.where(Fire.SHOPPING_CART_STATUS, isEqualTo: Fire.SHOPPING_CART_STATUS_CART)
+        //.where(Fire.SHOPPING_CART_STATUS, isEqualTo: Fire.SHOPPING_CART_STATUS_CART)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
@@ -91,6 +94,12 @@ class _CartState extends State<ShoppingCart> {
       values[document.documentID] = false;
     }
 
+    var subInfo =
+        "\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire
+        .SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire
+        .SHOPPING_CART_ITEM_PRICE] *
+        document[Fire.SHOPPING_CART_ITEM_QUANTITY]}";
+
     return new Container(
       child: new Card(
         child: new Column(
@@ -99,10 +108,13 @@ class _CartState extends State<ShoppingCart> {
             Dismissible(
               key: Key(document.documentID),
               onDismissed: (dir) {
-
-                Firestore.instance.collection(Fire.shoppingCart).document(document.documentID).delete();
-
-                Scaffold.of(context).showSnackBar(SnackBar(content: Text(document[Fire.SHOPPING_CART_ITEM_TITLE] + " removed")));
+                Firestore.instance
+                    .collection(Fire.shoppingCart)
+                    .document(document.documentID)
+                    .delete();
+                Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                        document[Fire.SHOPPING_CART_ITEM_TITLE] + " removed")));
               },
               background: Container(color: Colors.red),
               child: new ListTile(
@@ -133,8 +145,65 @@ class _CartState extends State<ShoppingCart> {
                 title: new Text(
                   document[Fire.SHOPPING_CART_ITEM_TITLE],
                 ),
-                subtitle: new Text(
-                    "\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]}"),
+                subtitle: Column(
+                  children: <Widget>[
+                    new Text(subInfo),
+                    new Divider(color: Colors.green),
+                    Row(
+                      children: <Widget>[
+                        new GestureDetector(
+                          onTap: () {
+                            Map<String, dynamic> values = {
+                              Fire.SHOPPING_CART_ITEM_QUANTITY : document[Fire.SHOPPING_CART_ITEM_QUANTITY] +1
+                            };
+
+                            Firestore.instance.collection(Fire.shoppingCart)
+                                .document(document.documentID)
+                                .updateData(values);
+
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    document[Fire.SHOPPING_CART_ITEM_TITLE] +
+                                        " +1")));
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8.0),
+                            child: Icon(
+                              Icons.add_circle,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                        new GestureDetector(
+                          onTap: () {
+
+                            Map<String, dynamic> values = {
+                              Fire.SHOPPING_CART_ITEM_QUANTITY : document[Fire.SHOPPING_CART_ITEM_QUANTITY] -1
+                            };
+
+                            Firestore.instance.collection(Fire.shoppingCart)
+                                .document(document.documentID)
+                                .updateData(values);
+
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    document[Fire.SHOPPING_CART_ITEM_TITLE] +
+                                        " -1")));
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8.0),
+                            child: Icon(
+                              Icons.remove_circle,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
                 //onTap: () => _openNewsFullPage(context, document),
               ),
             ),
@@ -176,8 +245,13 @@ class _CartState extends State<ShoppingCart> {
 
     values.forEach(iterateMapEntry);
 
-    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Done! View your order status"), action: SnackBarAction(label: "View", onPressed: () {
-      MyNavigator.goToMyOrders(context);
-    }),));
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text("Done! View your order status"),
+      action: SnackBarAction(
+          label: "View",
+          onPressed: () {
+            MyNavigator.goToMyOrders(context);
+          }),
+    ));
   }
 }
