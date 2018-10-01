@@ -21,7 +21,7 @@ Built with Flutter, for iOS and Android Mobile Applications. Simply download the
 ## Built With
 
 * [Flutter](https://flutter.io/) - Google’s mobile app SDK
-* [GitHub](hhttps://github.com/) - Version Control
+* [GitHub](https://github.com/) - Version Control
 * [Dart](https://www.dartlang.org/) - Langauge Used
 * [Firebase](https://firebase.google.com/) - Database Used
 * [TravisCI](https://travis-ci.org/) - Continuous Integration Testing
