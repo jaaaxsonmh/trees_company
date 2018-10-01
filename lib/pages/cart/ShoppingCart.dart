@@ -102,11 +102,11 @@ class _CartState extends State<ShoppingCart> {
                       if (value) {
                         numberOfItemsInShoppingCart++;
                         totalPriceOfShoppingCart +=
-                            document[Fire.SHOPPING_CART_ITEM_PRICE];
+                            document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY];
                       } else {
                         numberOfItemsInShoppingCart--;
                         totalPriceOfShoppingCart -=
-                            document[Fire.SHOPPING_CART_ITEM_PRICE];
+                            document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY];
                       }
                     });
                   }),
