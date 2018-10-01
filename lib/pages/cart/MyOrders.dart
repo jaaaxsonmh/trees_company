@@ -27,7 +27,7 @@ class _MyOrders extends State<MyOrders> {
               Text('My orders'),
               new Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: new Icon(Icons.shopping_basket))
+                  child: new Icon(Icons.assignment))
             ],
           )),
       body: new StreamBuilder<QuerySnapshot>(

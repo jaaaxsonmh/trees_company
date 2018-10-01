@@ -149,7 +149,7 @@ class _HomeState extends State<HomeScreen> {
             },
           ),ListTile(
             leading: Icon(
-              Icons.shopping_cart,
+              Icons.assignment,
               color: Colors.green,
             ),
             title: Text('My orders'),
@@ -164,6 +164,7 @@ class _HomeState extends State<HomeScreen> {
               MyNavigator.goToMyOrders(context);
             },
           ),
+          new Divider(color: Colors.green),
           new ListTile(
             leading: Icon(
               Icons.home,

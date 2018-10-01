@@ -52,7 +52,7 @@ class _CartState extends State<ShoppingCart> {
               Text('Shopping cart'),
               new Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: new Icon(Icons.shopping_basket))
+                  child: new Icon(Icons.shopping_cart))
             ],
           )),
       body: new StreamBuilder<QuerySnapshot>(
