@@ -11,6 +11,9 @@ class ShoppingCart extends StatefulWidget {
 
 class _CartState  extends State<ShoppingCart> {
 
+  Map<String, bool> values = {
+  };
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -44,14 +47,19 @@ class _CartState  extends State<ShoppingCart> {
           return new ListView.builder(
               itemCount: snapshot.data.documents.length,
               padding: const EdgeInsets.all(5.0),
-              itemBuilder: (context, index) =>
-                  _buildListItem(context, snapshot.data.documents[index]));
+              itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index]));
         },
       ),
     );
   }
 
   _buildListItem(BuildContext context, DocumentSnapshot document) {
+
+    if (!values.containsKey(document.documentID)){
+      values[document.documentID] = false;
+    }
+
+
     return new Container(
       child: new Card(
         child: new Column(
@@ -59,7 +67,11 @@ class _CartState  extends State<ShoppingCart> {
           children: <Widget>[
             new ListTile(
               key: new ValueKey(document.documentID),
-              leading: new Checkbox(value: false, onChanged: null),
+              leading: new Checkbox(value: values[document.documentID], onChanged: (bool value) {
+                setState(() {
+                  values[document.documentID] = value;
+                });
+              }),
               title: new Text(
                 "Item",
               ),
