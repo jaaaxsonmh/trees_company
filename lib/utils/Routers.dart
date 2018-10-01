@@ -9,4 +9,5 @@ class Routers {
   static const String delivery = "/delivery";
   static const String treeCare = "/treeCare";
   static const String orders = "/orders";
+  static const String splash = "/splash";
 }

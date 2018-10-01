@@ -18,7 +18,8 @@ var routes = <String, WidgetBuilder>{
   Routers.diagnoseTree: (BuildContext context) => DiagnoseTree(),
   Routers.settings: (BuildContext context) => Settings(),
   Routers.delivery: (BuildContext context) => DeliveryDetails(),
-  Routers.treeCare: (BuildContext context) => TreeCare()
+  Routers.treeCare: (BuildContext context) => TreeCare(),
+  Routers.splash: (BuildContext context) => SplashScreen()
 };
 
 void main() => runApp(new MaterialApp(

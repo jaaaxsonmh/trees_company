@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class LoginPageState extends State<LoginPage> {
   // key for form to be able to validate
   final formKey = new GlobalKey<FormState>();
 
-  String _username;
+  String _email;
   String _password;
   FormType _formType = FormType.login;
 
@@ -25,7 +25,7 @@ class LoginPageState extends State<LoginPage> {
     if (form.validate()) {
       // if valid then save.
       form.save();
-      print('valid form. Email: $_username, password: $_password');
+      print('valid form. Email: $_email, password: $_password');
       return true;
     }
     return false;
@@ -34,9 +34,19 @@ class LoginPageState extends State<LoginPage> {
   void validatedAndSubmit() async {
     if (validateAndSaveLogin()) {
       try {
-        FirebaseUser user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _username, password: _password);
-        print('User signed in: ${user.uid}');
+        //login with email if type login other wise, create user.
+        if (_formType == FormType.login)
+          {
+            FirebaseUser user = await FirebaseAuth.instance
+                .signInWithEmailAndPassword(email: _email, password: _password);
+            print('User signed in: ${user.uid}');
+            MyNavigator.goToSplash(context);
+          } else {
+          FirebaseUser user = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: _email, password: _password);
+          print('User registered: ${user.uid}');
+          MyNavigator.goToSplash(context);
+        }
       } catch (e) {
         print('Error encounted: $e');
       }
@@ -44,12 +54,14 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void goToRegister() {
+    formKey.currentState.reset();
     setState(() {
       _formType = FormType.register;
     });
   }
 
   void goToLogin() {
+    formKey.currentState.reset();
     setState(() {
       _formType = FormType.login;
     });
@@ -78,7 +90,7 @@ class LoginPageState extends State<LoginPage> {
         decoration: new InputDecoration(labelText: 'Email'),
         keyboardType: TextInputType.emailAddress,
         validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-        onSaved: (value) => _username = value,
+        onSaved: (value) => _email = value,
       ),
       new TextFormField(
         obscureText: true,

@@ -59,4 +59,8 @@ class MyNavigator {
   static void goToOrders(BuildContext context) {
     Navigator.pushNamed(context, Routers.orders);
   }
+
+  static void goToSplash(BuildContext context) {
+    Navigator.pushNamed(context, Routers.splash);
+  }
 }
