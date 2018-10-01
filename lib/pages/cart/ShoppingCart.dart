@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 
 class ShoppingCart extends StatefulWidget {
   @override
@@ -15,9 +16,12 @@ class _CartState extends State<ShoppingCart> {
   int numberOfItemsInShoppingCart = 0;
   int totalPriceOfShoppingCart = 0;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _scaffoldKey,
       bottomNavigationBar:
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Container(
@@ -171,5 +175,9 @@ class _CartState extends State<ShoppingCart> {
     }
 
     values.forEach(iterateMapEntry);
+
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Done! View your order status"), action: SnackBarAction(label: "View", onPressed: () {
+      MyNavigator.goToMyOrders(context);
+    }),));
   }
 }

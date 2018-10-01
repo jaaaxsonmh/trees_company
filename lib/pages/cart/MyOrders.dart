@@ -71,19 +71,16 @@ class _MyOrders extends State<MyOrders> {
       status = "We are prosseing your order";
     } else if (orderStatus == Fire.ORDER_DETAILS_DISPATCHED) {
       status = "Your order has been dispatched";
-    } else
-    if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_DELIVERY) {
+    } else if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_DELIVERY) {
       status = "Your order with a courier now";
-    } else
-    if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_SUCCESS) {
+    } else if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_SUCCESS) {
       status = "Your order is complite. Hope you enjoing it!";
+    }else if (orderStatus == Fire.ORDER_DETAILS_AVAILABLE_FOR_PICKUP) {
+      status = "Your order is avalibe to pickup in store";
     }
 
-    var orderInfo = "\$ ${document[Fire
-        .SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire
-        .SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire
-        .SHOPPING_CART_ITEM_PRICE] *
-        document[Fire.SHOPPING_CART_ITEM_QUANTITY]}";
+    var orderInfo =
+        "\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]}";
 
     return new Container(
       child: new Card(
@@ -104,11 +101,10 @@ class _MyOrders extends State<MyOrders> {
                 children: <Widget>[
                   new Text(orderInfo),
                   new Divider(color: Colors.green),
-                  new Text(status, style: TextStyle(
-                    fontSize: 17.0,
-                    color: Colors.green
-                  ),)
-
+                  new Text(
+                    status,
+                    style: TextStyle(fontSize: 17.0, color: Colors.green),
+                  )
                 ],
               ),
               //onTap: () => _openNewsFullPage(context, document),
