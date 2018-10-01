@@ -55,4 +55,8 @@ class MyNavigator {
   static void goToTreeCare(BuildContext context) {
     Navigator.pushNamed(context, Routers.treeCare);
   }
+
+  static void goToOrders(BuildContext context) {
+    Navigator.pushNamed(context, Routers.orders);
+  }
 }

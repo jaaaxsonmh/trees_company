@@ -4,6 +4,7 @@ class Fire {
   static const String trees = "trees";
   static const String tools = "tools";
   static const String care = "PlantCare";
+  static const String shoppingCart = "shoppingCart";
 
   /// NEWS FIELDS
   static const String NEWS_TITLE = "title";
@@ -34,4 +35,8 @@ class Fire {
   static const String CARE_SHORT = "short_brief";
   static const String CARE_LONG = "full_details";
   static const String CARE_SHOW = "show";
+
+
+  // Shopping Cart
+  static const String SHOPPING_CART_TIME = "time";
 }

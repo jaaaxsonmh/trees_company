@@ -137,7 +137,8 @@ class _HomeState extends State<HomeScreen> {
               ),
             ),
             onTap: () {
-              Navigator.pop(context);
+              MyNavigator.goToOrders(context);
+              //Navigator.pop(context);
             },
           ),
           new ListTile(
