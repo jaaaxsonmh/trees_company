@@ -30,7 +30,7 @@ Built with Flutter, for iOS and Android Mobile Applications. Simply download the
 
 
 * **Jack Hosking** - [GitHub](https://github.com/jaaaxsonmh)
-* **Nikita Pustovoi** - [GitHub](hhttps://github.com/Deishelon)
+* **Nikita Pustovoi** - [GitHub](https://github.com/Deishelon)
 * **James Eady** - [GitHub](https://github.com/PurpleBooth)
 * **Craig Fraser** - [GitHub](https://github.com/PurpleBooth)
 
