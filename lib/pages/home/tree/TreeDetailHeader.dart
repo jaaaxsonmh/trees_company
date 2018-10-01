@@ -124,7 +124,7 @@ class TreeDetailHeader extends StatelessWidget {
         .then((querySnapshot) {
       if (querySnapshot.documents.isEmpty) {
         Map<String, dynamic> values = {
-          Fire.SHOPPING_CART_ITEM_PRICE: int.tryParse(detail[Fire.TREE_PRICE]),
+          Fire.SHOPPING_CART_ITEM_PRICE: detail[Fire.TREE_PRICE],
           Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
           Fire.SHOPPING_CART_ITEM_QUANTITY: 1,
           Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
