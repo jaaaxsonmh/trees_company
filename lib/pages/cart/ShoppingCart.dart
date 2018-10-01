@@ -17,7 +17,27 @@ class _CartState  extends State<ShoppingCart> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      bottomNavigationBar: new Text("Price"),
+      bottomNavigationBar: Row(
+          children: [
+            Container(
+              child: new Text("total: \$: todo"),
+            ),
+            Container(
+              child: new RaisedButton(
+                  onPressed: pressedBuyButtonn,
+                  textColor: Colors.white,
+                  //minWidth: 50.0,
+                  color: Colors.green,
+                  child: Row(
+                    children: <Widget>[
+                      //Icon(Icons.camera),
+                      new Text("Buy"),
+                    ],
+                  )) ,
+            ),
+          ]
+
+      ),
       appBar: new AppBar(
           backgroundColor: Colors.green,
           title: Row(
@@ -83,6 +103,10 @@ class _CartState  extends State<ShoppingCart> {
         ),
       ),
     );
+
+  }
+
+  void pressedBuyButtonn() {
 
   }
 
