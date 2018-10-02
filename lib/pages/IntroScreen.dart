@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trees_co/utils/LocalDB.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/IntroHelper.dart';
 import 'package:trees_co/widgets/introAnimation.dart';
@@ -31,7 +32,7 @@ class IntroScreenState extends State<IntroScreen> {
 
   _intoPageShownSave() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("isIntro", true);
+    await prefs.setBool(LocalDB.isIntro, true);
   }
 
   // build layout

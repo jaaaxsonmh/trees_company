@@ -1,39 +1,22 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:trees_co/widgets/ArcBannerImage.dart';
-import 'package:trees_co/widgets/Poster.dart';
 import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
-import 'package:trees_co/utils/Routers.dart';
+import 'package:trees_co/widgets/ArcBannerImage.dart';
+import 'package:trees_co/widgets/Poster.dart';
 
-class TreeDetailHeader extends StatelessWidget {
-  TreeDetailHeader(this.detail);
+class ToolsDetailHeader extends StatelessWidget {
 
-  final DocumentSnapshot detail;
+  ToolsDetailHeader(this.document);
+
+  final DocumentSnapshot document;
 
   BuildContext context;
 
   _buildCategoryChips(TextTheme textTheme) {
     return <Widget>[
-      Container(
-        width: 85.0,
-        child: new RaisedButton(
-            onPressed: openAR,
-            textColor: Colors.white,
-            //minWidth: 50.0,
-            color: Colors.green,
-            child: Row(
-              children: <Widget>[
-                //Icon(Icons.camera),
-                new Text("Preview"),
-              ],
-            )),
-      ),
       new RaisedButton(
-          onPressed: addToShoppingCard,
+          onPressed: pressedBuyButton,
           textColor: Colors.white,
           color: Colors.blue,
           child: new Text("Buy now"))
@@ -51,14 +34,14 @@ class TreeDetailHeader extends StatelessWidget {
         new Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: new Text(
-            detail[Fire.TREE_TITLE],
+            document[Fire.TOOLS_TITLE],
             style: textTheme.title,
           ),
         ),
         new Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: new Text(
-            "\$" + detail[Fire.TREE_PRICE].toString(),
+            "\$" + document[Fire.TOOLS_PRICE].toString(),
             style: textTheme.title.copyWith(
                 fontWeight: FontWeight.w400,
                 color: Theme.of(context).accentColor),
@@ -81,7 +64,7 @@ class TreeDetailHeader extends StatelessWidget {
       children: [
         new Padding(
           padding: const EdgeInsets.only(bottom: 240.0),
-          child: new ArcBannerImage(detail[Fire.TREE_IMAGE]),
+          child: new ArcBannerImage(document[Fire.TOOLS_IMAGE]),
         ),
         new Positioned(
           bottom: 32.0,
@@ -92,7 +75,7 @@ class TreeDetailHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               new Poster(
-                detail[Fire.TREE_IMAGE],
+                document[Fire.TOOLS_IMAGE],
                 height: 190.0,
               ),
               new Expanded(
@@ -108,87 +91,55 @@ class TreeDetailHeader extends StatelessWidget {
     );
   }
 
-  addToShoppingCard() {
-    // Show UI (get Quantity & Tree info)
-    // Then call it
+
+  pressedBuyButton() {
+    // Show some UI -> get user QTY, etc
+
     addToShoppingCardDb();
   }
 
   addToShoppingCardDb() async {
-
     Firestore.instance
         .collection(Fire.shoppingCart)
         .where(Fire.SHOPPING_CART_ITEM_TITLE,
-            isEqualTo: detail[Fire.TREE_TITLE])
+        isEqualTo: document[Fire.TOOLS_TITLE])
         .getDocuments()
         .then((querySnapshot) {
       if (querySnapshot.documents.isEmpty) {
         Map<String, dynamic> values = {
-          Fire.SHOPPING_CART_ITEM_PRICE: detail[Fire.TREE_PRICE],
-          Fire.SHOPPING_CART_ITEM_IMAGE: detail[Fire.TREE_IMAGE],
+          Fire.SHOPPING_CART_ITEM_PRICE: document[Fire.TOOLS_PRICE],
+          Fire.SHOPPING_CART_ITEM_IMAGE: document[Fire.TOOLS_IMAGE],
           Fire.SHOPPING_CART_ITEM_QUANTITY: 1,
-          Fire.SHOPPING_CART_ITEM_TITLE: detail[Fire.TREE_TITLE],
+          Fire.SHOPPING_CART_ITEM_TITLE: document[Fire.TOOLS_TITLE],
           Fire.SHOPPING_CART_TIME: new DateTime.now(),
-          Fire.SHOPPING_CART_ITEM_TYPE: "Tree"
+          Fire.SHOPPING_CART_ITEM_TYPE: "Tool"
         };
 
         Firestore.instance.collection(Fire.shoppingCart).add(values);
-
       } else {
         querySnapshot.documents.forEach((value) {
-
-
           Map<String, dynamic> values = {
-            Fire.SHOPPING_CART_ITEM_QUANTITY: value[Fire.SHOPPING_CART_ITEM_QUANTITY] + 1,
+            Fire.SHOPPING_CART_ITEM_QUANTITY:
+            value[Fire.SHOPPING_CART_ITEM_QUANTITY] + 1,
           };
 
-          Firestore.instance.collection(Fire.shoppingCart).document(value.documentID).updateData(values);
-
+          Firestore.instance
+              .collection(Fire.shoppingCart)
+              .document(value.documentID)
+              .updateData(values);
         });
       }
 
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(detail[Fire.TREE_TITLE] + " added to shopping cart"), action: SnackBarAction(label: "View", onPressed: () {
-        MyNavigator.goToCart(context);
-      }),));
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(document[Fire.TOOLS_TITLE] + " added to shopping cart"),
+        action: SnackBarAction(
+            label: "View",
+            onPressed: () {
+              MyNavigator.goToCart(context);
+            }),
+      ));
     });
-
-
   }
 
-  void openAR() {
-    const platform = const MethodChannel(Routers.AR_KEY);
 
-    Future<Null> _openAR() async {
-      try {
-        int result = await platform.invokeMethod('getAr');
-      } on PlatformException catch (e) {
-        _showDialog();
-      }
-    }
-
-    _openAR();
-  }
-
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("AR is not available"),
-          content: new Text("AR is not available on your device"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
