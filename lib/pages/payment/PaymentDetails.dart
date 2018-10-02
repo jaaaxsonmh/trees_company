@@ -51,7 +51,9 @@ class _PaymentDetails extends State<PaymentDetails> {
             padding: EdgeInsets.all(10.0),
             child: new Form(
                 key: formKey,
-                child: new Column(children: <Widget>[
+                child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
                   new TextFormField(
                     controller: controllerCard,
                     decoration: new InputDecoration(labelText: 'Card number'),
