@@ -28,6 +28,9 @@ class _PaymentDetails extends State<PaymentDetails> {
                   padding: EdgeInsets.all(10.0), child: new Icon(Icons.payment))
             ],
           )),
+
+      //body: ,
+
     );
   }
 }
