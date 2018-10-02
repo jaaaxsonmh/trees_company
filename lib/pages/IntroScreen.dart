@@ -37,7 +37,7 @@ class IntroScreenState extends State<IntroScreen> {
   // build layout
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Container(
         color: Colors.blue,
         padding: EdgeInsets.all(8.0),
