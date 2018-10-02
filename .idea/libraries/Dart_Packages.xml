@@ -100,6 +100,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_masked_text">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_masked_text-0.6.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_test">
           <value>
             <list>
@@ -452,6 +459,7 @@
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/date_format-1.0.5/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.5.20/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.2.5/lib" />
+      <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_masked_text-0.6.0/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/front_end-0.1.4/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/glob-1.1.7/lib" />
       <root url="file://$USER_HOME$/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/html-0.13.3+3/lib" />
