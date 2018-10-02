@@ -6,6 +6,9 @@ import 'package:trees_co/widgets/introAnimation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroScreen extends StatefulWidget {
+  IntroScreen({this.onIntoOver});
+  @override
+  final VoidCallback onIntoOver;
   @override
   IntroScreenState createState() {
     return IntroScreenState();
@@ -24,6 +27,7 @@ class IntroScreenState extends State<IntroScreen> {
       if (current == totalPage) {
         last = true;
         _intoPageShownSave();
+        widget.onIntoOver();
       } else {
         last = false;
       }

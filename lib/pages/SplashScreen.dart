@@ -6,7 +6,9 @@ import 'package:trees_co/utils/LocalDB.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
 class SplashScreen extends StatefulWidget {
+  SplashScreen({this.onSplashOver});
   @override
+  final VoidCallback onSplashOver;
   SplashScreenState createState() => SplashScreenState();
 }
 
@@ -27,19 +29,20 @@ class SplashScreenState extends State<SplashScreen>
     Timer(Duration(milliseconds: 5000), () => openNextPage());
   }
 
-  openNextPage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isIntro = false;
-    try{
-      isIntro  = prefs.getBool(LocalDB.isIntro) ?? false;
-    }catch (e){
-    }
-
-    if (isIntro) {
-      MyNavigator.goToHome(context);
-    } else {
-      MyNavigator.goToIntro(context);
-    }
+  openNextPage()  {
+    widget.onSplashOver();
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    bool isIntro = false;
+//    try{
+//      isIntro  = prefs.getBool(LocalDB.isIntro) ?? false;
+//    }catch (e){
+//    }
+//
+//    if (isIntro) {
+//      MyNavigator.goToHome(context);
+//    } else {
+//      MyNavigator.goToIntro(context);
+//    }
   }
 
   @override
