@@ -11,6 +11,7 @@ import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/Routers.dart';
 import 'package:trees_co/utils/auth.dart';
+import 'package:trees_co/pages/IntroScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.auth, this.onSignedOut});
@@ -49,186 +50,180 @@ class _HomeState extends State<HomeScreen> {
 
     return new Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(
-          child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          new UserAccountsDrawerHeader(
-            //TODO: pull name from DB
-            accountName: new Text('Jack Hosking'),
-            currentAccountPicture: new CircleAvatar(
-              backgroundColor: Colors.white,
-              //TODO: add a image selector popup.
-              child: new Icon(Icons.add_a_photo),
-            ),
-            //TODO: pull email from DB
-            accountEmail: new Text('jpm8993@autuni.ac.nz'),
-            otherAccountsPictures: <Widget>[
-              new ShowAbout(),
-              new ShowShare(),
-              new ShowReview()
-            ],
-            decoration: BoxDecoration(
-              color: Colors.green,
-            ),
-          ),
-
-          /* This shows all the tab items on the drawer menu */
-          //TODO: add profile page
-          ListTile(
-            leading: Icon(
-              Icons.person,
-              color: Colors.green,
-            ),
-            title: Text('Profile'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.help,
-              color: Colors.green,
-            ),
-            title: Text('Plant Care Information'),
-            onTap: () {
-              MyNavigator.goToTreeCare(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.healing,
-              color: Colors.green,
-            ),
-            title: Text('Diagnose Tree Health'),
-            onTap: () {
-              MyNavigator.goToDiagnoseTree(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.camera,
-              color: Colors.green,
-            ),
-            title: Text('Plant a Tree in AR'),
-            onTap: () {
-              openAR();
-            },
-          ),
-          //TODO: add cart page
-          new Divider(color: Colors.green),
-          ListTile(
-            leading: Icon(
-              Icons.shopping_cart,
-              color: Colors.green,
-            ),
-            title: Text('View Cart'),
-            trailing: new Text(
-              _currentNumberOfItemsInCart.toString(),
-              style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-              ),
-            ),
-            onTap: () {
-              MyNavigator.goToCart(context);
-              //Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.assignment,
-              color: Colors.green,
-            ),
-            title: Text('My orders'),
-            trailing: new Text(
-              _currentNumberOfItemsInOrders.toString(),
-              style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-              ),
-            ),
-            onTap: () {
-              MyNavigator.goToMyOrders(context);
-            },
-          ),
-          new Divider(color: Colors.green),
-          new ListTile(
-            leading: Icon(
-              Icons.home,
-              color: Colors.green,
-            ),
-            title: new Text("Delivery Address"),
-            onTap: () {
-              MyNavigator.goToDelivery(context);
-            },
-          ),
-          new ListTile(
-            leading: Icon(
-              Icons.payment,
-              color: Colors.green,
-            ),
-            title: new Text("Payment Methods"),
-            onTap: () {
-              MyNavigator.goToPayments(context);
-            },
-          ),
-          new ListTile(
-            leading: Icon(
-              Icons.exit_to_app,
-              color: Colors.green,
-            ),
-            title: new Text("Log Out"),
-            onTap: () {
-              widget._signOut();
-            },
-          ),
-        ],
-      )),
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {
-                MyNavigator.goToCart(context);
-              }),
-          IconButton(
-              icon: Icon(Icons.assignment),
-              onPressed: () {
-                MyNavigator.goToMyOrders(context);
-              })
-        ],
-        leading: new IconButton(
-            icon: new Icon(Icons.menu),
-            onPressed: () {
-              _scaffoldKey.currentState.openDrawer();
-            }),
-        backgroundColor: Colors.green,
-        title: new Text('Plant A Tree',
-            style: new TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            )),
-      ),
+      drawer: buildDrawer(context),
+      appBar: buildAppBar(context),
       body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        fixedColor: Colors.green,
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.insert_drive_file),
-            title: new Text('News'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.streetview),
-            title: new Text('Trees'),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.pan_tool), title: Text('Tools'))
-        ],
-      ),
+      bottomNavigationBar: buildBottomNavigationBar(),
     );
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      onTap: onTabTapped,
+      currentIndex: _currentIndex,
+      fixedColor: Colors.green,
+      items: [
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.insert_drive_file),
+          title: new Text('News'),
+        ),
+        BottomNavigationBarItem(
+          icon: new Icon(Icons.streetview),
+          title: new Text('Trees'),
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.pan_tool), title: Text('Tools'))
+      ],
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      actions: <Widget>[
+        IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              MyNavigator.goToCart(context);
+            }),
+        IconButton(
+            icon: Icon(Icons.assignment),
+            onPressed: () {
+              MyNavigator.goToMyOrders(context);
+            })
+      ],
+      leading: new IconButton(
+          icon: new Icon(Icons.menu),
+          onPressed: () {
+            _scaffoldKey.currentState.openDrawer();
+          }),
+      backgroundColor: Colors.green,
+      title: new Text('Plant A Tree',
+          style: new TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          )),
+    );
+  }
+
+  Drawer buildDrawer(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        new UserAccount(),
+
+        // This shows all the tab items on the drawer menu
+
+        ListTile(
+          leading: Icon(
+            Icons.person,
+            color: Colors.green,
+          ),
+          title: Text('Profile'),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.help,
+            color: Colors.green,
+          ),
+          title: Text('Plant Care Information'),
+          onTap: () {
+            MyNavigator.goToTreeCare(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.healing,
+            color: Colors.green,
+          ),
+          title: Text('Diagnose Tree Health'),
+          onTap: () {
+            MyNavigator.goToDiagnoseTree(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.camera,
+            color: Colors.green,
+          ),
+          title: Text('Plant a Tree in AR'),
+          onTap: () {
+            openAR();
+          },
+        ),
+        //TODO: add cart page
+        new Divider(color: Colors.green),
+        ListTile(
+          leading: Icon(
+            Icons.shopping_cart,
+            color: Colors.green,
+          ),
+          title: Text('View Cart'),
+          trailing: new Text(
+            _currentNumberOfItemsInCart.toString(),
+            style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          ),
+          onTap: () {
+            MyNavigator.goToCart(context);
+            //Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.assignment,
+            color: Colors.green,
+          ),
+          title: Text('My orders'),
+          trailing: new Text(
+            _currentNumberOfItemsInOrders.toString(),
+            style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          ),
+          onTap: () {
+            MyNavigator.goToMyOrders(context);
+          },
+        ),
+        new Divider(color: Colors.green),
+        new ListTile(
+          leading: Icon(
+            Icons.home,
+            color: Colors.green,
+          ),
+          title: new Text("Delivery Address"),
+          onTap: () {
+            MyNavigator.goToDelivery(context);
+          },
+        ),
+        new ListTile(
+          leading: Icon(
+            Icons.payment,
+            color: Colors.green,
+          ),
+          title: new Text("Payment Methods"),
+          onTap: () {
+            MyNavigator.goToPayments(context);
+          },
+        ),
+        new ListTile(
+          leading: Icon(
+            Icons.exit_to_app,
+            color: Colors.green,
+          ),
+          title: new Text("Log Out"),
+          onTap: () {
+            widget._signOut();
+          },
+        ),
+      ],
+    ));
   }
 
 
@@ -296,6 +291,35 @@ class _HomeState extends State<HomeScreen> {
         _currentNumberOfItemsInOrders = size;
       });
     });
+  }
+}
+
+class UserAccount extends StatelessWidget {
+  const UserAccount({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new UserAccountsDrawerHeader(
+      //TODO: pull name from DB
+      accountName: new Text('Jack Hosking'),
+      currentAccountPicture: new CircleAvatar(
+        backgroundColor: Colors.white,
+        //TODO: add a image selector popup.
+        child: new Icon(Icons.add_a_photo),
+      ),
+      //TODO: pull email from DB
+      accountEmail: new Text('jpm8993@autuni.ac.nz'),
+      otherAccountsPictures: <Widget>[
+        new ShowAbout(),
+        new ShowShare(),
+        new ShowReview()
+      ],
+      decoration: BoxDecoration(
+        color: Colors.green,
+      ),
+    );
   }
 }
 
