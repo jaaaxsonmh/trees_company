@@ -63,7 +63,8 @@ class _MyOrders extends State<MyOrders> {
     }
 
     var orderRawTime = document[Fire.ORDER_TIME];
-    var orderTimeFormatted = formatDate(orderRawTime, [yyyy, '-', m, '-',d , ' ', hh , '-', mm, '-', ss]);
+    var orderTimeFormatted = formatDate(
+        orderRawTime, [yyyy, '-', m, '-', d, ' ', hh, '-', mm, '-', ss]);
 
     // Get the order status from db
     var orderStatus = document[Fire.ORDER_DETAILS];
@@ -79,7 +80,7 @@ class _MyOrders extends State<MyOrders> {
       status = "Your order with a courier now";
     } else if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_SUCCESS) {
       status = "Your order is complite. Hope you enjoing it!";
-    }else if (orderStatus == Fire.ORDER_DETAILS_AVAILABLE_FOR_PICKUP) {
+    } else if (orderStatus == Fire.ORDER_DETAILS_AVAILABLE_FOR_PICKUP) {
       status = "Your order is avalibe to pickup in store";
     }
 
