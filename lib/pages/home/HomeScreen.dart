@@ -374,7 +374,7 @@ class ShowAbout extends StatelessWidget {
               applicationName: 'Plant a Tree',
               applicationIcon:
                   new Image.asset("assets/sprout.png", width: 50.0),
-              applicationVersion: 'version 1.0',
+              applicationVersion: 'version 0.6',
               applicationLegalese:
                   'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.');
         },
