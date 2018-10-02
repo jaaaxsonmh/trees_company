@@ -10,11 +10,25 @@ class Root extends StatefulWidget {
   State<StatefulWidget> createState() => new _RootState();
 }
 
+enum AuthStatus {
+  notSignedIn,
+  signedIn
+}
+
 class _RootState extends State<Root> {
+
+  // initial not signed in
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
 
   @override
   Widget build(BuildContext context) {
-
-    return new LoginPage(auth: widget.auth);
+    switch (_authStatus){
+      case AuthStatus.notSignedIn:
+        return new LoginPage(auth: widget.auth);
+      case AuthStatus.signedIn:
+        return new Container(
+          child: new Text('signed in test')
+        );
+    }
   }
 }
