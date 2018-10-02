@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,15 +10,30 @@ import 'package:share/share.dart';
 import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/Routers.dart';
+import 'package:trees_co/utils/auth.dart';
 
 class HomeScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new _HomeState();
+  HomeScreen({this.auth, this.onSignedOut});
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+
+  void _signOut() async {
+    try {
+      await auth.signOut();
+      onSignedOut();
+    } catch (e) {
+      print(e);
+    }
   }
+
+
+  @override
+  _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<HomeScreen> {
+
+
   int _currentIndex = 0;
   int _currentNumberOfItemsInCart = 0;
   int _currentNumberOfItemsInOrders = 0;
@@ -50,35 +64,9 @@ class _HomeState extends State<HomeScreen> {
             //TODO: pull email from DB
             accountEmail: new Text('jpm8993@autuni.ac.nz'),
             otherAccountsPictures: <Widget>[
-              new FlatButton(
-                  onPressed: () {
-                    showAboutDialog(
-                        context: context,
-                        applicationName: 'Plant a Tree',
-                        applicationIcon:
-                            new Image.asset("assets/sprout.png", width: 50.0),
-                        applicationVersion: 'version 1.0',
-                        applicationLegalese:
-                            'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.');
-                  },
-                  child: new Icon(Icons.cake, color: Colors.white)),
-              new FlatButton(
-                child: new Icon(Icons.share, color: Colors.white),
-                onPressed: () {
-                  Share.share('Come try out our app download here:');
-                },
-              ),
-              new FlatButton(
-                child: new Icon(
-                  Icons.rate_review,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  LaunchReview.launch(
-                      androidAppId: 'com.skuu.treesco',
-                      iOSAppId: 'com.skuu.runfinity');
-                },
-              )
+              new ShowAbout(),
+              new ShowShare(),
+              new ShowReview()
             ],
             decoration: BoxDecoration(
               color: Colors.green,
@@ -180,9 +168,19 @@ class _HomeState extends State<HomeScreen> {
               Icons.payment,
               color: Colors.green,
             ),
-            title: new Text("Payment methods"),
+            title: new Text("Payment Methods"),
             onTap: () {
               MyNavigator.goToPayments(context);
+            },
+          ),
+          new ListTile(
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Colors.green,
+            ),
+            title: new Text("Log Out"),
+            onTap: () {
+              widget._signOut();
             },
           ),
         ],
@@ -232,6 +230,8 @@ class _HomeState extends State<HomeScreen> {
       ),
     );
   }
+
+
 
   void openAR() {
     Future<Null> _openAR() async {
@@ -296,5 +296,64 @@ class _HomeState extends State<HomeScreen> {
         _currentNumberOfItemsInOrders = size;
       });
     });
+  }
+}
+
+class ShowReview extends StatelessWidget {
+  const ShowReview({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new FlatButton(
+      child: new Icon(
+        Icons.rate_review,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        LaunchReview.launch(
+            androidAppId: 'com.skuu.treesco',
+            iOSAppId: 'com.skuu.runfinity');
+      },
+    );
+  }
+}
+
+class ShowShare extends StatelessWidget {
+  const ShowShare({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new FlatButton(
+      child: new Icon(Icons.share, color: Colors.white),
+      onPressed: () {
+        Share.share('Come try out our app download here:');
+      },
+    );
+  }
+}
+
+class ShowAbout extends StatelessWidget {
+  const ShowAbout({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new FlatButton(
+        onPressed: () {
+          showAboutDialog(
+              context: context,
+              applicationName: 'Plant a Tree',
+              applicationIcon:
+                  new Image.asset("assets/sprout.png", width: 50.0),
+              applicationVersion: 'version 1.0',
+              applicationLegalese:
+                  'Thanks for using Plant A Tree, this was our first flutter project, and we are all happy with the results and learning that came from this.');
+        },
+        child: new Icon(Icons.cake, color: Colors.white));
   }
 }

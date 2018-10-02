@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
+import 'package:trees_co/utils/auth.dart';
 
 class LoginPage extends StatefulWidget {
+  LoginPage({this.auth, this.onSignedIn});
+  final BaseAuth auth;
+  final VoidCallback onSignedIn;
+
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -35,18 +40,16 @@ class LoginPageState extends State<LoginPage> {
     if (validateAndSaveLogin()) {
       try {
         //login with email if type login other wise, create user.
-        if (_formType == FormType.login)
-          {
-            FirebaseUser user = await FirebaseAuth.instance
-                .signInWithEmailAndPassword(email: _email, password: _password);
-            print('User signed in: ${user.uid}');
-            MyNavigator.goToSplash(context);
-          } else {
-          FirebaseUser user = await FirebaseAuth.instance
-              .createUserWithEmailAndPassword(email: _email, password: _password);
-          print('User registered: ${user.uid}');
-          MyNavigator.goToSplash(context);
+        if (_formType == FormType.login) {
+          String userId =
+              await widget.auth.signInWitEmailAndPassword(_email, _password);
+          print('User signed in: $userId');
+        } else {
+          String userId =
+          await widget.auth.createUserWithEmailAndPassword(_email, _password);
+          print('User registered: $userId');
         }
+        widget.onSignedIn();
       } catch (e) {
         print('Error encounted: $e');
       }
@@ -79,9 +82,8 @@ class LoginPageState extends State<LoginPage> {
             child: new Form(
                 key: formKey,
                 child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: buildInputs() + buildSubmitButtons()
-                ))));
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: buildInputs() + buildSubmitButtons()))));
   }
 
   List<Widget> buildInputs() {
@@ -102,7 +104,7 @@ class LoginPageState extends State<LoginPage> {
   }
 
   List<Widget> buildSubmitButtons() {
-    if(_formType == FormType.login){
+    if (_formType == FormType.login) {
       return [
         new RaisedButton(
             color: Colors.green,

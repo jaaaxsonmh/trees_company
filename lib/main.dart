@@ -11,6 +11,8 @@ import 'package:trees_co/utils/Routers.dart';
 import 'package:trees_co/pages/diagnoseTree/diagnoseTree.dart';
 import 'package:trees_co/pages/deliveryDetails.dart';
 import 'package:trees_co/pages/treeCare/treeCare.dart';
+import 'package:trees_co/utils/auth.dart';
+import 'package:trees_co/utils/root.dart';
 
 var routes = <String, WidgetBuilder>{
   Routers.home: (BuildContext context) => HomeScreen(),
@@ -29,5 +31,5 @@ var routes = <String, WidgetBuilder>{
 void main() => runApp(new MaterialApp(
     theme: ThemeData(primaryColor: Colors.blue),
     //home: LoginPage(),
-    home: SplashScreen(),
+    home: new Root(auth: new Auth()),
     routes: routes));
