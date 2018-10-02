@@ -5,14 +5,11 @@
 </p>
 
 # Plant a Tree - TreeCo
- 
+Plant a Tree was developed to make online plant and care products purchasing easy. With a fully functional shopping cart, built with security and functionality in mind. Verifying your orders, that get delivered to your door, or picked up from our Tree Co nursery at any time! We here at Tree Co can constantly provide support to you through our application with built in tree care information, and ability to diagnose your plants health by having you upload a photo. Also! It gets better, every wondered what a garden of plants would look like at your house? Well... for our android users we support AR with models of our own products so you can do exactly that before you commit to purchasing! 
 
-
-One Paragraph of project description goes here
 
 ## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Donw
 
 ## Built With
 
