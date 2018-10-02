@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,15 +10,30 @@ import 'package:share/share.dart';
 import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/Routers.dart';
+import 'package:trees_co/utils/auth.dart';
 
 class HomeScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new _HomeState();
+  HomeScreen({this.auth, this.onSignedOut});
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+
+  void _signOut() async {
+    try {
+      await auth.signOut();
+      onSignedOut();
+    } catch (e) {
+      print(e);
+    }
   }
+
+
+  @override
+  _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<HomeScreen> {
+
+
   int _currentIndex = 0;
   int _currentNumberOfItemsInCart = 0;
   int _currentNumberOfItemsInOrders = 0;
@@ -185,6 +199,16 @@ class _HomeState extends State<HomeScreen> {
               MyNavigator.goToPayments(context);
             },
           ),
+          new ListTile(
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Colors.green,
+            ),
+            title: new Text("Payment methods"),
+            onTap: () {
+              widget._signOut();
+            },
+          ),
         ],
       )),
       appBar: AppBar(
@@ -232,6 +256,8 @@ class _HomeState extends State<HomeScreen> {
       ),
     );
   }
+
+
 
   void openAR() {
     Future<Null> _openAR() async {

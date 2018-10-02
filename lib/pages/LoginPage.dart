@@ -4,9 +4,9 @@ import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/auth.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({this.auth});
-
+  LoginPage({this.auth, this.onSignedIn});
   final BaseAuth auth;
+  final VoidCallback onSignedIn;
 
   @override
   LoginPageState createState() => LoginPageState();
@@ -49,6 +49,7 @@ class LoginPageState extends State<LoginPage> {
           await widget.auth.createUserWithEmailAndPassword(_email, _password);
           print('User registered: $userId');
         }
+        widget.onSignedIn();
       } catch (e) {
         print('Error encounted: $e');
       }
