@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:trees_co/utils/MoneyConverter.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
 class ShoppingCart extends StatefulWidget {
@@ -20,6 +21,9 @@ class _CartState extends State<ShoppingCart> {
 
   @override
   Widget build(BuildContext context) {
+
+    var price = MoneyConverter().convert(totalPriceOfShoppingCart);
+
     return new Scaffold(
       key: _scaffoldKey,
       bottomNavigationBar:
@@ -28,7 +32,7 @@ class _CartState extends State<ShoppingCart> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
             child: new Text(
-              "Total: \$ $totalPriceOfShoppingCart",
+              "Total: $price",
               style: TextStyle(fontSize: 18.0),
             ),
           ),
@@ -94,11 +98,12 @@ class _CartState extends State<ShoppingCart> {
       values[document.documentID] = false;
     }
 
+    var price = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE]);
+    var priceQTY = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]);
+
     var subInfo =
-        "\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire
-        .SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire
-        .SHOPPING_CART_ITEM_PRICE] *
-        document[Fire.SHOPPING_CART_ITEM_QUANTITY]}";
+        "$price | QTY: ${document[Fire
+        .SHOPPING_CART_ITEM_QUANTITY]} | Sub total: $priceQTY";
 
     return new Container(
       child: new Card(

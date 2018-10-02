@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:trees_co/utils/MoneyConverter.dart';
 import 'package:trees_co/widgets/ArcBannerImage.dart';
 import 'package:trees_co/widgets/Poster.dart';
 import 'package:trees_co/utils/Fire.dart';
@@ -45,6 +46,8 @@ class TreeDetailHeader extends StatelessWidget {
     this.context = context;
     var textTheme = Theme.of(context).textTheme;
 
+    var price = MoneyConverter().convert(detail[Fire.TREE_PRICE]);
+
     var movieInformation = new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,7 +61,7 @@ class TreeDetailHeader extends StatelessWidget {
         new Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: new Text(
-            "\$" + detail[Fire.TREE_PRICE].toString(),
+            price,
             style: textTheme.title.copyWith(
                 fontWeight: FontWeight.w400,
                 color: Theme.of(context).accentColor),
