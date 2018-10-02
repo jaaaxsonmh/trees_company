@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:trees_co/utils/MoneyConverter.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/widgets/ArcBannerImage.dart';
 import 'package:trees_co/widgets/Poster.dart';
@@ -28,6 +29,8 @@ class ToolsDetailHeader extends StatelessWidget {
     this.context = context;
     var textTheme = Theme.of(context).textTheme;
 
+    var price = MoneyConverter().convert(document[Fire.TOOLS_PRICE]);
+
     var movieInformation = new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,7 +44,7 @@ class ToolsDetailHeader extends StatelessWidget {
         new Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: new Text(
-            "\$" + document[Fire.TOOLS_PRICE].toString(),
+            price,
             style: textTheme.title.copyWith(
                 fontWeight: FontWeight.w400,
                 color: Theme.of(context).accentColor),

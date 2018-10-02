@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
+import 'package:trees_co/utils/MoneyConverter.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
 class ToolsList extends StatelessWidget {
@@ -30,6 +31,7 @@ class ToolsList extends StatelessWidget {
 }
 
 Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+  var price = MoneyConverter().convert(document[Fire.TOOLS_PRICE]);
   return new Container(
     child: new Card(
       child: new Column(
@@ -41,7 +43,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
             title: new Text(document[Fire.TOOLS_TITLE],
                 style: new TextStyle(fontSize: 20.0)),
             //subtitle: new Text(document[Fire.TREE_CATEGORY]),
-            trailing: new Text("\$" + document[Fire.TOOLS_PRICE].toString() + ".00",
+            trailing: new Text(price,
                 style: new TextStyle(fontSize: 24.0, color: Colors.green)),
             onTap: () => _openNewsFullPage(context, document),
           ),

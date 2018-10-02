@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
 import 'package:date_format/date_format.dart';
+import 'package:trees_co/utils/MoneyConverter.dart';
 
 class MyOrders extends StatefulWidget {
   @override
@@ -84,8 +85,11 @@ class _MyOrders extends State<MyOrders> {
       status = "Your order is avalibe to pickup in store";
     }
 
+    var price = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE]);
+    var priceQTY = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]);
+
     var orderInfo =
-        "\$ ${document[Fire.SHOPPING_CART_ITEM_PRICE]} | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: \$ ${document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]}";
+        "$price | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: $priceQTY";
 
     return new Container(
       child: new Card(
