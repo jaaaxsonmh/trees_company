@@ -10,7 +10,10 @@ import 'package:trees_co/utils/LocalDB.dart';
 class PaymentDetails extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new _PaymentDetails();
+    var pd = new _PaymentDetails();
+    pd.getSavedPaymentMethod();
+
+    return pd;
   }
 }
 
@@ -25,6 +28,8 @@ class _PaymentDetails extends State<PaymentDetails> {
   String _cardNumber;
   String _date;
   String _cvv;
+  String _buttonTitle = "Save";
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +94,7 @@ class _PaymentDetails extends State<PaymentDetails> {
                   new RaisedButton(
                       onPressed: savePaymentsDetails,
                       child: new Text(
-                        "Save",
+                        _buttonTitle,
                         style: new TextStyle(color: Colors.white),
                       ),
                       color: Colors.green)
@@ -112,6 +117,26 @@ class _PaymentDetails extends State<PaymentDetails> {
       await prefs.setString(LocalDB.payment_card_cvv, _cvv);
 
       print("Payments info saved");
+    }
+
+  }
+
+  getSavedPaymentMethod() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var card = prefs.getString(LocalDB.payment_card_number);
+    var date = prefs.getString(LocalDB.payment_card_exp_date);
+    var cvv = prefs.getString(LocalDB.payment_card_cvv);
+
+    if (card != null && date!= null && cvv != null){
+      setState(() {
+        controllerCvv.updateText(cvv);
+        controllerDate.updateText(date);
+        controllerCard.updateText(card);
+
+
+        _buttonTitle = "Update";
+      });
     }
 
   }
