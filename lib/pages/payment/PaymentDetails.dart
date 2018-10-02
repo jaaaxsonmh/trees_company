@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trees_co/pages/LoginPage.dart';
 import 'package:trees_co/utils/Fire.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:trees_co/utils/LocalDB.dart';
 
 class PaymentDetails extends StatefulWidget {
   @override
@@ -94,7 +96,7 @@ class _PaymentDetails extends State<PaymentDetails> {
                 ]))));
   }
 
-  savePaymentsDetails() {
+  savePaymentsDetails() async {
     final form = formKey.currentState;
 
     //print to console
@@ -103,6 +105,13 @@ class _PaymentDetails extends State<PaymentDetails> {
       form.save();
       print('Valid payment details. cardNumber: $_cardNumber, exp date: $_date , cvv: $_cvv');
 
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //bool save = prefs.getBool("isIntro") ?? false;
+      await prefs.setString(LocalDB.payment_card_number, _cardNumber);
+      await prefs.setString(LocalDB.payment_card_exp_date, _date);
+      await prefs.setString(LocalDB.payment_card_cvv, _cvv);
+
+      print("Payments info saved");
     }
 
   }

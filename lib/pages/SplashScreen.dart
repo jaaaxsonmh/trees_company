@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trees_co/utils/LocalDB.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class SplashScreenState extends State<SplashScreen>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isIntro = false;
     try{
-      isIntro  = prefs.getBool("isIntro") ?? false;
+      isIntro  = prefs.getBool(LocalDB.isIntro) ?? false;
     }catch (e){
     }
 
