@@ -20,6 +20,15 @@ class _RootState extends State<Root> {
   // initial not signed in
   AuthStatus _authStatus = AuthStatus.notSignedIn;
 
+  void initState() {
+    super.initState();
+    widget.auth.currentUser().then((userId) {
+      setState(() {
+        _authStatus = userId == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     switch (_authStatus){
