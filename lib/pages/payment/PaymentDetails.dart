@@ -53,22 +53,37 @@ class _PaymentDetails extends State<PaymentDetails> {
                         value.isEmpty ? 'Card number can\'t be empty' : null,
                     onSaved: (value) => _cardNumber = value,
                   ),
-                  new TextFormField(
-                    controller: controllerDate,
-                    decoration: new InputDecoration(labelText: 'Expiry date'),
-                    keyboardType: TextInputType.datetime,
-                    validator: (value) =>
-                        value.isEmpty ? 'Expiry date can\'t be empty' : null,
-                    onSaved: (value) => _date = value,
+                  Row(
+                    children: <Widget>[
+                      new Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
+                          child: new TextFormField(
+                            controller: controllerDate,
+                            decoration: new InputDecoration(labelText: 'Expiry date'),
+                            keyboardType: TextInputType.datetime,
+                            validator: (value) =>
+                                value.isEmpty ? 'Expiry date can\'t be empty' : null,
+                            onSaved: (value) => _date = value,
+                          ),
+                        ),
+                      ),
+                      new Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                          child: new TextFormField(
+                            controller: controllerCvv,
+                            decoration: new InputDecoration(labelText: 'CVV'),
+                            keyboardType: TextInputType.number,
+                            validator: (value) =>
+                            value.isEmpty ? 'CVV can\'t be empty' : null,
+                            onSaved: (value) => _cvv = value,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  new TextFormField(
-                    controller: controllerCvv,
-                    decoration: new InputDecoration(labelText: 'CVV'),
-                    keyboardType: TextInputType.number,
-                    validator: (value) =>
-                        value.isEmpty ? 'CVV can\'t be empty' : null,
-                    onSaved: (value) => _cvv = value,
-                  ),
+
                   new RaisedButton(
                       onPressed: savePaymentsDetails,
                       child: new Text(
