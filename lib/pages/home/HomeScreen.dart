@@ -31,7 +31,6 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     _getNumberOfItemsInCart();
 
     return new Scaffold(
@@ -147,7 +146,8 @@ class _HomeState extends State<HomeScreen> {
               MyNavigator.goToCart(context);
               //Navigator.pop(context);
             },
-          ),ListTile(
+          ),
+          ListTile(
             leading: Icon(
               Icons.assignment,
               color: Colors.green,
@@ -175,19 +175,30 @@ class _HomeState extends State<HomeScreen> {
               MyNavigator.goToDelivery(context);
             },
           ),
+          new ListTile(
+            leading: Icon(
+              Icons.payment,
+              color: Colors.green,
+            ),
+            title: new Text("Payment methods"),
+            onTap: () {
+              MyNavigator.goToPayments(context);
+            },
+          ),
         ],
       )),
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () { MyNavigator.goToCart(context);
-            }
-          ),IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                MyNavigator.goToCart(context);
+              }),
+          IconButton(
               icon: Icon(Icons.assignment),
-              onPressed: () { MyNavigator.goToMyOrders(context);
-              }
-          )
+              onPressed: () {
+                MyNavigator.goToMyOrders(context);
+              })
         ],
         leading: new IconButton(
             icon: new Icon(Icons.menu),
@@ -200,7 +211,6 @@ class _HomeState extends State<HomeScreen> {
               color: Colors.white,
               fontWeight: FontWeight.bold,
             )),
-
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -269,13 +279,11 @@ class _HomeState extends State<HomeScreen> {
         .collection(Fire.shoppingCart)
         .getDocuments()
         .then((querySnapshot) {
-          var size = querySnapshot.documents.length;
+      var size = querySnapshot.documents.length;
 
-          setState(() {
-            _currentNumberOfItemsInCart = size;
-          });
-
-
+      setState(() {
+        _currentNumberOfItemsInCart = size;
+      });
     });
 
     Firestore.instance
@@ -287,8 +295,6 @@ class _HomeState extends State<HomeScreen> {
       setState(() {
         _currentNumberOfItemsInOrders = size;
       });
-
-
     });
   }
 }

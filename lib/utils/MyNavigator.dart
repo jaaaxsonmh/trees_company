@@ -52,6 +52,10 @@ class MyNavigator {
     Navigator.pushNamed(context, Routers.delivery);
   }
 
+  static void goToPayments(BuildContext context) {
+    Navigator.pushNamed(context, Routers.payments);
+  }
+
   static void goToTreeCare(BuildContext context) {
     Navigator.pushNamed(context, Routers.treeCare);
   }
