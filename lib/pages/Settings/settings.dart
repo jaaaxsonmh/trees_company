@@ -10,7 +10,18 @@ class Settings  extends StatefulWidget {
   }
 }
 
+enum StateType {setProfile, showProfile}
+
 class _SettingsState extends State<Settings> {
+
+  final formKey = new GlobalKey<FormState>();
+
+  String _name;
+  String _location;
+  String _interests;
+  StateType _stateType = StateType.setProfile;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +32,7 @@ class _SettingsState extends State<Settings> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Settings'),
+            Text('Profile'),
             new Padding(
               padding: EdgeInsets.all(10.0),
               child:
@@ -30,7 +41,8 @@ class _SettingsState extends State<Settings> {
           ],
         )
       ),
-
+      body: new Container(
+      )
     );
   }
 }

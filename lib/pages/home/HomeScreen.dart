@@ -121,7 +121,7 @@ class _HomeState extends State<HomeScreen> {
           ),
           title: Text('Profile'),
           onTap: () {
-            Navigator.pop(context);
+            MyNavigator.goToSettings(context);
           },
         ),
         ListTile(
