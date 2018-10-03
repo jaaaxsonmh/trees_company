@@ -18,6 +18,7 @@ class _diagnoseTree extends State<DiagnoseTree> {
   File _image;
   String _name;
   String _details;
+  int _total = 0;
 
   // for camera option
   _pickImageCamera() async {
@@ -102,10 +103,12 @@ class _diagnoseTree extends State<DiagnoseTree> {
                   padding: EdgeInsets.all(10.0), child: new Icon(Icons.healing))
             ],
           )),
-      body: new Container(
-        child: new Form(
+      body: new ListView(
+        padding: EdgeInsets.all(10.0),
+         children: <Widget>[ new Form(
           key: formKey,
           child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               new TextFormField(
                   // Use email input type for emails.
@@ -113,15 +116,15 @@ class _diagnoseTree extends State<DiagnoseTree> {
                       hintText: 'John Doe',
                       labelText: 'Name'),
                 onSaved: (value) => _name = value,
+                validator: (value) => value.isEmpty ? 'Name can\'t be empty' : null,
               ),
-              new Padding(
-                  padding: EdgeInsets.only(left: 5.0, right: 5.0),
-                  child: new TextFormField(
+              new TextFormField(
                       decoration: new InputDecoration(
                           hintText: 'Tell us what you think is wrong?',
                           labelText: 'Details'),
                     onSaved: (value) => _details = value,
-                  )),
+                    validator: (value) => value.isEmpty ? 'Details can\'t be empty' : null,
+                  ),
               new RaisedButton(
                 onPressed: _pickImageGallery,
                 color: Colors.green,
@@ -129,18 +132,12 @@ class _diagnoseTree extends State<DiagnoseTree> {
               ),
               Center(
                 child: _image == null
-                    ? new Padding(
-                        padding:
-                            EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
-                        child: new Placeholder(
+                    ? new Placeholder(
                             color: Colors.green,
-                            fallbackHeight: 290.0,
-                            fallbackWidth: 290.0),
-                      )
-                    : new Padding(
-                        padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: new Image.file(_image,
-                            width: 290.0, height: 290.0)),
+                            fallbackHeight: 250.0,
+                            fallbackWidth: 250.0)
+                    : new Image.file(_image,
+                            width: 270.0, height: 270.0),
               ),
               new Container(
                 child: new RaisedButton(
@@ -158,6 +155,7 @@ class _diagnoseTree extends State<DiagnoseTree> {
             ],
           ),
         ),
+      ],
       ),
     );
   }
@@ -166,13 +164,18 @@ class _diagnoseTree extends State<DiagnoseTree> {
   _saveDiagnosticDetails() async {
 
     final form = formKey.currentState;
-    final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('diagnostics/diagnose.jpg');
+    final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('diagnostics/diagnose$_total.jpg');
     final StorageUploadTask task = firebaseStorageRef.putFile(_image);
 
     if(form.validate()) {
       form.save();
-      print('Valid details, $_name, $_details');
+      print('Valid details, $_name, $_details, $_total');
       _onValid();
+      _totalImages();
     }
+  }
+
+  _totalImages() {
+    _total++;
   }
 }
