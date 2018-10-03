@@ -40,6 +40,7 @@ class _SettingsState extends State<Settings>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      //TODO: revert from scroll view to appbar since it is breaking the forms when keyboard opens
       body: new NestedScrollView(
         controller: _scrollViewController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

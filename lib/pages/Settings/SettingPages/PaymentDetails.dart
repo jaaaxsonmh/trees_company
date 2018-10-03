@@ -17,6 +17,7 @@ class _PaymentDetails extends State<PaymentDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
+  var controllerName;
   var controllerCard = new MaskedTextController(mask: '0000 0000 0000 0000');
   var controllerDate = new MaskedTextController(mask: '00/00');
   var controllerCvv = new MaskedTextController(mask: '000');
@@ -39,7 +40,7 @@ class _PaymentDetails extends State<PaymentDetails> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       new TextFormField(
-                        controller: controllerCard,
+                        controller: controllerName,
                         decoration: new InputDecoration(labelText: 'Name'),
                         validator: (value) =>
                             value.isEmpty ? 'Card name can\'t be empty' : null,
@@ -132,6 +133,7 @@ class _PaymentDetails extends State<PaymentDetails> {
 
     if (name != null && card != null && date != null && cvv != null) {
       setState(() {
+        controllerName.updateText(name);
         controllerCvv.updateText(cvv);
         controllerDate.updateText(date);
         controllerCard.updateText(card);

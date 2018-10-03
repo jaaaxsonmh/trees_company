@@ -15,6 +15,11 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
+  var controllerName;
+  var controllerNumber;
+  var controllerAddress;
+  var controllerSuburb;
+  var controllerCity;
   var controllerPostCode = new MaskedTextController(mask: '0000');
 
   String _name;
@@ -23,6 +28,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
   String _suburb;
   String _city;
   String _postCode;
+  String _buttonTitle = "Save";
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +42,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       new TextFormField(
+                        controller: controllerName,
                         decoration: new InputDecoration(labelText: 'Name'),
                         validator: (value) =>
                         value.isEmpty ? 'Recipient name can\'t be empty' : null,
@@ -43,12 +50,12 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                       ),
                       Row(
                         children: <Widget>[
-
                           new Flexible(
                             child: Padding(
                               padding:
                               const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
                               child: new TextFormField(
+                                controller: controllerNumber,
                                 decoration: new InputDecoration(
                                     labelText: 'Street Number'),
                                 keyboardType: TextInputType.number,
@@ -65,6 +72,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                               padding:
                               const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
                               child: new TextFormField(
+                                controller: controllerAddress,
                                 decoration:
                                 new InputDecoration(labelText: 'Address'),
                                 validator: (value) =>
@@ -77,10 +85,54 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                           ),
                         ],
                       ),
+                      Row(
+                        children: <Widget>[
+                          new Flexible(
+                            child: Padding(
+                              padding:
+                              const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
+                              child: new TextFormField(
+                                controller: controllerSuburb,
+                                decoration: new InputDecoration(
+                                    labelText: 'Suburb'),
+                                validator: (value) =>
+                                value.isEmpty
+                                    ? 'Suburb can\'t be empty'
+                                    : null,
+                                onSaved: (value) => _suburb = value,
+                              ),
+                            ),
+                          ),
+                          new Flexible(
+                            child: Padding(
+                              padding:
+                              const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                              child: new TextFormField(
+                                controller: controllerPostCode,
+                                keyboardType: TextInputType.number,
+                                decoration:
+                                new InputDecoration(labelText: 'Post code'),
+                                validator: (value) =>
+                                value.isEmpty
+                                    ? 'Post code can\'t be empty'
+                                    : null,
+                                onSaved: (value) => _postCode = value,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      new TextFormField(
+                        controller: controllerCity,
+                        decoration: new InputDecoration(labelText: 'City'),
+                        validator: (value) =>
+                        value.isEmpty ? 'City name can\'t be empty' : null,
+                        onSaved: (value) => _city = value,
+                      ),
                       new RaisedButton(
                           onPressed: saveDeliveryDetails,
                           child: new Text(
-                            'Save',
+                            _buttonTitle,
                             style: new TextStyle(color: Colors.white),
                           ),
                           color: Colors.green)
@@ -105,8 +157,31 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
       await prefs.setString(LocalDB.delivery_city_name, _city);
       await prefs.setString(LocalDB.delivery_post_code, _postCode);
 
-
       print("Payments info saved");
+    }
+  }
+
+  getSavedPaymentMethod() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var name = prefs.getString(LocalDB.payment_card_name);
+    var number = prefs.getString(LocalDB.payment_card_number);
+    var address = prefs.getString(LocalDB.payment_card_exp_date);
+    var suburb = prefs.getString(LocalDB.payment_card_cvv);
+    var city = prefs.getString(LocalDB.payment_card_exp_date);
+    var postCode = prefs.getString(LocalDB.payment_card_cvv);
+
+    if (name != null && number != null && address != null && suburb != null && city != null && postCode != null) {
+      setState(() {
+        controllerName.updateText(name);
+        controllerNumber.updateText(number);
+        controllerAddress.updateText(address);
+        controllerSuburb.updateText(suburb);
+        controllerCity.updateText(city);
+        controllerPostCode.updateText(postCode);
+
+        _buttonTitle = "Update";
+      });
     }
   }
 
