@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 
 
 class Settings  extends StatefulWidget {
@@ -36,12 +36,17 @@ class _SettingsState extends State<Settings> {
             new Padding(
               padding: EdgeInsets.all(10.0),
               child:
-                new Icon(Icons.settings)
+                new Icon(Icons.person)
             )
           ],
         )
       ),
       body: new Container(
+        child: new Column(
+          children: <Widget>[
+
+          ],
+        )
       )
     );
   }

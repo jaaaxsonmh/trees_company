@@ -29,7 +29,6 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
             ],
           )
       ),
-
     );
   }
 }
