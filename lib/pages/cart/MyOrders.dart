@@ -74,15 +74,15 @@ class _MyOrders extends State<MyOrders> {
     if (orderStatus == null) {
       status = "Awating";
     } else if (orderStatus == Fire.ORDER_DETAILS_PROCESSING) {
-      status = "We are prosseing your order";
+      status = "We are processing your order.";
     } else if (orderStatus == Fire.ORDER_DETAILS_DISPATCHED) {
-      status = "Your order has been dispatched";
+      status = "Your order has been dispatched.";
     } else if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_DELIVERY) {
-      status = "Your order with a courier now";
+      status = "Your order is with a courier now.";
     } else if (orderStatus == Fire.ORDER_DETAILS_OUT_FOR_SUCCESS) {
-      status = "Your order is complite. Hope you enjoing it!";
+      status = "Your order is delivered. Hope you enjoing it!";
     } else if (orderStatus == Fire.ORDER_DETAILS_AVAILABLE_FOR_PICKUP) {
-      status = "Your order is avalibe to pickup in store";
+      status = "Your order is avalibe to pickup.";
     }
 
     var price = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE]);
