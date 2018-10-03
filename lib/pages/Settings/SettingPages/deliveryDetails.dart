@@ -3,10 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:trees_co/utils/LocalDB.dart';
 
-class DeliveryDetails  extends StatefulWidget {
+class DeliveryDetails extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new _DeliveryDetailsState();
+    var state = new _DeliveryDetailsState();
+    state.getSavedPaymentMethod();
+    return state;
   }
 }
 
@@ -15,11 +17,11 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
   //final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
-  var controllerName;
-  var controllerNumber;
-  var controllerAddress;
-  var controllerSuburb;
-  var controllerCity;
+  var controllerName = new MaskedTextController(mask: '******************************');
+  var controllerNumber = new MaskedTextController(mask: '******************************');
+  var controllerAddress = new MaskedTextController(mask: '******************************');
+  var controllerSuburb = new MaskedTextController(mask: '******************************');
+  var controllerCity = new MaskedTextController(mask: '******************************');
   var controllerPostCode = new MaskedTextController(mask: '0000');
 
   String _name;
@@ -33,7 +35,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        //key: _scaffoldKey,
+      //key: _scaffoldKey,
         child: new Container(
             padding: EdgeInsets.all(10.0),
             child: SingleChildScrollView(
@@ -46,7 +48,9 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                           controller: controllerName,
                           decoration: new InputDecoration(labelText: 'Name'),
                           validator: (value) =>
-                          value.isEmpty ? 'Recipient name can\'t be empty' : null,
+                          value.isEmpty
+                              ? 'Recipient name can\'t be empty'
+                              : null,
                           onSaved: (value) => _name = value,
                         ),
                         Row(
@@ -140,6 +144,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                       ])),
             )));
   }
+
   saveDeliveryDetails() async {
     final form = formKey.currentState;
 
@@ -173,7 +178,8 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
     var city = prefs.getString(LocalDB.payment_card_exp_date);
     var postCode = prefs.getString(LocalDB.payment_card_cvv);
 
-    if (name != null && number != null && address != null && suburb != null && city != null && postCode != null) {
+    if (name != null && number != null && address != null && suburb != null &&
+        city != null && postCode != null) {
       setState(() {
         controllerName.updateText(name);
         controllerNumber.updateText(number);

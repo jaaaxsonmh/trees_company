@@ -17,7 +17,7 @@ class _PaymentDetails extends State<PaymentDetails> {
 //  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
-  var controllerName;
+  var controllerName = new MaskedTextController(mask: '******************************');
   var controllerCard = new MaskedTextController(mask: '0000 0000 0000 0000');
   var controllerDate = new MaskedTextController(mask: '00/00');
   var controllerCvv = new MaskedTextController(mask: '000');
