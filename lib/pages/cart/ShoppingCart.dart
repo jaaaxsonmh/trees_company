@@ -122,9 +122,14 @@ class _CartState extends State<ShoppingCart> {
                     .collection(Fire.shoppingCart)
                     .document(document.documentID)
                     .delete();
+
+                _scaffoldKey.currentState.removeCurrentSnackBar();
                 Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text(
                         document[Fire.SHOPPING_CART_ITEM_TITLE] + " removed")));
+
+
+
               },
               background: Container(color: Colors.red),
               child: new ListTile(
@@ -180,10 +185,12 @@ class _CartState extends State<ShoppingCart> {
                                 qtyControlsEnabled = true;
                               });
 
+                              _scaffoldKey.currentState.removeCurrentSnackBar();
                               Scaffold.of(context).showSnackBar(SnackBar(
                                   content: Text(
                                       document[Fire.SHOPPING_CART_ITEM_TITLE] +
                                           " +1")));
+
                             }
                           },
                           child: Container(
@@ -216,10 +223,12 @@ class _CartState extends State<ShoppingCart> {
                               });
                               ;
 
+                              _scaffoldKey.currentState.removeCurrentSnackBar();
                               Scaffold.of(context).showSnackBar(SnackBar(
                                   content: Text(
                                       document[Fire.SHOPPING_CART_ITEM_TITLE] +
                                           " -1")));
+
                             }
                           },
                           child: Container(
