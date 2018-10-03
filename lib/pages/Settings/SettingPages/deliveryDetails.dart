@@ -166,12 +166,12 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
   getSavedPaymentMethod() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    var name = prefs.getString(LocalDB.payment_card_name);
-    var number = prefs.getString(LocalDB.payment_card_number);
-    var address = prefs.getString(LocalDB.payment_card_exp_date);
-    var suburb = prefs.getString(LocalDB.payment_card_cvv);
+    var name = prefs.getString(LocalDB.delivery_recipient_name);
+    var number = prefs.getString(LocalDB.delivery_house_number);
+    var address = prefs.getString(LocalDB.delivery_street_address);
+    var suburb = prefs.getString(LocalDB.delivery_suburb_name);
     var city = prefs.getString(LocalDB.payment_card_exp_date);
-    var postCode = prefs.getString(LocalDB.payment_card_cvv);
+    var postCode = prefs.getString(LocalDB.delivery_city_name);
 
     if (name != null &&
         number != null &&
