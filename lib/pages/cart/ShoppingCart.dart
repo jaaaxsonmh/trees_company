@@ -117,16 +117,26 @@ class _CartState extends State<ShoppingCart> {
           children: <Widget>[
             Dismissible(
               key: Key(document.documentID),
+              direction: DismissDirection.endToStart,
               onDismissed: (dir) {
                 Firestore.instance
                     .collection(Fire.shoppingCart)
                     .document(document.documentID)
                     .delete();
+
+                _scaffoldKey.currentState.removeCurrentSnackBar();
                 Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text(
                         document[Fire.SHOPPING_CART_ITEM_TITLE] + " removed")));
               },
-              background: Container(color: Colors.red),
+              background: Container(
+                color: Colors.red,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.delete_sweep, color: Colors.white),
+                ),
+                alignment: Alignment.centerRight,
+              ),
               child: new ListTile(
                 key: new ValueKey(document.documentID),
                 trailing: new Image.network(
@@ -180,6 +190,7 @@ class _CartState extends State<ShoppingCart> {
                                 qtyControlsEnabled = true;
                               });
 
+                              _scaffoldKey.currentState.removeCurrentSnackBar();
                               Scaffold.of(context).showSnackBar(SnackBar(
                                   content: Text(
                                       document[Fire.SHOPPING_CART_ITEM_TITLE] +
@@ -198,7 +209,6 @@ class _CartState extends State<ShoppingCart> {
                         new GestureDetector(
                           onTap: () {
                             if (qtyControlsEnabled) {
-
                               qtyControlsEnabled = false;
 
                               Map<String, dynamic> values = {
@@ -216,6 +226,7 @@ class _CartState extends State<ShoppingCart> {
                               });
                               ;
 
+                              _scaffoldKey.currentState.removeCurrentSnackBar();
                               Scaffold.of(context).showSnackBar(SnackBar(
                                   content: Text(
                                       document[Fire.SHOPPING_CART_ITEM_TITLE] +
