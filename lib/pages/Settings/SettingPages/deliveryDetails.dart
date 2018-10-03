@@ -170,7 +170,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
     var number = prefs.getString(LocalDB.delivery_house_number);
     var address = prefs.getString(LocalDB.delivery_street_address);
     var suburb = prefs.getString(LocalDB.delivery_suburb_name);
-    var city = prefs.getString(LocalDB.payment_card_exp_date);
+    var city = prefs.getString(LocalDB.delivery_city_name);
     var postCode = prefs.getString(LocalDB.delivery_city_name);
 
     if (name != null &&
