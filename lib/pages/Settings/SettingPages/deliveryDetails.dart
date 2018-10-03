@@ -12,7 +12,7 @@ class DeliveryDetails  extends StatefulWidget {
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  //final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
   var controllerName;
@@ -32,111 +32,113 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        key: _scaffoldKey,
-        body: new Container(
+    return new Container(
+        //key: _scaffoldKey,
+        child: new Container(
             padding: EdgeInsets.all(10.0),
-            child: new Form(
-                key: formKey,
-                child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      new TextFormField(
-                        controller: controllerName,
-                        decoration: new InputDecoration(labelText: 'Name'),
-                        validator: (value) =>
-                        value.isEmpty ? 'Recipient name can\'t be empty' : null,
-                        onSaved: (value) => _name = value,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          new Flexible(
-                            child: Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
-                              child: new TextFormField(
-                                controller: controllerNumber,
-                                decoration: new InputDecoration(
-                                    labelText: 'Street Number'),
-                                keyboardType: TextInputType.number,
-                                validator: (value) =>
-                                value.isEmpty
-                                    ? 'Street Number can\'t be empty'
-                                    : null,
-                                onSaved: (value) => _number = value,
+            child: SingleChildScrollView(
+              child: new Form(
+                  key: formKey,
+                  child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        new TextFormField(
+                          controller: controllerName,
+                          decoration: new InputDecoration(labelText: 'Name'),
+                          validator: (value) =>
+                          value.isEmpty ? 'Recipient name can\'t be empty' : null,
+                          onSaved: (value) => _name = value,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            new Flexible(
+                              child: Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
+                                child: new TextFormField(
+                                  controller: controllerNumber,
+                                  decoration: new InputDecoration(
+                                      labelText: 'Street Number'),
+                                  keyboardType: TextInputType.number,
+                                  validator: (value) =>
+                                  value.isEmpty
+                                      ? 'Street Number can\'t be empty'
+                                      : null,
+                                  onSaved: (value) => _number = value,
+                                ),
                               ),
                             ),
-                          ),
-                          new Flexible(
-                            child: Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
-                              child: new TextFormField(
-                                controller: controllerAddress,
-                                decoration:
-                                new InputDecoration(labelText: 'Address'),
-                                validator: (value) =>
-                                value.isEmpty
-                                    ? 'Address can\'t be empty'
-                                    : null,
-                                onSaved: (value) => _address = value,
+                            new Flexible(
+                              child: Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                                child: new TextFormField(
+                                  controller: controllerAddress,
+                                  decoration:
+                                  new InputDecoration(labelText: 'Address'),
+                                  validator: (value) =>
+                                  value.isEmpty
+                                      ? 'Address can\'t be empty'
+                                      : null,
+                                  onSaved: (value) => _address = value,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          new Flexible(
-                            child: Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
-                              child: new TextFormField(
-                                controller: controllerSuburb,
-                                decoration: new InputDecoration(
-                                    labelText: 'Suburb'),
-                                validator: (value) =>
-                                value.isEmpty
-                                    ? 'Suburb can\'t be empty'
-                                    : null,
-                                onSaved: (value) => _suburb = value,
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            new Flexible(
+                              child: Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
+                                child: new TextFormField(
+                                  controller: controllerSuburb,
+                                  decoration: new InputDecoration(
+                                      labelText: 'Suburb'),
+                                  validator: (value) =>
+                                  value.isEmpty
+                                      ? 'Suburb can\'t be empty'
+                                      : null,
+                                  onSaved: (value) => _suburb = value,
+                                ),
                               ),
                             ),
-                          ),
-                          new Flexible(
-                            child: Padding(
-                              padding:
-                              const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
-                              child: new TextFormField(
-                                controller: controllerPostCode,
-                                keyboardType: TextInputType.number,
-                                decoration:
-                                new InputDecoration(labelText: 'Post code'),
-                                validator: (value) =>
-                                value.isEmpty
-                                    ? 'Post code can\'t be empty'
-                                    : null,
-                                onSaved: (value) => _postCode = value,
+                            new Flexible(
+                              child: Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                                child: new TextFormField(
+                                  controller: controllerPostCode,
+                                  keyboardType: TextInputType.number,
+                                  decoration:
+                                  new InputDecoration(labelText: 'Post code'),
+                                  validator: (value) =>
+                                  value.isEmpty
+                                      ? 'Post code can\'t be empty'
+                                      : null,
+                                  onSaved: (value) => _postCode = value,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      new TextFormField(
-                        controller: controllerCity,
-                        decoration: new InputDecoration(labelText: 'City'),
-                        validator: (value) =>
-                        value.isEmpty ? 'City name can\'t be empty' : null,
-                        onSaved: (value) => _city = value,
-                      ),
-                      new RaisedButton(
-                          onPressed: saveDeliveryDetails,
-                          child: new Text(
-                            _buttonTitle,
-                            style: new TextStyle(color: Colors.white),
-                          ),
-                          color: Colors.green)
-                    ]))));
+                          ],
+                        ),
+                        new TextFormField(
+                          controller: controllerCity,
+                          decoration: new InputDecoration(labelText: 'City'),
+                          validator: (value) =>
+                          value.isEmpty ? 'City name can\'t be empty' : null,
+                          onSaved: (value) => _city = value,
+                        ),
+                        new RaisedButton(
+                            onPressed: saveDeliveryDetails,
+                            child: new Text(
+                              _buttonTitle,
+                              style: new TextStyle(color: Colors.white),
+                            ),
+                            color: Colors.green)
+                      ])),
+            )));
   }
   saveDeliveryDetails() async {
     final form = formKey.currentState;
