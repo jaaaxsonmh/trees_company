@@ -27,8 +27,6 @@ class introAnimationState extends State<IntroAnimation>
 
   @override
   void initState() {
-    // TODO: create animiation controlller and curve in annimation
-    // TODO: add listener
     super.initState();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 700));
