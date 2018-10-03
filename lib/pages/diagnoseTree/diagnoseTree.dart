@@ -92,17 +92,7 @@ class _diagnoseTree extends State<DiagnoseTree> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-          backgroundColor: Colors.green,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text('Diagnose Tree Health'),
-              new Padding(
-                  padding: EdgeInsets.all(10.0), child: new Icon(Icons.healing))
-            ],
-          )),
+      appBar: buildAppBar(),
       body: new ListView(
         padding: EdgeInsets.all(10.0),
          children: <Widget>[ new Form(
@@ -158,6 +148,20 @@ class _diagnoseTree extends State<DiagnoseTree> {
       ],
       ),
     );
+  }
+
+  AppBar buildAppBar() {
+    return new AppBar(
+        backgroundColor: Colors.green,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text('Diagnose Tree Health'),
+            new Padding(
+                padding: EdgeInsets.all(10.0), child: new Icon(Icons.healing))
+          ],
+        ));
   }
 
 
