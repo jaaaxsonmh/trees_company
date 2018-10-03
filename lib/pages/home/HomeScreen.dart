@@ -191,17 +191,7 @@ class _HomeState extends State<HomeScreen> {
             MyNavigator.goToMyOrders(context);
           },
         ),
-        new Divider(),
-        ListTile(
-          leading: Icon(
-            Icons.exit_to_app,
-            color: Colors.green,
-          ),
-          title: Text('Sign Out'),
-          onTap: () {
-              widget._signOut();
-          },
-        ),
+
       ],
     ));
   }

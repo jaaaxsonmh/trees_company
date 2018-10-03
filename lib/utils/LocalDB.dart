@@ -9,6 +9,7 @@ class LocalDB {
   static const String payment_card_cvv = "payment_card_cvv";
 
   // delivery address information
+  static const String delivery_recipient_name = "delivery_recipient_name";
   static const String delivery_house_number = "delivery_house_number";
   static const String delivery_street_address = "delivery_street_address";
   static const String delivery_suburb_name = "delivery_suburb_name";

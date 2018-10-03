@@ -31,18 +31,6 @@ class _PaymentDetails extends State<PaymentDetails> {
   Widget build(BuildContext context) {
     return new Scaffold(
         key: _scaffoldKey,
-        appBar: new AppBar(
-            backgroundColor: Colors.green,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('Payment'),
-                new Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: new Icon(Icons.payment))
-              ],
-            )),
         body: new Container(
             padding: EdgeInsets.all(10.0),
             child: new Form(
