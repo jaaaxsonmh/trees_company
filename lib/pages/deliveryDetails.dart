@@ -33,11 +33,3 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
     );
   }
 }
-
-class secureData {
-  String name = '';
-  String houseNumber = '';
-  String houseAddress = '';
-  String postCode = '';
-  String specialInstructions = '';
-}

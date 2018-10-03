@@ -27,7 +27,6 @@ class _PaymentDetails extends State<PaymentDetails> {
   String _cvv;
   String _buttonTitle = "Save";
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -55,56 +54,63 @@ class _PaymentDetails extends State<PaymentDetails> {
                         controller: controllerCard,
                         decoration: new InputDecoration(labelText: 'Name'),
                         validator: (value) =>
-                        value.isEmpty ? 'Card name can\'t be empty' : null,
+                            value.isEmpty ? 'Card name can\'t be empty' : null,
                         onSaved: (value) => _name = value,
                       ),
-                  new TextFormField(
-                    controller: controllerCard,
-                    decoration: new InputDecoration(labelText: 'Card number'),
-                    keyboardType: TextInputType.number,
-                    validator: (value) =>
-                        value.isEmpty ? 'Card number can\'t be empty' : null,
-                    onSaved: (value) => _cardNumber = value,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      new Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
-                          child: new TextFormField(
-                            controller: controllerDate,
-                            decoration: new InputDecoration(labelText: 'Expiry date'),
-                            keyboardType: TextInputType.datetime,
-                            validator: (value) =>
-                                value.isEmpty ? 'Expiry date can\'t be empty' : null,
-                            onSaved: (value) => _date = value,
+                      new TextFormField(
+                        controller: controllerCard,
+                        decoration:
+                            new InputDecoration(labelText: 'Card number'),
+                        keyboardType: TextInputType.number,
+                        validator: (value) => value.isEmpty
+                            ? 'Card number can\'t be empty'
+                            : null,
+                        onSaved: (value) => _cardNumber = value,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          new Flexible(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(0.0, 0.0, 8.0, 0.0),
+                              child: new TextFormField(
+                                controller: controllerDate,
+                                decoration: new InputDecoration(
+                                    labelText: 'Expiry date'),
+                                keyboardType: TextInputType.datetime,
+                                validator: (value) => value.isEmpty
+                                    ? 'Expiry date can\'t be empty'
+                                    : null,
+                                onSaved: (value) => _date = value,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      new Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
-                          child: new TextFormField(
-                            controller: controllerCvv,
-                            decoration: new InputDecoration(labelText: 'CVV'),
-                            keyboardType: TextInputType.number,
-                            validator: (value) =>
-                            value.isEmpty ? 'CVV can\'t be empty' : null,
-                            onSaved: (value) => _cvv = value,
+                          new Flexible(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                              child: new TextFormField(
+                                controller: controllerCvv,
+                                decoration:
+                                    new InputDecoration(labelText: 'CVV'),
+                                keyboardType: TextInputType.number,
+                                validator: (value) => value.isEmpty
+                                    ? 'CVV can\'t be empty'
+                                    : null,
+                                onSaved: (value) => _cvv = value,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-
-                  new RaisedButton(
-                      onPressed: savePaymentsDetails,
-                      child: new Text(
-                        _buttonTitle,
-                        style: new TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.green)
-                ]))));
+                      new RaisedButton(
+                          onPressed: savePaymentsDetails,
+                          child: new Text(
+                            _buttonTitle,
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                          color: Colors.green)
+                    ]))));
   }
 
   savePaymentsDetails() async {
@@ -114,7 +120,8 @@ class _PaymentDetails extends State<PaymentDetails> {
     if (form.validate()) {
       // if valid then save.
       form.save();
-      print('Valid payment details. name: $_name, cardNumber: $_cardNumber, exp date: $_date , cvv: $_cvv');
+      print(
+          'Valid payment details. name: $_name, cardNumber: $_cardNumber, exp date: $_date , cvv: $_cvv');
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       //bool save = prefs.getBool("isIntro") ?? false;
@@ -125,10 +132,9 @@ class _PaymentDetails extends State<PaymentDetails> {
 
       print("Payments info saved");
     }
-
   }
 
-  getSavedPaymentMethod() async{
+  getSavedPaymentMethod() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var name = prefs.getString(LocalDB.payment_card_name);
@@ -136,16 +142,14 @@ class _PaymentDetails extends State<PaymentDetails> {
     var date = prefs.getString(LocalDB.payment_card_exp_date);
     var cvv = prefs.getString(LocalDB.payment_card_cvv);
 
-    if (name != null && card != null && date!= null && cvv != null){
+    if (name != null && card != null && date != null && cvv != null) {
       setState(() {
         controllerCvv.updateText(cvv);
         controllerDate.updateText(date);
         controllerCard.updateText(card);
 
-
         _buttonTitle = "Update";
       });
     }
-
   }
 }
