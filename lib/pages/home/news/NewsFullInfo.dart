@@ -9,10 +9,7 @@ class NewsFullInfo extends StatefulWidget {
 
   NewsFullInfo(this.document);
 
-  @override
-  State<StatefulWidget> createState() {
-    return new _NewsFullInfo(document);
-  }
+  _NewsFullInfo createState() => _NewsFullInfo(document);
 }
 
 class _NewsFullInfo extends State<NewsFullInfo>
@@ -28,7 +25,9 @@ class _NewsFullInfo extends State<NewsFullInfo>
   void initState() {
     super.initState();
     _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 5000));
+        vsync: this , duration: Duration(seconds: 5));
+
+
     _iconAnimation = new CurvedAnimation(
         parent: _iconAnimationController, curve: Curves.elasticOut);
     _iconAnimation.addListener(() => this.setState(() {}));
@@ -80,8 +79,8 @@ class _NewsFullInfo extends State<NewsFullInfo>
         child: Container(
           child: new Image(
             image: new AssetImage("assets/sprout.png"),
-            height: _iconAnimation.value * 150,
-            width: _iconAnimation.value * 150,
+            height: _iconAnimation.value * 100,
+            width: _iconAnimation.value * 100,
           ),
         ));
   }
