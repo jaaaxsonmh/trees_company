@@ -17,7 +17,7 @@ class _PaymentDetails extends State<PaymentDetails> {
 //  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
-  var controllerName = new MaskedTextController(mask: '******************************');
+  var controllerName = new TextEditingController();
   var controllerCard = new MaskedTextController(mask: '0000 0000 0000 0000');
   var controllerDate = new MaskedTextController(mask: '00/00');
   var controllerCvv = new MaskedTextController(mask: '000');
@@ -135,7 +135,7 @@ class _PaymentDetails extends State<PaymentDetails> {
 
     if (name != null && card != null && date != null && cvv != null) {
       setState(() {
-        controllerName.updateText(name);
+        controllerName.text = name;
         controllerCvv.updateText(cvv);
         controllerDate.updateText(date);
         controllerCard.updateText(card);
