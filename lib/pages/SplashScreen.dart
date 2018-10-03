@@ -31,18 +31,6 @@ class SplashScreenState extends State<SplashScreen>
 
   openNextPage()  {
     widget.onSplashOver();
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//    bool isIntro = false;
-//    try{
-//      isIntro  = prefs.getBool(LocalDB.isIntro) ?? false;
-//    }catch (e){
-//    }
-//
-//    if (isIntro) {
-//      MyNavigator.goToHome(context);
-//    } else {
-//      MyNavigator.goToIntro(context);
-//    }
   }
 
   @override
