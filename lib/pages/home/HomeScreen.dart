@@ -121,7 +121,7 @@ class _HomeState extends State<HomeScreen> {
           ),
           title: Text('Profile'),
           onTap: () {
-            Navigator.pop(context);
+            MyNavigator.goToSettings(context);
           },
         ),
         ListTile(
@@ -191,37 +191,7 @@ class _HomeState extends State<HomeScreen> {
             MyNavigator.goToMyOrders(context);
           },
         ),
-        new Divider(color: Colors.green),
-        new ListTile(
-          leading: Icon(
-            Icons.home,
-            color: Colors.green,
-          ),
-          title: new Text("Delivery Address"),
-          onTap: () {
-            MyNavigator.goToDelivery(context);
-          },
-        ),
-        new ListTile(
-          leading: Icon(
-            Icons.payment,
-            color: Colors.green,
-          ),
-          title: new Text("Payment Methods"),
-          onTap: () {
-            MyNavigator.goToPayments(context);
-          },
-        ),
-        new ListTile(
-          leading: Icon(
-            Icons.exit_to_app,
-            color: Colors.green,
-          ),
-          title: new Text("Log Out"),
-          onTap: () {
-            widget._signOut();
-          },
-        ),
+
       ],
     ));
   }

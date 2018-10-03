@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 class DiagnoseTree extends StatefulWidget {
@@ -11,164 +12,174 @@ class DiagnoseTree extends StatefulWidget {
 }
 
 class _diagnoseTree extends State<DiagnoseTree> {
-  File image;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final formKey = new GlobalKey<FormState>();
+
+  File _image;
+  String _name;
+  String _details;
+  int _total = 0;
 
   // for camera option
   _pickImageCamera() async {
     File img = await ImagePicker.pickImage(source: ImageSource.camera);
-    image = img;
+    _image = img;
     setState(() {});
   }
 
   // for gallery option
   _pickImageGallery() async {
     File img = await ImagePicker.pickImage(source: ImageSource.gallery);
-    image = img;
-    setState(() {});
+    setState(() {
+      _image = img;
+    });
   }
 
-  _onSubmit() {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Container(
-              child: new Image.asset("assets/sprout.png",
-              width: 50.0, height: 50.0),
-            ),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children : <Widget>[
-                Expanded(
-                  child: Text(
-                    'Thank you! \n A response is on its way \n While you wait check this out!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.green,
-
-                    ),
+  _onValid() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Container(
+            child:
+                new Image.asset("assets/sprout.png", width: 50.0, height: 50.0),
+          ),
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  'Click below to view the status of diagnostic',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.green,
                   ),
-                )
-              ],
-            ),
-            actions: <Widget>[
-              new Column( children: <Widget>[
+                ),
+              )
+            ],
+          ),
+          actions: <Widget>[
+            new Column(
+              children: <Widget>[
                 FlatButton(
-                    child: new Text('Close', style: new TextStyle(color: Colors.white)),
+                    child: new Text('Close',
+                        style: new TextStyle(color: Colors.white)),
                     color: Colors.green,
                     onPressed: () {
-                      //TODO: Send to detailed information of different tree types
                       Navigator.pop(context);
                     })
               ],
-              ),
-                  new Column( children: <Widget>[
-                    FlatButton(
-                        child: new Text('Home', style: new TextStyle(color: Colors.white)),
-                        color: Colors.green,
-                        onPressed: () {
-                          //TODO: Send to detailed information of different tree types page
-                          MyNavigator.goToHome(context);
-                        })
-                  ],)
-            ],
-          );
-        },
-      );
-    }
+            ),
+            new Column(
+              children: <Widget>[
+                FlatButton(
+                    child: new Text('View Status',
+                        style: new TextStyle(color: Colors.white)),
+                    color: Colors.green,
+                    onPressed: () {
+                      MyNavigator.goToHome(context);
+                    })
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
 
-  
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-          backgroundColor: Colors.green,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+      appBar: buildAppBar(),
+      body: new ListView(
+        padding: EdgeInsets.all(10.0),
+         children: <Widget>[ new Form(
+          key: formKey,
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text('Diagnose Tree Health'),
-              new Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child:
-                  new Icon(Icons.healing)
-              )
-            ],
-          )),
-      body: ListView(
-        children: <Widget>[
-          new Padding(
-            padding: EdgeInsets.only(left: 5.0, right: 5.0),
-            child: new TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                // Use email input type for emails.
-                decoration: new InputDecoration(
-                    hintText: 'you@example.com', labelText: 'E-mail Address'))
-          ),
-          new Padding(
-            padding: EdgeInsets.only(left: 5.0, right: 5.0),
-            child:new TextFormField(
-                decoration: new InputDecoration(
-                    hintText: 'Tell us what you think is wrong?',
-                    labelText: 'Enter short details about the tree'))
-          ),
-          new RaisedButton(
-            onPressed: _pickImageGallery,
-            color: Colors.green,
-            /*(){
-              new SimpleDialog(
-              title: new Text('Camera'),
-                children: <Widget>[
-                  new FlatButton(onPressed: _pickImageCamera,
-                      child: null),
-                  new FlatButton(onPressed: _pickImageGallery,
-                      child: null)
-                ],
-            );
-            },*/
-            child: Icon(Icons.add_a_photo, color: Colors.white),
-          ),
-          Center(
-            child: image == null
-                ? new Padding(
-              padding:
-              EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
-              child: new Placeholder(
-                  color: Colors.green,
-                  fallbackHeight: 290.0,
-                  fallbackWidth: 290.0),
-            )
-                : new Padding(
-                padding:
-                EdgeInsets.only(left: 10.0, right: 10.0),
-                child: new Image.file(image, width: 290.0, height: 290.0)),
-          ),
-            new Container(
-              child: new RaisedButton(
-                child: new Text(
-                  'Send for Review',
-                  style: new TextStyle(color: Colors.white),
-                ),
-                // TODO: send data from each field and image to firebase
-                onPressed: () {
-                  _onSubmit();
-                  //TODO: add send to firebase
-                },
-                color: Colors.green,
+              new TextFormField(
+                  // Use email input type for emails.
+                  decoration: new InputDecoration(
+                      hintText: 'John Doe',
+                      labelText: 'Name'),
+                onSaved: (value) => _name = value,
+                validator: (value) => value.isEmpty ? 'Name can\'t be empty' : null,
               ),
-            ),
-
-        ],
+              new TextFormField(
+                      decoration: new InputDecoration(
+                          hintText: 'Tell us what you think is wrong?',
+                          labelText: 'Details'),
+                    onSaved: (value) => _details = value,
+                    validator: (value) => value.isEmpty ? 'Details can\'t be empty' : null,
+                  ),
+              new RaisedButton(
+                onPressed: _pickImageGallery,
+                color: Colors.green,
+                child: Icon(Icons.add_a_photo, color: Colors.white),
+              ),
+              Center(
+                child: _image == null
+                    ? new Placeholder(
+                            color: Colors.green,
+                            fallbackHeight: 250.0,
+                            fallbackWidth: 250.0)
+                    : new Image.file(_image,
+                            width: 270.0, height: 270.0),
+              ),
+              new Container(
+                child: new RaisedButton(
+                  child: new Text(
+                    'Send for Review',
+                    style: new TextStyle(color: Colors.white),
+                  ),
+                  // TODO: send data from each field and image to firebase
+                  onPressed: () {
+                    _saveDiagnosticDetails();
+                  },
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
       ),
-    // this doesnt work since only 1 item, and it requires >= 2.
-    /*  bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.check),
-          title: new Text('Submit')
-        )
-      ]),*/
     );
+  }
+
+  AppBar buildAppBar() {
+    return new AppBar(
+        backgroundColor: Colors.green,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text('Diagnose Tree Health'),
+            new Padding(
+                padding: EdgeInsets.all(10.0), child: new Icon(Icons.healing))
+          ],
+        ));
+  }
+
+
+  _saveDiagnosticDetails() async {
+
+    final form = formKey.currentState;
+    final StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('diagnostics/diagnose$_total.jpg');
+    final StorageUploadTask task = firebaseStorageRef.putFile(_image);
+
+    if(form.validate()) {
+      form.save();
+      print('Valid details, $_name, $_details, $_total');
+      _onValid();
+      _totalImages();
+    }
+  }
+
+  _totalImages() {
+    _total++;
   }
 }

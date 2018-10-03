@@ -41,16 +41,7 @@ class ReviewDialog extends StatelessWidget {
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                new FlatButton.icon(
-                    onPressed: () => new Icon(Icons.star, color: Colors.yellow),
-                    icon: new Icon(Icons.star), label: null),
-                new Icon(Icons.star, color: Colors.yellow),
-                new Icon(Icons.star, color: Colors.yellow),
-                new Icon(Icons.star, color: Colors.yellow),
-                new Icon(Icons.star, color: Colors.yellow),
-                new Icon(Icons.star, color: Colors.yellow),
-              ],
+              children: children(),
             ),
           ),
         ],
@@ -64,6 +55,20 @@ class ReviewDialog extends StatelessWidget {
             child: new Text('Lets rate this bitch'))
       ],
     );
+  }
+
+  List<Widget> children() {
+    final icon = new Icon(Icons.star, color: Colors.yellow);
+    return <Widget>[
+              new FlatButton.icon(
+                  onPressed: () => icon,
+                  icon: new Icon(Icons.star), label: null),
+              icon,
+              icon,
+              icon,
+              icon,
+              icon,
+            ];
   }
 
   void showRatedDialog() {}
