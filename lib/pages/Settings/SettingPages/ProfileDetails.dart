@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ProfileDetails extends StatefulWidget {
 
   @override
@@ -14,7 +13,8 @@ class _ProfileDetailsState extends State<ProfileDetails> {
     // TODO: implement build
   return new Scaffold(
     body: new Center(
-      child: new Text('No Profile Page Yet'),
+      child: new Text('Coming soon...'
+      ),
     )
   );
   }

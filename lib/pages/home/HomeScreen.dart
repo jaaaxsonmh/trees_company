@@ -11,7 +11,6 @@ import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/Routers.dart';
 import 'package:trees_co/utils/auth.dart';
-import 'package:trees_co/pages/IntroScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.auth, this.onSignedOut});
@@ -111,9 +110,6 @@ class _HomeState extends State<HomeScreen> {
       padding: EdgeInsets.zero,
       children: <Widget>[
         new UserAccount(),
-
-        // This shows all the tab items on the drawer menu
-
         ListTile(
           leading: Icon(
             Icons.person,
@@ -191,7 +187,17 @@ class _HomeState extends State<HomeScreen> {
             MyNavigator.goToMyOrders(context);
           },
         ),
-
+        new Divider(),
+        ListTile(
+          leading: Icon(
+            Icons.exit_to_app,
+            color: Colors.green,
+          ),
+          title: Text('Sign Out'),
+          onTap: () {
+           widget._signOut();
+          },
+        ),
       ],
     ));
   }

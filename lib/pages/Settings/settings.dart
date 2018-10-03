@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:trees_co/pages/Settings/SettingPages/deliveryDetails.dart';
 import 'package:trees_co/pages/Settings/SettingPages/PaymentDetails.dart';
 import 'package:trees_co/pages/Settings/SettingPages/ProfileDetails.dart';
-
+import 'package:trees_co/utils/auth.dart';
 
 class Settings extends StatefulWidget {
+
+
   @override
-  State<StatefulWidget> createState() {
-    return new _SettingsState();
-  }
+  _SettingsState createState() => _SettingsState();
 }
 
 enum StateType { setProfile, showProfile }
