@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/utils/Fire.dart';
@@ -17,17 +19,18 @@ class _CartState extends State<ShoppingCart> {
   int numberOfItemsInShoppingCart = 0;
   int totalPriceOfShoppingCart = 0;
 
+  bool qtyControlsEnabled = true;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-
     var price = MoneyConverter().convert(totalPriceOfShoppingCart);
 
     return new Scaffold(
       key: _scaffoldKey,
       bottomNavigationBar:
-      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Container(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 8.0),
@@ -70,7 +73,7 @@ class _CartState extends State<ShoppingCart> {
         stream: Firestore.instance
             .collection(Fire.shoppingCart)
             .orderBy(Fire.SHOPPING_CART_TIME)
-        //.where(Fire.SHOPPING_CART_STATUS, isEqualTo: Fire.SHOPPING_CART_STATUS_CART)
+            //.where(Fire.SHOPPING_CART_STATUS, isEqualTo: Fire.SHOPPING_CART_STATUS_CART)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
@@ -98,12 +101,14 @@ class _CartState extends State<ShoppingCart> {
       values[document.documentID] = false;
     }
 
-    var price = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE]);
-    var priceQTY = MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE] * document[Fire.SHOPPING_CART_ITEM_QUANTITY]);
+    var price =
+        MoneyConverter().convert(document[Fire.SHOPPING_CART_ITEM_PRICE]);
+    var priceQTY = MoneyConverter().convert(
+        document[Fire.SHOPPING_CART_ITEM_PRICE] *
+            document[Fire.SHOPPING_CART_ITEM_QUANTITY]);
 
     var subInfo =
-        "$price | QTY: ${document[Fire
-        .SHOPPING_CART_ITEM_QUANTITY]} | Sub total: $priceQTY";
+        "$price | QTY: ${document[Fire.SHOPPING_CART_ITEM_QUANTITY]} | Sub total: $priceQTY";
 
     return new Container(
       child: new Card(
@@ -158,22 +163,32 @@ class _CartState extends State<ShoppingCart> {
                       children: <Widget>[
                         new GestureDetector(
                           onTap: () {
-                            Map<String, dynamic> values = {
-                              Fire.SHOPPING_CART_ITEM_QUANTITY : document[Fire.SHOPPING_CART_ITEM_QUANTITY] +1
-                            };
+                            if (qtyControlsEnabled) {
+                              qtyControlsEnabled = false;
 
-                            Firestore.instance.collection(Fire.shoppingCart)
-                                .document(document.documentID)
-                                .updateData(values);
+                              Map<String, dynamic> values = {
+                                Fire.SHOPPING_CART_ITEM_QUANTITY:
+                                    document[Fire.SHOPPING_CART_ITEM_QUANTITY] +
+                                        1
+                              };
 
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    document[Fire.SHOPPING_CART_ITEM_TITLE] +
-                                        " +1")));
+                              Firestore.instance
+                                  .collection(Fire.shoppingCart)
+                                  .document(document.documentID)
+                                  .updateData(values)
+                                  .then((value) {
+                                qtyControlsEnabled = true;
+                              });
+
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      document[Fire.SHOPPING_CART_ITEM_TITLE] +
+                                          " +1")));
+                            }
                           },
                           child: Container(
-                            padding: const EdgeInsets.only(
-                                left: 8.0, right: 8.0),
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
                             child: Icon(
                               Icons.add_circle,
                               color: Colors.green,
@@ -182,23 +197,34 @@ class _CartState extends State<ShoppingCart> {
                         ),
                         new GestureDetector(
                           onTap: () {
+                            if (qtyControlsEnabled) {
 
-                            Map<String, dynamic> values = {
-                              Fire.SHOPPING_CART_ITEM_QUANTITY : document[Fire.SHOPPING_CART_ITEM_QUANTITY] -1
-                            };
+                              qtyControlsEnabled = false;
 
-                            Firestore.instance.collection(Fire.shoppingCart)
-                                .document(document.documentID)
-                                .updateData(values);
+                              Map<String, dynamic> values = {
+                                Fire.SHOPPING_CART_ITEM_QUANTITY:
+                                    document[Fire.SHOPPING_CART_ITEM_QUANTITY] -
+                                        1
+                              };
 
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text(
-                                    document[Fire.SHOPPING_CART_ITEM_TITLE] +
-                                        " -1")));
+                              Firestore.instance
+                                  .collection(Fire.shoppingCart)
+                                  .document(document.documentID)
+                                  .updateData(values)
+                                  .then((value) {
+                                qtyControlsEnabled = true;
+                              });
+                              ;
+
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      document[Fire.SHOPPING_CART_ITEM_TITLE] +
+                                          " -1")));
+                            }
                           },
                           child: Container(
-                            padding: const EdgeInsets.only(
-                                left: 8.0, right: 8.0),
+                            padding:
+                                const EdgeInsets.only(left: 8.0, right: 8.0),
                             child: Icon(
                               Icons.remove_circle,
                               color: Colors.red,
