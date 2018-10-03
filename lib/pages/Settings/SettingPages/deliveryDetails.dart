@@ -148,7 +148,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
       // if valid then save.
       form.save();
       print(
-          'Valid payment details. Name: $_name, Number: $_number, Address: $_address, Suburb: $_suburb, City: $_city, PostCode: $_postCode');
+          'Valid delivery details. Name: $_name, Number: $_number, Address: $_address, Suburb: $_suburb, City: $_city, PostCode: $_postCode');
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       //bool save = prefs.getBool("isIntro") ?? false;
@@ -159,7 +159,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
       await prefs.setString(LocalDB.delivery_city_name, _city);
       await prefs.setString(LocalDB.delivery_post_code, _postCode);
 
-      print("Payments info saved");
+      print("Delivery info saved");
     }
   }
 
