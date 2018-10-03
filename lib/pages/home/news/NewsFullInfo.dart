@@ -81,7 +81,7 @@ class NewsFullInfo extends StatelessWidget {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0)),
-                  onPressed: () => MyNavigator.goToHome(context),
+                  onPressed: () => Navigator.pop(context),
                 ),
               ],
             ));
