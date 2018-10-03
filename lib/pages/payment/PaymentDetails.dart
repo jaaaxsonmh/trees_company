@@ -1,9 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trees_co/pages/LoginPage.dart';
-import 'package:trees_co/utils/Fire.dart';
-import 'package:date_format/date_format.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:trees_co/utils/LocalDB.dart';
 
@@ -25,6 +21,7 @@ class _PaymentDetails extends State<PaymentDetails> {
   var controllerDate = new MaskedTextController(mask: '00/00');
   var controllerCvv = new MaskedTextController(mask: '000');
 
+  String _name;
   String _cardNumber;
   String _date;
   String _cvv;
@@ -54,6 +51,13 @@ class _PaymentDetails extends State<PaymentDetails> {
                 child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
+                      new TextFormField(
+                        controller: controllerCard,
+                        decoration: new InputDecoration(labelText: 'Name'),
+                        validator: (value) =>
+                        value.isEmpty ? 'Card name can\'t be empty' : null,
+                        onSaved: (value) => _name = value,
+                      ),
                   new TextFormField(
                     controller: controllerCard,
                     decoration: new InputDecoration(labelText: 'Card number'),
@@ -110,10 +114,11 @@ class _PaymentDetails extends State<PaymentDetails> {
     if (form.validate()) {
       // if valid then save.
       form.save();
-      print('Valid payment details. cardNumber: $_cardNumber, exp date: $_date , cvv: $_cvv');
+      print('Valid payment details. name: $_name, cardNumber: $_cardNumber, exp date: $_date , cvv: $_cvv');
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       //bool save = prefs.getBool("isIntro") ?? false;
+      await prefs.setString(LocalDB.payment_card_name, _name);
       await prefs.setString(LocalDB.payment_card_number, _cardNumber);
       await prefs.setString(LocalDB.payment_card_exp_date, _date);
       await prefs.setString(LocalDB.payment_card_cvv, _cvv);
@@ -126,11 +131,12 @@ class _PaymentDetails extends State<PaymentDetails> {
   getSavedPaymentMethod() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    var name = prefs.getString(LocalDB.payment_card_name);
     var card = prefs.getString(LocalDB.payment_card_number);
     var date = prefs.getString(LocalDB.payment_card_exp_date);
     var cvv = prefs.getString(LocalDB.payment_card_cvv);
 
-    if (card != null && date!= null && cvv != null){
+    if (name != null && card != null && date!= null && cvv != null){
       setState(() {
         controllerCvv.updateText(cvv);
         controllerDate.updateText(date);
