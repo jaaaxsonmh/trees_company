@@ -21,7 +21,6 @@ var routes = <String, WidgetBuilder>{
   Routers.shopCart: (BuildContext context) => ShoppingCart(),
   Routers.orders: (BuildContext context) => MyOrders(),
   Routers.diagnoseTree: (BuildContext context) => DiagnoseTree(),
-  Routers.settings: (BuildContext context) => Settings(),
   Routers.delivery: (BuildContext context) => DeliveryDetails(),
   Routers.treeCare: (BuildContext context) => TreeCare(),
   Routers.payments: (BuildContext context) => PaymentDetails(),

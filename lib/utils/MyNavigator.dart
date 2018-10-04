@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:trees_co/pages/Settings/settings.dart';
 import 'package:trees_co/pages/home/news/NewsFullInfo.dart';
 import 'package:trees_co/pages/home/tools/ToolsFullInfo.dart';
 import 'package:trees_co/pages/home/tree/TreeDetailsPage.dart';
 import 'package:trees_co/pages/home/tree/TreeInfo.dart';
 import 'package:trees_co/utils/Routers.dart';
+import 'package:trees_co/utils/auth.dart';
 
 class MyNavigator {
   static void goToHome(BuildContext context) {
@@ -44,8 +46,11 @@ class MyNavigator {
     Navigator.pushNamed(context, Routers.diagnoseTree);
   }
 
-  static void goToSettings(BuildContext context) {
-    Navigator.pushNamed(context, Routers.settings);
+  static void goToSettings(BuildContext context, BaseAuth auth, VoidCallback call) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Settings(auth, call)),
+    );
   }
 
   static void goToDelivery(BuildContext context) {

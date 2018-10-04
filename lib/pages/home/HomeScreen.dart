@@ -117,7 +117,7 @@ class _HomeState extends State<HomeScreen> {
           ),
           title: Text('Profile'),
           onTap: () {
-            MyNavigator.goToSettings(context);
+            MyNavigator.goToSettings(context, widget.auth, widget.onSignedOut);
           },
         ),
         ListTile(
@@ -187,17 +187,7 @@ class _HomeState extends State<HomeScreen> {
             MyNavigator.goToMyOrders(context);
           },
         ),
-        new Divider(),
-        ListTile(
-          leading: Icon(
-            Icons.exit_to_app,
-            color: Colors.green,
-          ),
-          title: Text('Sign Out'),
-          onTap: () {
-           widget._signOut();
-          },
-        ),
+        new Divider()
       ],
     ));
   }

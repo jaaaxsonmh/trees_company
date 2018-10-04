@@ -3,10 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:trees_co/pages/Settings/SettingPages/deliveryDetails.dart';
 import 'package:trees_co/pages/Settings/SettingPages/PaymentDetails.dart';
 import 'package:trees_co/pages/Settings/SettingPages/ProfileDetails.dart';
+import 'package:trees_co/utils/MyNavigator.dart';
 import 'package:trees_co/utils/auth.dart';
 
 class Settings extends StatefulWidget {
-
+  Settings(this.auth, this.onSignedOut);
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -16,7 +19,6 @@ enum StateType { setProfile, showProfile }
 
 class _SettingsState extends State<Settings>
     with SingleTickerProviderStateMixin {
-
   final formKey = new GlobalKey<FormState>();
 
   ScrollController _scrollViewController;
@@ -36,7 +38,6 @@ class _SettingsState extends State<Settings>
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -46,7 +47,16 @@ class _SettingsState extends State<Settings>
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             new SliverAppBar(
-              title: new Text('Settings'),
+              title: new Text('Profile'),
+              actions: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.exit_to_app),
+                    onPressed: () {
+                      widget.auth.signOut();
+                      widget.onSignedOut();
+                      Navigator.pop(context);
+                    })
+              ],
               pinned: true,
               backgroundColor: Colors.green,
               floating: true,
