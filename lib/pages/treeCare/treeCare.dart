@@ -99,12 +99,13 @@ void _showFullInfo(document, context) {
     builder: (BuildContext context) {
       // return object of type Dialog
       return AlertDialog(
-        title: new Text(document[Fire.CARE_TYPE] + ' Care'),
+        title: new Text(document[Fire.CARE_TYPE] + ' Care', style: TextStyle(color: Colors.green)),
         content: new Text(document[Fire.CARE_LONG]),
         actions: <Widget>[
           // usually buttons at the bottom of the dialog
           new FlatButton(
-            child: new Text("Close"),
+            child: new Text("Close",
+            style: TextStyle(color: Colors.green)),
             onPressed: () {
               Navigator.of(context).pop();
             },
