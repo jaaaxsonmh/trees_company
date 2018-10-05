@@ -26,26 +26,30 @@ class _TreeCareState extends State<TreeCare> {
               ),
             ),
           );
-        return new Scaffold(
-            appBar: new AppBar(
-                backgroundColor: Colors.green,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text('Plant Care Information'),
-                    new Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: new Icon(Icons.nature))
-                  ],
-                )), // appBar
-            body: new ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                padding: const EdgeInsets.all(5.0),
-                itemBuilder: (context, index) => _buildListItem(
-                    context, snapshot.data.documents[index]))); // scaffold
+        return buildPlantCare(snapshot); // scaffold
       },
     );
+  }
+
+  Scaffold buildPlantCare(AsyncSnapshot<QuerySnapshot> snapshot) {
+    return new Scaffold(
+          appBar: new AppBar(
+              backgroundColor: Colors.green,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text('Plant Care Information'),
+                  new Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: new Icon(Icons.nature))
+                ],
+              )), // appBar
+          body: new ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              padding: const EdgeInsets.all(5.0),
+              itemBuilder: (context, index) => _buildListItem(
+                  context, snapshot.data.documents[index])));
   }
 }
 
@@ -78,7 +82,7 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
                 child: new Text('Full Details',
                     style: new TextStyle(color: Colors.green)),
                 onPressed: () {
-                  //TODO: full details cards
+                  _showFullInfo(document, context);
                 },
               ),
             ],
@@ -88,4 +92,27 @@ Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     ),
   );
 }
+
+void _showFullInfo(document, context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text(document[Fire.CARE_TYPE] + ' Care'),
+        content: new Text(document[Fire.CARE_LONG]),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text("Close"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
