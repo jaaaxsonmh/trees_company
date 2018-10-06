@@ -31,11 +31,9 @@ class Fire {
   static const String TOOLS_PRICE = "price";
 
   // PLANT CARE
-  static const String CARE_ICON = "plant_icon";
   static const String CARE_TYPE = "plant_type";
   static const String CARE_SHORT = "short_brief";
   static const String CARE_LONG = "full_details";
-  static const String CARE_SHOW = "show";
 
 
   // Shopping Cart

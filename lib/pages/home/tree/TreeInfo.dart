@@ -9,7 +9,6 @@ class TreeInfo extends StatelessWidget {
   TreeInfo(this.document);
 
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       color: Colors.blue,
       child: Column(
