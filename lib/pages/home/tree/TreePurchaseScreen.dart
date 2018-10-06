@@ -34,8 +34,8 @@ class _TreePurchaseScreen extends State<TreePurchaseScreen> {
   static const int DELIVERY = 0;
   static const int PICK_UP = 1;
 
-  String _treeType;
-  String _treeAge;
+  String _treeType = "";
+  String _treeAge = "";
 
   bool isCreditCardInfoSaved = false;
   bool isDeliveryAddressInfoSaved = false;
@@ -413,6 +413,8 @@ class _TreePurchaseScreen extends State<TreePurchaseScreen> {
 
   contunuePurchaseFlow() async {
     final form1 = formKey.currentState;
+
+    form1.save();
 
     var allGud = false;
 
