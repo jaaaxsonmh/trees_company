@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trees_co/pages/Settings/SettingPages/PaymentDetails.dart';
 import 'package:trees_co/utils/Fire.dart';
 import 'package:trees_co/utils/LocalDB.dart';
 import 'package:trees_co/utils/MoneyConverter.dart';

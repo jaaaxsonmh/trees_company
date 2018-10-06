@@ -5,10 +5,18 @@ import 'package:trees_co/utils/MoneyConverter.dart';
 import 'package:trees_co/utils/MyNavigator.dart';
 
 class TreesList extends StatelessWidget {
+
+  final notfiltered = "";
+  final filter = "Conifer";
+  final filter2 = "Groundcover";
+  final filter3 = "Trees";
+  final filter4 = "Shrubs";
+
+
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection(Fire.trees).snapshots(),
+      stream: Firestore.instance.collection(Fire.trees).where(Fire.TREE_CATEGORY, isEqualTo: filter3).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return new Center(
