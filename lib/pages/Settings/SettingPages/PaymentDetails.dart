@@ -83,6 +83,7 @@ class _PaymentDetails extends State<PaymentDetails> {
                                   controller: controllerCvv,
                                   decoration:
                                       new InputDecoration(labelText: 'CVV'),
+                                  obscureText: true,
                                   keyboardType: TextInputType.number,
                                   validator: (value) => value.isEmpty
                                       ? 'CVV can\'t be empty'
