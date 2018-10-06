@@ -472,15 +472,9 @@ class _TreePurchaseScreen extends State<TreePurchaseScreen> {
         });
       }
 
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text(detail[Fire.TREE_TITLE] + " added to shopping cart"),
-        action: SnackBarAction(
-            label: "View",
-            onPressed: () {
-              Navigator.pop(context);
-              MyNavigator.goToCart(context);
-            }),
-      ));
+      Navigator.pop(context);
+      MyNavigator.goToCart(context);
+
     });
   }
 }
