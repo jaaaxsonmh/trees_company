@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:trees_co/pages/Settings/settings.dart';
@@ -5,6 +7,7 @@ import 'package:trees_co/pages/home/news/NewsFullInfo.dart';
 import 'package:trees_co/pages/home/tools/ToolsFullInfo.dart';
 import 'package:trees_co/pages/home/tree/TreeDetailsPage.dart';
 import 'package:trees_co/pages/home/tree/TreeInfo.dart';
+import 'package:trees_co/pages/home/tree/TreePurchaseScreen.dart';
 import 'package:trees_co/utils/Routers.dart';
 import 'package:trees_co/utils/auth.dart';
 
@@ -53,12 +56,19 @@ class MyNavigator {
     );
   }
 
-  static void goToDelivery(BuildContext context) {
-    Navigator.pushNamed(context, Routers.delivery);
+  static Future goToDelivery(BuildContext context) {
+    return Navigator.pushNamed(context, Routers.delivery);
   }
 
-  static void goToPayments(BuildContext context) {
-    Navigator.pushNamed(context, Routers.payments);
+  static Future goToPayments(BuildContext context) {
+    return Navigator.pushNamed(context, Routers.payments);
+  }
+
+  static void goToTreePurchaseScreen(BuildContext context, DocumentSnapshot document) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TreePurchaseScreen(document)),
+    );
   }
 
   static void goToTreeCare(BuildContext context) {

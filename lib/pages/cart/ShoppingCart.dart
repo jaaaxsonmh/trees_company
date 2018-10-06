@@ -211,26 +211,30 @@ class _CartState extends State<ShoppingCart> {
                             if (qtyControlsEnabled) {
                               qtyControlsEnabled = false;
 
-                              Map<String, dynamic> values = {
-                                Fire.SHOPPING_CART_ITEM_QUANTITY:
-                                    document[Fire.SHOPPING_CART_ITEM_QUANTITY] -
-                                        1
-                              };
+                              if (document[Fire.SHOPPING_CART_ITEM_QUANTITY] > 0) {
+                                Map<String, dynamic> values = {
+                                  Fire.SHOPPING_CART_ITEM_QUANTITY: document[
+                                          Fire.SHOPPING_CART_ITEM_QUANTITY] - 1
+                                };
 
-                              Firestore.instance
-                                  .collection(Fire.shoppingCart)
-                                  .document(document.documentID)
-                                  .updateData(values)
-                                  .then((value) {
+                                Firestore.instance
+                                    .collection(Fire.shoppingCart)
+                                    .document(document.documentID)
+                                    .updateData(values)
+                                    .then((value) {
+                                  qtyControlsEnabled = true;
+                                });
+                                ;
+
+                                _scaffoldKey.currentState
+                                    .removeCurrentSnackBar();
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text(document[
+                                            Fire.SHOPPING_CART_ITEM_TITLE] +
+                                        " -1")));
+                              }else{
                                 qtyControlsEnabled = true;
-                              });
-                              ;
-
-                              _scaffoldKey.currentState.removeCurrentSnackBar();
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text(
-                                      document[Fire.SHOPPING_CART_ITEM_TITLE] +
-                                          " -1")));
+                              }
                             }
                           },
                           child: Container(

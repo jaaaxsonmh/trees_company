@@ -36,7 +36,7 @@ class TreeDetailsPage extends StatelessWidget {
               new Padding(
                   padding: EdgeInsets.all(10.0),
                   child:
-                  new Icon(Icons.add_shopping_cart)
+                  new Icon(Icons.shopping_cart)
               )
             ],
           )

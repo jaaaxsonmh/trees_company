@@ -43,6 +43,9 @@ class Fire {
   static const String SHOPPING_CART_ITEM_PRICE = "price";
   static const String SHOPPING_CART_ITEM_QUANTITY = "quantity";
   static const String SHOPPING_CART_ITEM_TYPE = "itemType"; // Tree | Tools
+  static const String SHOPPING_CART_ITEM_DELIVERY_PICKUP = "delivery_pickup_info";
+  static const String SHOPPING_CART_ITEM_TREE_AGE = "tree_age";
+  static const String SHOPPING_CART_ITEM_TREE_TYPE = "tree_type";
 
 
   // Orders

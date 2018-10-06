@@ -114,7 +114,8 @@ class TreeDetailHeader extends StatelessWidget {
   addToShoppingCard() {
     // Show UI (get Quantity & Tree info)
     // Then call it
-    addToShoppingCardDb();
+    //addToShoppingCardDb();
+    MyNavigator.goToTreePurchaseScreen(context, detail);
   }
 
   addToShoppingCardDb() async {
