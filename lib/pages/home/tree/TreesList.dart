@@ -166,6 +166,8 @@ class _TreesList extends State<TreesList> {
                             setState(() {
                               selectedPrimaryFilter = "";
                               selectedSecondaryFilter = "";
+
+                              secondaryFiltersSelected = [];
                             });
                           }),
                     ),
