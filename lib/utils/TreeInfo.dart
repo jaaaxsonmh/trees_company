@@ -1,7 +1,4 @@
-class TreeCategories{
-  static const String category_decorative = "decorative";
 
-}
 class TreeMaxHeight{
   static const String height_less_1m = "<1m";
   static const String height_1m_2m = "1-2m";
@@ -9,24 +6,19 @@ class TreeMaxHeight{
   static const String height_more_3m = ">3m";
 }
 class TreeGrowthRate{
-  static const String rate_fast = "fast";
-  static const String rate_medium = "medium";
-  static const String rate_slow = "slow";
-}
-class TreeMaintenance{
-  static const String maintenance_fast = "high";
-  static const String maintenance_medium = "medium";
-  static const String maintenance_low = "low";
+  static const String rate_fast = "Fast";
+  static const String rate_medium = "Medium";
+  static const String rate_slow = "Slow";
 }
 class TreeSoilDrainage{
-  static const String soil_drainage_fast = "high";
+  static const String soil_drainage_fast = "fast";
   static const String soil_drainage_medium = "medium";
-  static const String soil_drainage_low = "low";
-  static const String soil_drainage_anything = "anything";
+  static const String soil_drainage_low = "slow";
+  static const String soil_drainage_anything = "any";
 }
 class TreeSun{
-  static const String sun_sunny = "sunny";
-  static const String sun_med = "med";
-  static const String sun_shade = "shade";
-  static const String sun_anything = "anything";
+  static const String sun_sunny = "Sunny";
+  static const String sun_med = "Medium";
+  static const String sun_shade = "Shade";
+  static const String sun_anything = "Anything";
 }
