@@ -154,25 +154,38 @@ class _TreesList extends State<TreesList> {
           );
         return Column(
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    new Opacity(
-                      opacity: hideSecondSearch,
-                      child: new GestureDetector(
-                          child: new Icon(Icons.remove_circle_outline),
-                          onTap: () {
-                            setState(() {
-                              selectedPrimaryFilter = "";
-                              selectedSecondaryFilter = "";
-                            });
-                          }),
-                    ),
-                    new DropdownButton<String>(
-                      hint: Text(filterHintPrimary),
-                      items: baseFilters.map((String value) {
+            new Wrap(
+        children: <Widget>[
+                  new Opacity(
+                    opacity: hideSecondSearch,
+                    child: new GestureDetector(
+                        child: new Icon(Icons.remove_circle_outline),
+                        onTap: () {
+                          setState(() {
+                            selectedPrimaryFilter = "";
+                            selectedSecondaryFilter = "";
+                          });
+                        }),
+                  ),
+                  new DropdownButton<String>(
+                    hint: Text(filterHintPrimary),
+                    items: baseFilters.map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPrimaryFilter = value;
+                      });
+                    },
+                  ),
+                  new Opacity(
+                    opacity: hideSecondSearch,
+                    child: new DropdownButton<String>(
+                      hint: Text(filterHintSecondary),
+                      items: secondaryFiltersSelected.map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
                           child: new Text(value),
@@ -180,33 +193,12 @@ class _TreesList extends State<TreesList> {
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
-                          selectedPrimaryFilter = value;
+                          selectedSecondaryFilter = value;
                         });
                       },
                     ),
-                    new Opacity(
-                      opacity: hideSecondSearch,
-                      child: new DropdownButton<String>(
-                        hint: Text(filterHintSecondary),
-                        items: secondaryFiltersSelected.map((String value) {
-                          return new DropdownMenuItem<String>(
-                            value: value,
-                            child: new Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedSecondaryFilter = value;
-                          });
-                        },
-                      ),
-                    )
-                  ],
-                ),
-
-                new Align(
-                  alignment: Alignment.centerRight,
-                  child: new DropdownButton<String>(
+                  ),
+                  new DropdownButton<String>(
                     hint: Text(filterPrice),
                     items: filtersPrice.map((String value) {
                       return new DropdownMenuItem<String>(
@@ -219,13 +211,9 @@ class _TreesList extends State<TreesList> {
                         selectedPriceFilter = value;
                       });
                     },
-                  ),
-                )
-
-
-
-              ],
-            ),
+                  )
+                ],
+              ),
             new Expanded(
               child: new ListView.builder(
                   itemCount: snapshot.data.documents.length,
