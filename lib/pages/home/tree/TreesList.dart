@@ -156,16 +156,19 @@ class _TreesList extends State<TreesList> {
           children: <Widget>[
             new Wrap(
         children: <Widget>[
-                  new Opacity(
-                    opacity: hideSecondSearch,
-                    child: new GestureDetector(
-                        child: new Icon(Icons.remove_circle_outline),
-                        onTap: () {
-                          setState(() {
-                            selectedPrimaryFilter = "";
-                            selectedSecondaryFilter = "";
-                          });
-                        }),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new Opacity(
+                      opacity: hideSecondSearch,
+                      child: new GestureDetector(
+                          child: new Icon(Icons.remove_circle_outline),
+                          onTap: () {
+                            setState(() {
+                              selectedPrimaryFilter = "";
+                              selectedSecondaryFilter = "";
+                            });
+                          }),
+                    ),
                   ),
                   new DropdownButton<String>(
                     hint: Text(filterHintPrimary),
@@ -181,21 +184,24 @@ class _TreesList extends State<TreesList> {
                       });
                     },
                   ),
-                  new Opacity(
-                    opacity: hideSecondSearch,
-                    child: new DropdownButton<String>(
-                      hint: Text(filterHintSecondary),
-                      items: secondaryFiltersSelected.map((String value) {
-                        return new DropdownMenuItem<String>(
-                          value: value,
-                          child: new Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedSecondaryFilter = value;
-                        });
-                      },
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
+                    child: new Opacity(
+                      opacity: hideSecondSearch,
+                      child: new DropdownButton<String>(
+                        hint: Text(filterHintSecondary),
+                        items: secondaryFiltersSelected.map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedSecondaryFilter = value;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   new DropdownButton<String>(
