@@ -204,19 +204,22 @@ class _TreesList extends State<TreesList> {
                   ],
                 ),
 
-                new DropdownButton<String>(
-                  hint: Text(filterPrice),
-                  items: filtersPrice.map((String value) {
-                    return new DropdownMenuItem<String>(
-                      value: value,
-                      child: new Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedPriceFilter = value;
-                    });
-                  },
+                new Align(
+                  alignment: Alignment.centerRight,
+                  child: new DropdownButton<String>(
+                    hint: Text(filterPrice),
+                    items: filtersPrice.map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedPriceFilter = value;
+                      });
+                    },
+                  ),
                 )
 
 
