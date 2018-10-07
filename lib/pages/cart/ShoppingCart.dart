@@ -259,6 +259,10 @@ class _CartState extends State<ShoppingCart> {
     );
   }
 
+  String getSubTotal(priceQTY) {
+    return priceQTY;
+  }
+
   void pressedBuy() {
     // Get the items and assign new db values
 

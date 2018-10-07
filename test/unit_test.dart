@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:trees_co/utils/Routers.dart';
+import 'package:trees_co/pages/cart/ShoppingCart.dart';
 
 void main() {
 
@@ -29,6 +30,33 @@ void main() {
     var treeCare = Routers.treeCare;
     expect(treeCare, Routers.treeCare);
 
+    // New Tests for routes
+    var login = Routers.login;
+    expect(login, Routers.login);
+
+    var  payments = Routers.payments;
+    expect(payments, Routers.payments);
+
+    var shopCart = Routers.shopCart;
+    expect(shopCart, Routers.shopCart);
+
+    var orders = Routers.orders;
+    expect(orders, Routers.orders);
+
+    var splash = Routers.splash;
+    expect(splash, Routers.splash);
+  });
+
+
+  test('Quantity Calculation', () {
+
+  });
+
+  test('Apply Discount', () {
+
+  });
+
+  test('Subtotal', () {
 
   });
 }
