@@ -18,6 +18,7 @@ Plant a Tree was developed to make online plant and care products purchasing eas
 * [Dart](https://www.dartlang.org/) - Langauge Used
 * [Firebase](https://firebase.google.com/) - Database Used
 * [TravisCI](https://travis-ci.org/) - Continuous Integration Testing
+* [Plant A Tree AR](https://github.com/Deishelon/PlantATreeAR) - Augmented Reality 
 
 ## Authors
 
