@@ -10,6 +10,29 @@ class DeliveryDetails extends StatefulWidget {
     state.getSavedPaymentMethod();
     return state;
   }
+
+  Map<String, String> getLocalDatabaseValid() {
+    return {
+      "delivery_recipient_name": "",
+      "delivery_house_number": "",
+      "delivery_street_address": "",
+      "delivery_suburb_name": "",
+      "delivery_city_name": "",
+      "delivery_post_code": ""
+    };
+  }
+
+  Map<String, String> getLocalDatabaseNotValid() {
+    return {
+      "delivery_recipient_name": null,
+      "delivery_house_number": null,
+      "delivery_street_address": null,
+      "delivery_suburb_name": null,
+      "delivery_city_name": null,
+      "delivery_post_code": null
+    };
+  }
+
 }
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
@@ -76,8 +99,8 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                                       8.0, 0.0, 0.0, 0.0),
                                   child: new TextFormField(
                                     controller: controllerAddress,
-                                    decoration:
-                                        new InputDecoration(labelText: 'Address'),
+                                    decoration: new InputDecoration(
+                                        labelText: 'Address'),
                                     validator: (value) => value.isEmpty
                                         ? 'Address can\'t be empty'
                                         : null,
@@ -95,8 +118,8 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                                       0.0, 0.0, 8.0, 0.0),
                                   child: new TextFormField(
                                     controller: controllerSuburb,
-                                    decoration:
-                                        new InputDecoration(labelText: 'Suburb'),
+                                    decoration: new InputDecoration(
+                                        labelText: 'Suburb'),
                                     validator: (value) => value.isEmpty
                                         ? 'Suburb can\'t be empty'
                                         : null,
