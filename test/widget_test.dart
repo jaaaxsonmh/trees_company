@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:trees_co/main.dart';
+import 'package:trees_co/pages/home/HomeScreen.dart';
 
 void main() {
   testWidgets('my first widget test', (WidgetTester tester) async {
