@@ -417,6 +417,9 @@ class _TreePurchaseScreen extends State<TreePurchaseScreen> {
 
     var allGud = false;
 
+    print(fullDeliveryAddress);
+    print(lastCreditCard);
+
     if (form1.validate() &&
         fullDeliveryAddress != "" &&
         lastCreditCard != "") {
