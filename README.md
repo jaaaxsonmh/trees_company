@@ -36,14 +36,8 @@ Plant a Tree was developed to make online plant and care products purchasing eas
 
 ## Authors
 
-
 * **Jack Hosking** - [GitHub](https://github.com/jaaaxsonmh)
 * **Nikita Pustovoi** - [GitHub](https://github.com/Deishelon)
-* **James Eady** - [GitHub](https://github.com/Eadzz)
-* **Craig Fraser** - [GitHub](https://github.com/Noodlien)
-
-
-See also the list of [contributors](https://github.com/jaaaxsonmh/trees_company/graphs/contributors) who participated in this project.
 
 ## License
 
